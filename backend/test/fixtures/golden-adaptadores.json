@@ -1,0 +1,284 @@
+{
+ "gerado_com": "código anterior à refatoração",
+ "lambda": {
+  "respostas": {
+   "options": {
+    "statusCode": 204,
+    "headers": {
+     "Access-Control-Allow-Origin": "*",
+     "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+     "Access-Control-Allow-Headers": "Content-Type,Authorization",
+     "Access-Control-Max-Age": "600"
+    },
+    "body": ""
+   },
+   "health": {
+    "statusCode": 200,
+    "headers": {
+     "Content-Type": "application/json; charset=utf-8",
+     "Cache-Control": "no-store",
+     "Access-Control-Allow-Origin": "*",
+     "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+     "Access-Control-Allow-Headers": "Content-Type,Authorization",
+     "Access-Control-Max-Age": "600"
+    },
+    "body": "{\"ok\":true,\"cidadaos\":89046,\"servicos\":843,\"derivados_gerados_em\":\"2026-11-12T19:11:31.711Z\"}"
+   },
+   "health com barra": {
+    "statusCode": 200,
+    "headers": {
+     "Content-Type": "application/json; charset=utf-8",
+     "Cache-Control": "no-store",
+     "Access-Control-Allow-Origin": "*",
+     "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+     "Access-Control-Allow-Headers": "Content-Type,Authorization",
+     "Access-Control-Max-Age": "600"
+    },
+    "body": "{\"ok\":true,\"cidadaos\":89046,\"servicos\":843,\"derivados_gerados_em\":\"2026-11-12T19:11:31.711Z\"}"
+   },
+   "rota inexistente": {
+    "statusCode": 404,
+    "headers": {
+     "Content-Type": "application/json; charset=utf-8",
+     "Cache-Control": "no-store",
+     "Access-Control-Allow-Origin": "*",
+     "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+     "Access-Control-Allow-Headers": "Content-Type,Authorization",
+     "Access-Control-Max-Age": "600"
+    },
+    "body": "{\"erro\":\"rota_nao_encontrada\",\"mensagem\":\"Rota não encontrada.\"}"
+   },
+   "metodo nao permitido": {
+    "statusCode": 405,
+    "headers": {
+     "Content-Type": "application/json; charset=utf-8",
+     "Cache-Control": "no-store",
+     "Access-Control-Allow-Origin": "*",
+     "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+     "Access-Control-Allow-Headers": "Content-Type,Authorization",
+     "Access-Control-Max-Age": "600"
+    },
+    "body": "{\"erro\":\"metodo_nao_permitido\",\"mensagem\":\"Método não permitido nesta rota.\"}"
+   },
+   "entrar como": {
+    "statusCode": 200,
+    "headers": {
+     "Content-Type": "application/json; charset=utf-8",
+     "Cache-Control": "no-store",
+     "Access-Control-Allow-Origin": "*",
+     "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+     "Access-Control-Allow-Headers": "Content-Type,Authorization",
+     "Access-Control-Max-Age": "600"
+    },
+    "body": "{\"cidadao_id\":\"C007938\",\"saudacao\":\"Você entrou como C007938 (dados fictícios).\",\"perfil\":{\"cidadao_id\":\"C007938\",\"idade\":68,\"faixa_etaria\":\"60-74\",\"sexo\":\"F\",\"rpa\":3,\"situacao_renda\":null,\"criancas_na_familia\":null,\"empreendedor\":false,\"mei\":false,\"servidor_publico\":false,\"proprietario_imovel\":false,\"tutor_animal\":false,\"estudante\":false,\"cadastro_unico\":false,\"bolsa_familia\":false,\"usuario_compaz\":false,\"microcredito\":false,\"aceita_notificacao\":false},\"perfil_resumo\":\"Mulher, 68 anos, mora na RPA 3.\",\"saude_liberada\":false,\"saude\":null,\"acessibilidade_liberada\":false,\"acessibilidade\":null,\"tem_historico\":true,\"total_acessos\":3,\"historico_recente\":[{\"data\":\"2026-09-11\",\"data_br\":\"11/09/2026\",\"hora\":\"10:01\",\"servico_id\":519,\"servico\":\"Ver resultado de exames laboratoriais\"},{\"data\":\"2026-08-20\",\"data_br\":\"20/08/2026\",\"hora\":\"20:47\",\"servico_id\":1475,\"servico\":\"Ver meus encaminhamentos\"},{\"data\":\"2026-07-02\",\"data_br\":\"02/07/2026\",\"hora\":\"15:55\",\"servico_id\":953,\"servico\":\"Ver meus agendamentos de Saúde\"}],\"consentimento\":{\"finalidade\":\"saude_personalizacao\",\"status\":\"pendente\",\"usa_dados\":false,\"usa_dados_de_saude\":false,\"mensagem\":\"Ainda não perguntamos. Enquanto isso, não usamos nenhuma informação de saúde.\",\"deve_pedir_agora\":true,\"acoes_disponiveis\":[\"concedido\"],\"atualizado_em\":null},\"consentimento_acessibilidade\":{\"finalidade\":\"acessibilidade_personalizacao\",\"status\":\"pendente\",\"usa_dados\":false,\"usa_dados_de_saude\":false,\"mensagem\":\"Ainda não perguntamos. Enquanto isso, não usamos essa informação.\",\"deve_pedir_agora\":true,\"acoes_disponiveis\":[\"concedido\"],\"atualizado_em\":null}}"
+   },
+   "vitrine com consulta": {
+    "statusCode": 200,
+    "headers": {
+     "Content-Type": "application/json; charset=utf-8",
+     "Cache-Control": "no-store",
+     "Access-Control-Allow-Origin": "*",
+     "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+     "Access-Control-Allow-Headers": "Content-Type,Authorization",
+     "Access-Control-Max-Age": "600"
+    },
+    "body": "{\"cidadao_id\":\"C007938\",\"base_da_personalizacao\":\"historico\",\"explicacao_geral\":\"Montamos esta lista com o seu perfil e com os serviços que você já usou.\",\"aviso_saude\":\"Não usamos nenhuma informação de saúde nesta lista.\",\"aviso_acessibilidade\":\"Não usamos nenhuma informação de acessibilidade nesta lista.\",\"total_acessos_historico\":3,\"semana_de_referencia_da_demanda\":\"2026-09-21\",\"itens\":[{\"posicao\":1,\"servico_id\":908,\"titulo\":\"Emitir credencial de estacionamento especial para idosos (maiores de 60 anos)\",\"nome\":\"Emitir credencial de estacionamento especial para idosos (maiores de 60 anos)\",\"orgao\":\"CTTU\",\"tema\":\"Mobilidade\",\"tipo_servico\":\"Agendamento\",\"digital\":true,\"jornada_disponivel\":true,\"origem\":\"momento\",\"tag\":\"Seu momento de vida\",\"motivo\":\"Este serviço é voltado a pessoas com 60 anos ou mais.\",\"outros_motivos\":[\"Pessoas como você também usam. É muito acessado por pessoas de 60-74 anos.\"]},{\"posicao\":2,\"servico_id\":1361,\"titulo\":\"Emitir Carteira da Pessoa Idosa\",\"nome\":\"Emitir Carteira da Pessoa Idosa\",\"orgao\":\"GOV.BR\",\"tema\":\"Cidadania\",\"tipo_servico\":\"A classificar\",\"digital\":false,\"jornada_disponivel\":false,\"origem\":\"popular\",\"tag\":\"Pessoas parecidas com você\",\"motivo\":\"Pessoas como você também usam. É muito acessado por pessoas de 60-74 anos.\",\"outros_motivos\":[]}],\"consentimento\":{\"finalidade\":\"saude_personalizacao\",\"status\":\"pendente\",\"usa_dados\":false,\"usa_dados_de_saude\":false,\"mensagem\":\"Ainda não perguntamos. Enquanto isso, não usamos nenhuma informação de saúde.\",\"deve_pedir_agora\":true,\"acoes_disponiveis\":[\"concedido\"],\"atualizado_em\":null},\"convite_consentimento\":{\"finalidade\":\"saude_personalizacao\",\"titulo\":\"Quer ver serviços de saúde pensados para você?\",\"resumo\":\"Podemos usar informações de saúde do seu cadastro para mostrar serviços que combinam com a sua situação. Só fazemos isso se você deixar.\",\"opcoes\":[{\"valor\":\"concedido\",\"rotulo\":\"Aceito\"},{\"valor\":\"recusado\",\"rotulo\":\"Agora não\"}]},\"consentimento_acessibilidade\":{\"finalidade\":\"acessibilidade_personalizacao\",\"status\":\"pendente\",\"usa_dados\":false,\"usa_dados_de_saude\":false,\"mensagem\":\"Ainda não perguntamos. Enquanto isso, não usamos essa informação.\",\"deve_pedir_agora\":true,\"acoes_disponiveis\":[\"concedido\"],\"atualizado_em\":null},\"convite_acessibilidade\":{\"finalidade\":\"acessibilidade_personalizacao\",\"titulo\":\"Quer ver serviços com apoio de acessibilidade?\",\"resumo\":\"Podemos usar a informação de que você é pessoa com deficiência, que já consta no seu cadastro, para mostrar serviços e benefícios que podem ajudar. Só fazemos isso se você deixar.\",\"opcoes\":[{\"valor\":\"concedido\",\"rotulo\":\"Aceito\"},{\"valor\":\"recusado\",\"rotulo\":\"Agora não\"}]}}"
+   },
+   "json invalido": {
+    "statusCode": 400,
+    "headers": {
+     "Content-Type": "application/json; charset=utf-8",
+     "Cache-Control": "no-store",
+     "Access-Control-Allow-Origin": "*",
+     "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+     "Access-Control-Allow-Headers": "Content-Type,Authorization",
+     "Access-Control-Max-Age": "600"
+    },
+    "body": "{\"erro\":\"json_invalido\",\"mensagem\":\"O corpo precisa ser um JSON válido.\"}"
+   },
+   "corpo grande": {
+    "statusCode": 413,
+    "headers": {
+     "Content-Type": "application/json; charset=utf-8",
+     "Cache-Control": "no-store",
+     "Access-Control-Allow-Origin": "*",
+     "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+     "Access-Control-Allow-Headers": "Content-Type,Authorization",
+     "Access-Control-Max-Age": "600"
+    },
+    "body": "{\"erro\":\"corpo_grande\",\"mensagem\":\"Corpo da requisição grande demais.\"}"
+   },
+   "corpo vazio em post": {
+    "statusCode": 400,
+    "headers": {
+     "Content-Type": "application/json; charset=utf-8",
+     "Cache-Control": "no-store",
+     "Access-Control-Allow-Origin": "*",
+     "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+     "Access-Control-Allow-Headers": "Content-Type,Authorization",
+     "Access-Control-Max-Age": "600"
+    },
+    "body": "{\"erro\":\"id_invalido\",\"mensagem\":\"Código inválido. Use o formato C000001 (ou só o número, como 1).\"}"
+   },
+   "evento em base64": {
+    "statusCode": 200,
+    "headers": {
+     "Content-Type": "application/json; charset=utf-8",
+     "Cache-Control": "no-store",
+     "Access-Control-Allow-Origin": "*",
+     "Access-Control-Allow-Methods": "GET,POST,PUT,PATCH,DELETE,OPTIONS",
+     "Access-Control-Allow-Headers": "Content-Type,Authorization",
+     "Access-Control-Max-Age": "600"
+    },
+    "body": "{\"ok\":true}"
+   }
+  },
+  "estado_gravado": {
+   "depois_de_get": false,
+   "depois_de_post": true
+  }
+ },
+ "servidor": {
+  "respostas": {
+   "options": {
+    "status": 204,
+    "headers": {
+     "access-control-allow-origin": "*",
+     "access-control-allow-methods": "GET,POST,PUT,PATCH,OPTIONS",
+     "access-control-allow-headers": "Content-Type,Authorization",
+     "access-control-max-age": "600"
+    },
+    "corpo": null
+   },
+   "health": {
+    "status": 200,
+    "headers": {
+     "access-control-allow-origin": "*",
+     "access-control-allow-methods": "GET,POST,PUT,PATCH,OPTIONS",
+     "access-control-allow-headers": "Content-Type,Authorization",
+     "access-control-max-age": "600",
+     "content-type": "application/json; charset=utf-8",
+     "cache-control": "no-store"
+    },
+    "corpo": {
+     "ok": true,
+     "cidadaos": 89046,
+     "servicos": 843,
+     "derivados_gerados_em": "2026-11-12T19:11:31.711Z"
+    }
+   },
+   "indice": {
+    "status": 200,
+    "headers": {
+     "access-control-allow-origin": "*",
+     "access-control-allow-methods": "GET,POST,PUT,PATCH,OPTIONS",
+     "access-control-allow-headers": "Content-Type,Authorization",
+     "access-control-max-age": "600",
+     "content-type": "application/json; charset=utf-8",
+     "cache-control": "no-store"
+    },
+    "corpo": {
+     "nome": "API do protótipo Conecta Recife (dados fictícios)",
+     "motor_de_dados": {
+      "GET /dados/cidadaos/demo": "personas oficiais e cenários para \"entrar como\"",
+      "GET /dados/cidadaos/{id}": "entrar como (perfil; saúde e deficiência só com consentimento)",
+      "GET /dados/cidadaos/{id}/jornadas": "pedidos do cidadão",
+      "GET /dados/servicos/{id}": "detalhe do serviço",
+      "GET /dados/consentimentos/texto?finalidade=": "texto de cada consentimento",
+      "GET /dados/consentimentos/{id}?finalidade=": "situação do consentimento",
+      "POST /dados/consentimentos/{id}": "{\"decisao\":\"concedido|recusado|revogado\",\"finalidade\":\"saude_personalizacao|acessibilidade_personalizacao\"}",
+      "POST /dados/jornadas": "{\"cidadao_id\":\"C000003\",\"servico_id\":352}",
+      "GET /dados/jornadas/{id}": "etapa atual do pedido",
+      "PATCH /dados/jornadas/{id}": "{\"campos\":{...}}",
+      "POST /dados/jornadas/{id}/confirmar": "{\"confirmar\":true}",
+      "POST /dados/eventos": "{\"cidadao_id\":\"C000003\",\"tipo\":\"servico_aberto\",\"servico_id\":352}",
+      "GET /dados/eventos/resumo": "contagem por tipo"
+     },
+     "motor_de_recomendacao": {
+      "GET /recomendacao/{id}?limite=8": "serviços sugeridos com motivo, base da personalização e convites de consentimento"
+     },
+     "saude_da_api": "GET /health"
+    }
+   },
+   "painel": {
+    "status": 200,
+    "headers": {
+     "content-type": "text/html; charset=utf-8",
+     "cache-control": "no-store"
+    },
+    "html": true
+   },
+   "raiz para navegador": {
+    "status": 200,
+    "headers": {
+     "content-type": "text/html; charset=utf-8",
+     "cache-control": "no-store"
+    },
+    "html": true
+   },
+   "rota inexistente": {
+    "status": 404,
+    "headers": {
+     "access-control-allow-origin": "*",
+     "access-control-allow-methods": "GET,POST,PUT,PATCH,OPTIONS",
+     "access-control-allow-headers": "Content-Type,Authorization",
+     "access-control-max-age": "600",
+     "content-type": "application/json; charset=utf-8",
+     "cache-control": "no-store"
+    },
+    "corpo": {
+     "erro": "rota_nao_encontrada",
+     "mensagem": "Rota não encontrada."
+    }
+   },
+   "metodo nao permitido": {
+    "status": 405,
+    "headers": {
+     "access-control-allow-origin": "*",
+     "access-control-allow-methods": "GET,POST,PUT,PATCH,OPTIONS",
+     "access-control-allow-headers": "Content-Type,Authorization",
+     "access-control-max-age": "600",
+     "content-type": "application/json; charset=utf-8",
+     "cache-control": "no-store"
+    },
+    "corpo": {
+     "erro": "metodo_nao_permitido",
+     "mensagem": "Método não permitido nesta rota."
+    }
+   },
+   "json invalido": {
+    "status": 400,
+    "headers": {
+     "access-control-allow-origin": "*",
+     "access-control-allow-methods": "GET,POST,PUT,PATCH,OPTIONS",
+     "access-control-allow-headers": "Content-Type,Authorization",
+     "access-control-max-age": "600",
+     "content-type": "application/json; charset=utf-8",
+     "cache-control": "no-store"
+    },
+    "corpo": {
+     "erro": "json_invalido",
+     "mensagem": "O corpo precisa ser um JSON válido."
+    }
+   },
+   "corpo grande": {
+    "rejeitado": true
+   },
+   "evento": {
+    "status": 200,
+    "headers": {
+     "access-control-allow-origin": "*",
+     "access-control-allow-methods": "GET,POST,PUT,PATCH,OPTIONS",
+     "access-control-allow-headers": "Content-Type,Authorization",
+     "access-control-max-age": "600",
+     "content-type": "application/json; charset=utf-8",
+     "cache-control": "no-store"
+    },
+    "corpo": {
+     "ok": true
+    }
+   }
+  },
+  "estado_gravado_ao_sair": true
+ }
+}
