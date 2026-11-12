@@ -1,0 +1,233 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Write preservation property tests (BEFORE implementing fix)": [
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521232965
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521297924
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521635190
+      }
+    ],
+    "2. Write bug condition exploration test": [
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521238136
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521642321
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521737555
+      }
+    ],
+    "3.1 Tabela única de erros (`api/erros.js`)": [
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521242388
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521744537
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521888085
+      }
+    ],
+    "3.2 Funções de entrada (`api/entrada.js`)": [
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521246707
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521897474
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794522013639
+      }
+    ],
+    "3.3 Roteador independente da ordem (`api/roteador.js`)": [
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521251031
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794522020479
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794522084727
+      }
+    ],
+    "3.4 HTTP comum (`api/http-comum.js`)": [
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521255416
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794522091873
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794522334595
+      }
+    ],
+    "3.5 Rotas por área e índice gerado": [
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521259710
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794522343471
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794522735128
+      }
+    ],
+    "3.6 Dividir `dados/jornada.js` em `dados/jornada/`": [
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521264264
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794522746109
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794523149738
+      }
+    ],
+    "3.7 Dividir `montarVitrine`": [
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521268584
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794523158050
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794523298931
+      }
+    ],
+    "3.8 Contrato das APIs e README": [
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521272956
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794523306424
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794523667768
+      }
+    ],
+    "3.9 Verify bug condition exploration test now passes": [
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521277412
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794523675202
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794523700118
+      }
+    ],
+    "3.10 Verify preservation tests still pass": [
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521281873
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794523706983
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794523747574
+      }
+    ],
+    "4. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794521286573
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794523759343
+      },
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794523825056
+      }
+    ],
+    "3. Fix: refatorar a clareza das APIs sem mudar o comportamento externo": [
+      {
+        "executionId": "88487ad3-38b2-4560-9aa8-dd961a753985",
+        "chatSessionId": "sess_f90470b9-168e-43ba-b3ba-98f39bc9489f",
+        "timestamp": 1794523752253
+      }
+    ]
+  }
+}
