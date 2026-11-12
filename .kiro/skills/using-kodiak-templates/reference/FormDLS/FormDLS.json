@@ -1,0 +1,156 @@
+{
+  "parameters": {
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "canGoBack": "true",
+      "androidPreventGoBack": "false",
+      "rightButtons": [
+        {
+          "action": {
+            "name": "alert"
+          },
+          "icon": "ui-placeholder",
+          "accessibilityLabel": "Botão de ação"
+        },
+        {
+          "action": {
+            "name": "alert"
+          },
+          "icon": "ui-placeholder",
+          "accessibilityLabel": "Botão de ação"
+        },
+        {
+          "action": {
+            "name": "alert"
+          },
+          "icon": "ui-placeholder",
+          "accessibilityLabel": "Botão de ação"
+        }
+      ],
+      "title": "Title",
+      "leftIcon": {
+        "name": "ui-back",
+        "accessibilityLabel": "Botão de ação"
+      },
+      "collapsable": false
+    },
+    "screenHeader": {
+      "title": "Título principal",
+      "description": "Lorem ipsum dolor sit amet consectetur. Hac vulputate eget convallis venenatis."
+    },
+    "templateParams": {
+      "items": [
+        {
+          "validations": [
+            {
+              "jsExpression": "__value.length > 10",
+              "errorMessage": "Tamanho do texto deve ser maior que 10 caracteres"
+            }
+          ],
+          "type": "textInput",
+          "name": "textInput_70172",
+          "label": "Input label",
+          "placeholder": "Placeholder Text"
+        },
+        {
+          "type": "dateField",
+          "name": "dateField_70173",
+          "label": "Input label"
+        },
+        {
+          "type": "moneyField",
+          "currencyType": "brl",
+          "name": "moneyField_70174",
+          "hint": "Hint text",
+          "label": "Input label"
+        },
+        {
+          "optionsList": [
+            {
+              "id": "id1",
+              "label": "Label 1"
+            },
+            {
+              "id": "id2",
+              "label": "Label 2"
+            },
+            {
+              "id": "id2",
+              "label": "Label 3"
+            }
+          ],
+          "type": "selectField",
+          "name": "selectField_70175",
+          "label": "Input label",
+          "selectionLabel": "Selecione"
+        },
+        {
+          "type": "textArea",
+          "name": "textArea_70176",
+          "label": "Input label",
+          "placeholder": "Mensagem...",
+          "required": "true"
+        },
+        {
+          "type": "password",
+          "name": "password_70177",
+          "label": "Input label"
+        },
+        {
+          "type": "numberField",
+          "name": "numberField_70178",
+          "hint": "Hint text",
+          "label": "Input label"
+        },
+        {
+          "optionsList": [
+            {
+              "label": "Label da opção",
+              "description": "Texto de apoio",
+              "id": "727",
+              "checked": "false",
+              "disabled": "false"
+            },
+            {
+              "label": "Label da opção",
+              "description": "Texto de apoio",
+              "id": "741",
+              "checked": "false",
+              "disabled": "false"
+            }
+          ],
+          "type": "checkboxGroup",
+          "name": "checkboxGroup_70179",
+          "label": "Group Label"
+        },
+        {
+          "onPress": {
+            "params": {
+              "title": "Título"
+            },
+            "name": "alert"
+          },
+          "type": "linkNavigation",
+          "label": "rererer"
+        }
+      ]
+    },
+    "internalFooterDLS": {},
+    "footerParams": {
+      "mainButton": {
+        "action": {
+          "name": "alert"
+        },
+        "showInlined": false,
+        "title": "AÇÃO PRIMÁRIA"
+      }
+    },
+    "name": "FormDLS"
+  },
+  "description": "Template FormDLS",
+  "configName": "form-template"
+}

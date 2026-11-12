@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "kodiak-mcp": {
+      "command": "/home/participant/.local/bin/kodiak-mcp",
+      "args": [],
+      "disabled": false
+    }
+  }
+}

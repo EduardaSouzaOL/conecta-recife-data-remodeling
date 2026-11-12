@@ -1,0 +1,160 @@
+{
+  "parameters": {
+    "templateParams": {
+      "sections": [
+        {
+          "sectionTitle": "",
+          "sectionData": [
+            {
+              "label": "Fulano de Tal",
+              "auxiliarLines": [
+                {
+                  "description": "Ag. 1000-1 - Cc. 10000-1",
+                  "status": "default",
+                  "coloringAuxiliarLines": "Em ambos os lados"
+                },
+                {
+                  "description": "Último acesso: 07/10/2024 às 15h53",
+                  "status": "default",
+                  "coloringAuxiliarLines": "Em ambos os lados"
+                }
+              ],
+              "image": {
+                "base64": "iVBORw0..."
+              },
+              "action": {
+                "name": "alert"
+              }
+            }
+          ]
+        },
+        {
+          "sectionTitle": "Configurações",
+          "sectionData": [
+            {
+              "label": "Geral",
+              "icon": {
+                "name": "ui-settings",
+                "accessibilityLabel": "Ícone"
+              },
+              "action": {
+                "name": "alert"
+              },
+              "rightFeatures": {
+                "description": "Configure notificações, acesso ao App, imagens da tela de login e muito mais."
+              }
+            },
+            {
+              "label": "Cadastro",
+              "icon": {
+                "name": "ui-register",
+                "accessibilityLabel": "Ícone"
+              },
+              "action": {
+                "name": "alert"
+              },
+              "rightFeatures": {
+                "description": "Edite dados pessoais, profissionais, e-mail, telefone e outros itens."
+              }
+            },
+            {
+              "label": "Privacidade",
+              "action": {
+                "name": "alert"
+              },
+              "rightFeatures": {
+                "description": "Personalize sua privacidade e saiba como o BB trata seus dados pessoais."
+              }
+            },
+            {
+              "label": "Acessibilidade",
+              "icon": {
+                "name": "ui-accessibility",
+                "accessibilityLabel": "Ícone"
+              },
+              "action": {
+                "name": "alert"
+              },
+              "rightFeatures": {
+                "description": "Garanta uma experiência visual acessível e personalizada."
+              }
+            }
+          ]
+        },
+        {
+          "sectionTitle": "Segurança",
+          "sectionData": [
+            {
+              "label": "Central de Segurança",
+              "icon": {
+                "name": "seguranca-user-key",
+                "accessibilityLabel": "Ícone"
+              },
+              "action": {
+                "name": "alert"
+              },
+              "rightFeatures": {}
+            },
+            {
+              "label": "BB Code",
+              "icon": {
+                "name": "seguranca-qr-code",
+                "accessibilityLabel": "Ícone"
+              },
+              "action": {
+                "name": "alert"
+              },
+              "rightFeatures": {
+                "description": "Habilitado"
+              }
+            },
+            {
+              "label": "Central de Senhas",
+              "icon": {
+                "name": "seguranca-key",
+                "accessibilityLabel": "Ícone"
+              },
+              "action": {
+                "name": "alert"
+              },
+              "rightFeatures": {}
+            },
+            {
+              "label": "Situação deste dispositivo",
+              "action": {
+                "name": "alert"
+              },
+              "rightFeatures": {
+                "description": "Liberado para movimentações."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "canGoBack": "true",
+      "title": "3. Meu Perfil",
+      "rightButtons": [
+        {
+          "icon": "ui-close",
+          "accessibilityLabel": "Botão de ação",
+          "action": {
+            "name": "alert"
+          }
+        }
+      ]
+    },
+    "screenHeader": {},
+    "footerParams": {},
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "internalFooterDLS": {},
+    "name": "ListDLS"
+  },
+  "description": "Template ListDLS",
+  "configName": "list-dls-template"
+}

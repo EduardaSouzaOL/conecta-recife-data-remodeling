@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {},
+    "screenHeader": {},
+    "templateParams": {
+      "image": {
+        "uri": "https://cdn.exemplo.com/onboarding/passo-1.png",
+        "aspectRatio": "wide",
+        "cache": true,
+        "accessibilityLabel": "Ilustração de uma pessoa usando o celular para investir"
+      },
+      "pagination": {
+        "active": true,
+        "maxPages": 3,
+        "actualPage": 1
+      },
+      "title": "Invista em poucos toques",
+      "description": "Agora você pode aplicar e resgatar direto pelo app, sem burocracia."
+    },
+    "footerParams": {
+      "mainButton": {
+        "action": {
+          "params": {
+            "requestParams": {
+              "param1": "valor1",
+              "param2": "valor2"
+            },
+            "contextParams": {
+              "contextParam1": "contextValor1"
+            },
+            "checkAuthorization": false,
+            "configName": "onboarding-novo-produto-1"
+          },
+          "name": "navigation",
+          "configName": "onboarding-novo-produto-2"
+        },
+        "showInlined": false,
+        "title": "Próximo"
+      },
+      "secondaryButton": {
+        "action": {
+          "params": {
+            "checkAuthorization": false
+          },
+          "name": "navigation",
+          "configName": "central-produtos"
+        },
+        "title": "Pular"
+      }
+    },
+    "name": "Onboarding"
+  },
+  "description": "Primeira tela do onboarding do novo produto de investimentos",
+  "configName": "onboarding-novo-produto-1"
+}

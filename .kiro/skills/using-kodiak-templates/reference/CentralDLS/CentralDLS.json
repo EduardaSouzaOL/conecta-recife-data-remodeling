@@ -1,0 +1,341 @@
+{
+  "parameters": {
+    "templateParams": {
+      "balanceCardIconsWidgetProps": {
+        "title": "Título do widget",
+        "description": "Lorem ipsum dolor sit amet consectetur. Hac vulputate eget convallis venenatis.",
+        "balance": {
+          "left": {
+            "label": "Label do link",
+            "description": "Description",
+            "action": {
+              "name": "alert"
+            }
+          },
+          "right": {
+            "label": "Label do link",
+            "description": "Description",
+            "action": {
+              "name": "alert"
+            }
+          }
+        },
+        "cards": {
+          "mode": "carousel",
+          "items": [
+            {
+              "label": "Label",
+              "description": "Description",
+              "neutral": "true",
+              "size": "regular",
+              "icon": "ui-placeholder",
+              "action": {
+                "name": "alert"
+              }
+            },
+            {
+              "label": "Label",
+              "description": "Description",
+              "neutral": "true",
+              "size": "regular",
+              "icon": "ui-placeholder",
+              "action": {
+                "name": "alert"
+              }
+            }
+          ],
+          "button": {
+            "action": {
+              "name": "alert"
+            },
+            "label": "Saber mais"
+          }
+        }
+      },
+      "imageCarouselWidgetProps": {
+        "items": [
+          {
+            "image": {
+              "base64": "iVBORw0KGg...",
+              "accessibilityLabel": "Label de acessibilidade",
+              "aspectRatio": "wide"
+            },
+            "action": {
+              "name": "alert"
+            }
+          },
+          {
+            "image": {
+              "base64": "iVBORw0KGg...",
+              "accessibilityLabel": "Label de acessibilidade",
+              "aspectRatio": "wide"
+            },
+            "action": {
+              "name": "alert"
+            }
+          }
+        ]
+      },
+      "contentLinesWidgetProps": {
+        "title": "Título do widget",
+        "description": "Lorem ipsum dolor sit amet consectetur. Hac vulputate eget convallis venenatis.",
+        "items": [
+          {
+            "label": "Saldo disponível",
+            "value": "R$ 12.450,00",
+            "action": {
+              "name": "alert"
+            }
+          },
+          {
+            "label": "Fatura atual",
+            "value": "R$ 1.230,00",
+            "action": {
+              "name": "alert"
+            }
+          }
+        ],
+        "button": {
+          "action": {
+            "name": "alert"
+          },
+          "label": "Saber mais"
+        }
+      },
+      "cardIconsWidgetProps": {
+        "title": "Título do widget",
+        "description": "Lorem ipsum dolor sit amet consectetur. Hac vulputate eget convallis venenatis.",
+        "cards": {
+          "mode": "carousel",
+          "items": [
+            {
+              "label": "Label",
+              "description": "Description",
+              "neutral": "true",
+              "size": "regular",
+              "icon": "ui-placeholder",
+              "action": {
+                "name": "alert"
+              }
+            },
+            {
+              "label": "Label",
+              "description": "Description",
+              "neutral": "true",
+              "size": "regular",
+              "icon": "ui-placeholder",
+              "action": {
+                "name": "alert"
+              }
+            }
+          ],
+          "button": {
+            "action": {
+              "name": "alert"
+            },
+            "label": "Saber mais"
+          }
+        }
+      },
+      "cardImagesWidgetsProps": {
+        "items": [
+          {
+            "type": "cardImage",
+            "title": "Título do widget",
+            "description": "Lorem ipsum dolor sit amet consectetur. Hac vulputate eget convallis venenatis.",
+            "button": {
+              "action": {
+                "name": "alert"
+              },
+              "label": "Saber mais"
+            },
+            "cards": {
+              "cardType": "large",
+              "items": [
+                {
+                  "action": {
+                    "name": "alert"
+                  },
+                  "title": "Lorem ipsum dolor amet.",
+                  "paragraph": "Lorem ipsum dolor sit amet, consec tetur adipiscing elit.",
+                  "image": {
+                    "base64": "iVBORw0KGg..."
+                  },
+                  "neutral": "true"
+                },
+                {
+                  "action": {
+                    "name": "alert"
+                  },
+                  "title": "Lorem ipsum dolor amet.",
+                  "paragraph": "Lorem ipsum dolor sit amet, consec tetur adipiscing elit.",
+                  "image": {
+                    "base64": "iVBORw0KGg..."
+                  },
+                  "neutral": "true"
+                }
+              ],
+              "mode": "carousel"
+            }
+          },
+          {
+            "type": "cardImage",
+            "title": "Título do widget",
+            "description": "Lorem ipsum dolor sit amet consectetur. Hac vulputate eget convallis venenatis.",
+            "button": {
+              "action": {
+                "name": "alert"
+              },
+              "label": "Saber mais"
+            },
+            "cards": {
+              "cardType": "large",
+              "items": [
+                {
+                  "action": {
+                    "name": "alert"
+                  },
+                  "title": "Lorem ipsum dolor amet.",
+                  "paragraph": "Lorem ipsum dolor sit amet, consec tetur adipiscing elit.",
+                  "image": {
+                    "base64": "iVBORw0KGg..."
+                  },
+                  "neutral": "true"
+                },
+                {
+                  "action": {
+                    "name": "alert"
+                  },
+                  "title": "Lorem ipsum dolor amet.",
+                  "paragraph": "Lorem ipsum dolor sit amet, consec tetur adipiscing elit.",
+                  "image": {
+                    "base64": "iVBORw0KGg..."
+                  },
+                  "neutral": "true"
+                }
+              ],
+              "mode": "carousel"
+            }
+          }
+        ]
+      },
+      "cardProductImagesWidgetsProps": {
+        "items": []
+      },
+      "bottomCardImagesWidgetsProps": {
+        "items": [
+          {
+            "type": "cardImage",
+            "title": "Título do widget",
+            "description": "Lorem ipsum dolor sit amet consectetur. Hac vulputate eget convallis venenatis.",
+            "button": {
+              "action": {
+                "name": "alert"
+              },
+              "label": "Saber mais"
+            },
+            "cards": {
+              "cardType": "large",
+              "items": [
+                {
+                  "action": {
+                    "name": "alert"
+                  },
+                  "title": "Lorem ipsum dolor amet.",
+                  "paragraph": "Lorem ipsum dolor sit amet, consec tetur adipiscing elit.",
+                  "image": {
+                    "base64": "iVBORw0KGg..."
+                  },
+                  "neutral": "true"
+                },
+                {
+                  "action": {
+                    "name": "alert"
+                  },
+                  "title": "Lorem ipsum dolor amet.",
+                  "paragraph": "Lorem ipsum dolor sit amet, consec tetur adipiscing elit.",
+                  "image": {
+                    "base64": "iVBORw0KGg..."
+                  },
+                  "neutral": "true"
+                }
+              ],
+              "mode": "carousel"
+            }
+          },
+          {
+            "type": "cardImage",
+            "title": "Título do widget",
+            "description": "Lorem ipsum dolor sit amet consectetur. Hac vulputate eget convallis venenatis.",
+            "button": {
+              "action": {
+                "name": "alert"
+              },
+              "label": "Saber mais"
+            },
+            "cards": {
+              "cardType": "large",
+              "items": [
+                {
+                  "action": {
+                    "name": "alert"
+                  },
+                  "title": "Lorem ipsum dolor amet.",
+                  "paragraph": "Lorem ipsum dolor sit amet, consec tetur adipiscing elit.",
+                  "image": {
+                    "base64": "iVBORw0KGg..."
+                  },
+                  "neutral": "true"
+                },
+                {
+                  "action": {
+                    "name": "alert"
+                  },
+                  "title": "Lorem ipsum dolor amet.",
+                  "paragraph": "Lorem ipsum dolor sit amet, consec tetur adipiscing elit.",
+                  "image": {
+                    "base64": "iVBORw0KGg..."
+                  },
+                  "neutral": "true"
+                }
+              ],
+              "mode": "carousel"
+            }
+          }
+        ]
+      },
+      "bottomCardProductImagesWidgetsProps": {
+        "items": []
+      }
+    },
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "canGoBack": "true",
+      "title": "Title",
+      "rightButtons": [
+        {
+          "icon": "ui-placeholder",
+          "accessibilityLabel": "Botão de ação",
+          "action": {
+            "name": "alert"
+          }
+        }
+      ],
+      "leftIcon": {
+        "name": "ui-back",
+        "accessibilityLabel": "Botão de ação"
+      },
+      "collapsable": false
+    },
+    "screenHeader": {},
+    "footerParams": {},
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "internalFooterDLS": {},
+    "name": "CentralDLS"
+  },
+  "description": "Template CentralDLS",
+  "configName": "central-dls-template1548"
+}

@@ -1,0 +1,1099 @@
+{
+  "parameters": {
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "canGoBack": "true",
+      "androidPreventGoBack": "false",
+      "closeAction": {
+        "analytics": {
+          "enabled": "false"
+        }
+      },
+      "rightButtons": [
+        {
+          "action": {
+            "analytics": {
+              "enabled": "false"
+            },
+            "params": {
+              "checkAuthorization": false,
+              "configName": "central-2-v2",
+              "navigationType": "replace"
+            },
+            "name": "navigation"
+          },
+          "icon": "ui-update"
+        }
+      ],
+      "contentBar": [
+        {
+          "bigNumber": {
+            "size": "xHugeBd",
+            "color": "onHighlightDefault",
+            "precision": 2,
+            "operator": true,
+            "value": "10000",
+            "formatType": "BRL"
+          },
+          "labelTitle": {
+            "mode": "vertical",
+            "prefixIcon": {
+              "name": "ban-elo"
+            },
+            "title": "Texto Label Title",
+            "description": "Descrição"
+          },
+          "buttonList": [
+            {
+              "iconProps": {
+                "name": "ban-visa-minicard"
+              },
+              "chevron": false,
+              "action": {
+                "analytics": {
+                  "enabled": "false"
+                },
+                "params": {
+                  "text": "Mensagem"
+                },
+                "name": "alert"
+              },
+              "title": "Botão 1"
+            },
+            {
+              "iconProps": {
+                "name": "ui-like"
+              },
+              "chevron": false,
+              "action": {
+                "analytics": {
+                  "enabled": "false"
+                },
+                "params": {
+                  "text": "Mensagem"
+                },
+                "name": "alert"
+              },
+              "title": "Botão Dois"
+            },
+            {
+              "iconProps": {
+                "name": "color-discord"
+              },
+              "chevron": false,
+              "action": {
+                "analytics": {
+                  "enabled": "false"
+                },
+                "params": {
+                  "text": "oi"
+                },
+                "name": "alert"
+              },
+              "title": "Botão 3"
+            }
+          ],
+          "itemType": "bigNumber"
+        },
+        {
+          "tabularLine": {
+            "inverted": false,
+            "prefixAvatarProps": {
+              "name": "AV"
+            },
+            "progressBarOnHighlight": {
+              "value": "50",
+              "type": "highlight-primary",
+              "mode": "none",
+              "label": false,
+              "state": "default"
+            },
+            "action": {
+              "analytics": {
+                "enabled": "false"
+              },
+              "params": {
+                "text": "Mensagem"
+              }
+            },
+            "label": "Label",
+            "value": {
+              "data": "Negativo",
+              "status": "negative"
+            },
+            "accessibilityContext": "Contexto de acessibilidade"
+          },
+          "labelTitle": {
+            "mode": "horizontal",
+            "prefixIcon": {
+              "name": "ban-jcb"
+            },
+            "title": "LabelTitle"
+          },
+          "buttonList": [
+            {
+              "chevron": true,
+              "action": {
+                "analytics": {
+                  "enabled": "false"
+                },
+                "params": {
+                  "text": "Oi"
+                },
+                "name": "alert"
+              },
+              "title": "Botão 1"
+            }
+          ],
+          "itemType": "tabularLine"
+        }
+      ],
+      "concierge": {
+        "type": "navigation",
+        "navigationProps": {
+          "chevron": true,
+          "prefixIconProps": {
+            "name": "color-heart-lgbt"
+          },
+          "action": {
+            "analytics": {
+              "enabled": "false"
+            },
+            "params": {
+              "text": "Olá"
+            },
+            "name": "alert"
+          },
+          "label": "Concierge nav.",
+          "description": "Descrição",
+          "value": "Valor"
+        }
+      },
+      "title": "Central 2.0 - v3!"
+    },
+    "templateParams": {
+      "internalHeader": {
+        "inlineMessage": {
+          "linkNavigation": {
+            "action": {
+              "analytics": {
+                "enabled": "false"
+              }
+            }
+          },
+          "kind": "success",
+          "message": "Mensagem Central2",
+          "description": "Descrição"
+        }
+      },
+      "sessoes": [
+        {
+          "sessionItemConfig": {
+            "titlePrefix": {
+              "iconProps": {
+                "name": "fin-shopping"
+              }
+            },
+            "titleSuffix": {
+              "config": {
+                "action": {
+                  "analytics": {
+                    "enabled": "false"
+                  },
+                  "params": {
+                    "text": "oláa"
+                  },
+                  "name": "alert"
+                },
+                "label": "Saiba mais"
+              },
+              "name": "linkNavigation"
+            },
+            "quickAccessIcons": [
+              {
+                "iconProps": {
+                  "name": "fin-open-finance"
+                },
+                "badgeProps": {
+                  "label": "1"
+                },
+                "action": {
+                  "analytics": {
+                    "enabled": "false"
+                  },
+                  "params": {
+                    "text": "Msg"
+                  },
+                  "name": "alert"
+                },
+                "label": "BB Previdênciaaaaa BB Previdênciaaaaa BB Previdênciaaaaa"
+              },
+              {
+                "iconProps": {
+                  "name": "fin-debit-machine"
+                },
+                "badgeProps": {
+                  "label": "3"
+                },
+                "action": {
+                  "analytics": {
+                    "enabled": "false"
+                  },
+                  "params": {
+                    "text": "Msg"
+                  },
+                  "name": "alert"
+                },
+                "label": "Ico 2"
+              },
+              {
+                "iconProps": {
+                  "name": "fin-limits"
+                },
+                "action": {
+                  "analytics": {
+                    "enabled": "false"
+                  }
+                },
+                "label": "Ico 3"
+              },
+              {
+                "iconProps": {
+                  "name": "rel-user-headphone"
+                },
+                "action": {
+                  "analytics": {
+                    "enabled": "false"
+                  }
+                },
+                "label": "Ico 4"
+              }
+            ],
+            "quickAccessFormField": {
+              "textFieldConfig": {
+                "hint": " espaço reservado",
+                "varName": "var"
+              },
+              "buttonConfig": {
+                "iconProps": {
+                  "name": "color-heart-lgbt"
+                },
+                "action": {
+                  "analytics": {
+                    "enabled": "false"
+                  },
+                  "params": {
+                    "checkAuthorization": false,
+                    "configName": "central-2-v2"
+                  },
+                  "name": "navigation"
+                },
+                "labelEmpty": "Colar",
+                "labelFilled": "Pagar",
+                "chevron": "false"
+              },
+              "autoFillButtons": [
+                {
+                  "iconProps": {
+                    "name": "color-facebook"
+                  },
+                  "action": {
+                    "analytics": {
+                      "enabled": "false"
+                    },
+                    "params": {
+                      "text": "Preenchimento 1"
+                    },
+                    "name": "alert"
+                  },
+                  "label": "Preenchimento 1",
+                  "internalValue": "Valor Rápido 1"
+                },
+                {
+                  "iconProps": {
+                    "name": "color-teams"
+                  },
+                  "action": {
+                    "analytics": {
+                      "enabled": "false"
+                    },
+                    "params": {
+                      "text": "Preenchimento 2"
+                    },
+                    "name": "alert"
+                  },
+                  "label": "Preenchimento 2",
+                  "internalValue": "Valor Rápido 2"
+                },
+                {
+                  "iconProps": {
+                    "name": "color-whatsapp"
+                  },
+                  "action": {
+                    "analytics": {
+                      "enabled": "false"
+                    },
+                    "params": {
+                      "text": "Preenchimento 3"
+                    },
+                    "name": "alert"
+                  },
+                  "label": "Preenchimento 3",
+                  "internalValue": "Valor Rápido 3"
+                }
+              ],
+              "enableTextField": "true"
+            },
+            "groupType": "quickAccess",
+            "actionItemsPresentationType": "grid",
+            "title": "Acesso rápido",
+            "description": "Descrição Interna"
+          }
+        },
+        {
+          "sessionItemConfig": {
+            "titleSuffix": {
+              "config": {
+                "action": {
+                  "analytics": {
+                    "enabled": "false"
+                  }
+                }
+              }
+            },
+            "action": {
+              "analytics": {
+                "enabled": "false"
+              },
+              "params": {
+                "text": "Card!"
+              },
+              "name": "alert"
+            },
+            "cards": [
+              {
+                "id": "card1",
+                "title": "Título",
+                "description": "Descrição",
+                "value": "Valor",
+                "status": "default"
+              },
+              {
+                "id": "card2",
+                "title": "Título",
+                "description": "Descrição",
+                "value": "Valor",
+                "status": "positive"
+              },
+              {
+                "id": "card3",
+                "title": "Título",
+                "description": "Descrição",
+                "value": "Valor",
+                "status": "negative"
+              }
+            ],
+            "groupType": "selectableCards",
+            "varName": "selectedCard",
+            "title": "Título Interno Cards",
+            "description": "Descrição"
+          }
+        },
+        {
+          "sessionItemConfig": {
+            "titleSuffix": {
+              "config": {
+                "action": {
+                  "analytics": {
+                    "enabled": "false"
+                  }
+                }
+              }
+            },
+            "chartConfig": {
+              "chartProps": {
+                "DATASETS": [
+                  {
+                    "data": [
+                      {
+                        "date": "2026-04-10T10:00:00.000Z",
+                        "value": "100"
+                      },
+                      {
+                        "date": "2026-04-10T10:10:00.000Z",
+                        "value": "150"
+                      },
+                      {
+                        "date": "2026-04-10T10:20:00.000Z",
+                        "value": "200"
+                      },
+                      {
+                        "date": "2026-04-10T10:30:00.000Z",
+                        "value": "100"
+                      },
+                      {
+                        "date": "2026-04-10T10:40:00.000Z",
+                        "value": "115"
+                      }
+                    ],
+                    "legendLabel": "Dados"
+                  }
+                ],
+                "title": "Título - Gráfico",
+                "description": "Descrição - Desc",
+                "showTotalValue": true,
+                "showTrend": true
+              },
+              "chartType": "line"
+            },
+            "groupType": "chart",
+            "title": "Título Interno Gráfico",
+            "description": "Descrição Interna"
+          }
+        },
+        {
+          "sessionItemConfig": {
+            "carouselItems": [
+              {
+                "titleSuffix": {
+                  "config": {
+                    "action": {
+                      "analytics": {
+                        "enabled": "false"
+                      }
+                    }
+                  }
+                },
+                "carouselConfig": {
+                  "items": [
+                    {
+                      "image": {
+                        "uri": "https://www.bb.com.br/docs/pub/IDC/AppPJ/ebook_ligapj_kodiak-mulheres_de_sucesso.png",
+                        "cache": true
+                      },
+                      "action": {
+                        "analytics": {
+                          "enabled": "false"
+                        }
+                      }
+                    },
+                    {
+                      "image": {
+                        "uri": "https://www.bb.com.br/docs/pub/IDC/AppPJ/ebook_ligapj_kodiak-mulheres_de_sucesso.png",
+                        "cache": true
+                      },
+                      "action": {
+                        "analytics": {
+                          "enabled": "false"
+                        }
+                      }
+                    }
+                  ],
+                  "carouselType": "imageCarousel"
+                },
+                "title": "Título - Interno Carrossel",
+                "description": "Descrição Carrossel de imagens"
+              }
+            ],
+            "groupType": "caroussel"
+          }
+        },
+        {
+          "sessionItemConfig": {
+            "carouselItems": [
+              {
+                "titleSuffix": {
+                  "config": {
+                    "action": {
+                      "analytics": {
+                        "enabled": "false"
+                      }
+                    }
+                  }
+                },
+                "carouselConfig": {
+                  "card": [
+                    {
+                      "favoriteButton": {
+                        "action": {
+                          "analytics": {
+                            "enabled": "false"
+                          }
+                        },
+                        "favorite": "false"
+                      },
+                      "cardAction": {
+                        "analytics": {
+                          "enabled": "false"
+                        }
+                      },
+                      "title": "Título do card",
+                      "discountLabel": "Rótulo de desconto",
+                      "priceLabel": "Rótulo de valor",
+                      "extraInfoLabel": "Informação extra",
+                      "categoryLabel": "Categoria",
+                      "sellerLabel": "Vendedor",
+                      "badgePropsLabel": "Badge",
+                      "uri": "https://www.bb.com.br/docs/pub/IDC/AppPJ/ebook_ligapj_kodiak-mulheres_de_sucesso.png",
+                      "cache": true
+                    }
+                  ],
+                  "carouselType": "cardProductImages"
+                },
+                "title": "Título Interno Carrossel 2",
+                "description": "Descrição Cards de produto"
+              }
+            ],
+            "groupType": "caroussel"
+          }
+        },
+        {
+          "sessionItemConfig": {
+            "carouselItems": [
+              {
+                "titleSuffix": {
+                  "config": {
+                    "action": {
+                      "analytics": {
+                        "enabled": "false"
+                      },
+                      "params": {
+                        "text": "oi"
+                      },
+                      "name": "alert"
+                    },
+                    "label": "Saiba mais"
+                  },
+                  "name": "linkNavigation"
+                },
+                "carouselConfig": {
+                  "items": [
+                    {
+                      "onPressCard": {
+                        "analytics": {
+                          "enabled": "false"
+                        }
+                      },
+                      "onClose": {
+                        "analytics": {
+                          "enabled": "false"
+                        }
+                      },
+                      "buttonGroup": {
+                        "mainButton": {
+                          "iconProps": {
+                            "name": "ban-mastercard"
+                          },
+                          "action": {
+                            "analytics": {
+                              "enabled": "false"
+                            },
+                            "params": {
+                              "text": "Mensagem"
+                            },
+                            "name": "alert"
+                          },
+                          "name": "Rótulo Principal",
+                          "style": "secondary"
+                        },
+                        "secondaryButton": {
+                          "iconProps": {
+                            "name": "plt-nintendo-switch"
+                          },
+                          "action": {
+                            "analytics": {
+                              "enabled": "false"
+                            },
+                            "params": {
+                              "text": "Secundário"
+                            },
+                            "name": "alert"
+                          },
+                          "name": "Rótulo Secundário",
+                          "chevron": "false"
+                        }
+                      },
+                      "title": "Título - Info Cards",
+                      "description": "Descrição - Info Cards",
+                      "iconName": "fin-conta-jovem"
+                    },
+                    {
+                      "onPressCard": {
+                        "analytics": {
+                          "enabled": "false"
+                        }
+                      },
+                      "onClose": {
+                        "analytics": {
+                          "enabled": "false"
+                        }
+                      },
+                      "buttonGroup": {
+                        "mainButton": {
+                          "action": {
+                            "analytics": {
+                              "enabled": "false"
+                            },
+                            "params": {
+                              "text": "Alerta"
+                            },
+                            "name": "alert"
+                          },
+                          "name": "OK",
+                          "chevron": "true"
+                        },
+                        "secondaryButton": {
+                          "action": {
+                            "analytics": {
+                              "enabled": "false"
+                            }
+                          }
+                        }
+                      },
+                      "title": "Info Card 2",
+                      "description": "Descrição",
+                      "iconName": "fin-shopping"
+                    }
+                  ],
+                  "carouselType": "infoCardCarousel"
+                },
+                "title": "Carrossel Info Cards",
+                "description": "Descrição Info cards"
+              }
+            ],
+            "groupType": "caroussel"
+          }
+        },
+        {
+          "sessionItemConfig": {
+            "carouselItems": [
+              {
+                "titleSuffix": {
+                  "config": {
+                    "action": {
+                      "analytics": {
+                        "enabled": "false"
+                      }
+                    }
+                  }
+                },
+                "carouselConfig": {
+                  "items": [
+                    {
+                      "action": {
+                        "analytics": {
+                          "enabled": "false"
+                        },
+                        "params": {
+                          "text": "Mensagem"
+                        },
+                        "name": "alert"
+                      },
+                      "neutral": "false",
+                      "disabled": "false",
+                      "label": "Rótulo",
+                      "icon": "fin-open-finance",
+                      "title": "Título",
+                      "description": "Descrição",
+                      "contentSize": "small"
+                    },
+                    {
+                      "badgeProps": {
+                        "label": "12"
+                      },
+                      "action": {
+                        "analytics": {
+                          "enabled": "false"
+                        },
+                        "params": {
+                          "text": "Mensagem"
+                        },
+                        "name": "alert"
+                      },
+                      "neutral": "false",
+                      "disabled": "false",
+                      "label": "Rótulo",
+                      "icon": "plt-android",
+                      "title": "Título",
+                      "description": "Descrição"
+                    }
+                  ],
+                  "carouselType": "carouselCardIcons"
+                },
+                "title": "Título - Interno Carrossel",
+                "description": "Descrição - Carrossel de ícones"
+              }
+            ],
+            "groupType": "caroussel"
+          }
+        },
+        {
+          "sessionItemConfig": {
+            "carouselItems": [
+              {
+                "titleSuffix": {
+                  "config": {
+                    "action": {
+                      "analytics": {
+                        "enabled": "false"
+                      }
+                    }
+                  }
+                },
+                "carouselConfig": {
+                  "cards": {
+                    "items": [
+                      {
+                        "image": {
+                          "uri": "https://www.bb.com.br/docs/pub/IDC/AppPJ/ebook_ligapj_kodiak-mulheres_de_sucesso.png",
+                          "cache": true
+                        },
+                        "action": {
+                          "analytics": {
+                            "enabled": "false"
+                          }
+                        },
+                        "title": "Título",
+                        "paragraph": "Descrição",
+                        "neutral": "true",
+                        "badge": "1"
+                      },
+                      {
+                        "image": {
+                          "uri": "https://www.bb.com.br/docs/pub/IDC/AppPJ/ebook_ligapj_kodiak-mulheres_de_sucesso.png",
+                          "cache": true
+                        },
+                        "action": {
+                          "analytics": {
+                            "enabled": "false"
+                          }
+                        },
+                        "title": "Título",
+                        "paragraph": "Descrição",
+                        "neutral": "sim",
+                        "badge": "2"
+                      }
+                    ],
+                    "cardType": "small"
+                  },
+                  "carouselType": "cardImages"
+                },
+                "title": "Título - Interno",
+                "description": "Descrição Cards de Imagens"
+              }
+            ],
+            "groupType": "caroussel"
+          }
+        },
+        {
+          "sessionItemConfig": {
+            "listItems": [
+              {
+                "titleSuffix": {
+                  "config": {
+                    "action": {
+                      "analytics": {
+                        "enabled": "false"
+                      }
+                    },
+                    "name": "plt-xbox"
+                  },
+                  "name": "icon"
+                },
+                "tabsConfig": {
+                  "tabs": [
+                    {
+                      "tabLabel": "Aba 1",
+                      "tabValue": "1"
+                    },
+                    {
+                      "tabLabel": "Aba 2",
+                      "tabValue": "2"
+                    },
+                    {
+                      "tabLabel": "Aba 3",
+                      "tabValue": "3"
+                    }
+                  ],
+                  "enableScroll": "false",
+                  "tabsVarName": "abas",
+                  "selectedTab": "2"
+                },
+                "items": [
+                  {
+                    "action": {
+                      "analytics": {
+                        "enabled": "false"
+                      }
+                    },
+                    "label": "Texto principal",
+                    "value": "direita"
+                  },
+                  {
+                    "action": {
+                      "analytics": {
+                        "enabled": "false"
+                      }
+                    },
+                    "label": "Texto principal"
+                  },
+                  {
+                    "action": {
+                      "analytics": {
+                        "enabled": "false"
+                      }
+                    },
+                    "label": "Texto principal"
+                  }
+                ],
+                "bottomConfig": {
+                  "mainButton": {
+                    "iconProps": {
+                      "name": "ifn-bndes"
+                    },
+                    "action": {
+                      "analytics": {
+                        "enabled": "false"
+                      },
+                      "params": {
+                        "text": "oi"
+                      },
+                      "name": "alert"
+                    },
+                    "title": "Rótulo"
+                  },
+                  "secondaryButton": {
+                    "iconProps": {
+                      "name": "flg-brazil"
+                    },
+                    "action": {
+                      "analytics": {
+                        "enabled": "false"
+                      },
+                      "params": {
+                        "text": "Oi secundário"
+                      },
+                      "name": "alert"
+                    },
+                    "title": "Rótulo"
+                  },
+                  "bottomType": "buttomGroup"
+                },
+                "title": "Título",
+                "description": "Descrição"
+              }
+            ],
+            "groupType": "lists"
+          }
+        },
+        {
+          "sessionItemConfig": {
+            "listItems": [
+              {
+                "titleSuffix": {
+                  "config": {
+                    "action": {
+                      "analytics": {
+                        "enabled": "false"
+                      }
+                    },
+                    "name": "fin-limits"
+                  },
+                  "name": "icon"
+                },
+                "tabsConfig": {
+                  "tabs": [
+                    {
+                      "tabLabel": "Aba 1",
+                      "tabValue": "aba21"
+                    },
+                    {
+                      "tabLabel": "Aba 2",
+                      "tabValue": "aba22"
+                    },
+                    {
+                      "tabLabel": "Aba 3",
+                      "tabValue": "aba23"
+                    },
+                    {
+                      "tabLabel": "Aba 4",
+                      "tabValue": "aba24"
+                    }
+                  ],
+                  "enableScroll": "false",
+                  "tabsVarName": "Abas2",
+                  "selectedTab": "aba24"
+                },
+                "checkboxItens": {
+                  "switches": [
+                    {
+                      "switchValue": "false",
+                      "label": "Switch 1",
+                      "switchVarName": "var1"
+                    },
+                    {
+                      "switchValue": "true",
+                      "label": "Switch 2",
+                      "switchVarName": "var2"
+                    },
+                    {
+                      "switchValue": "false",
+                      "label": "Switch 3",
+                      "switchVarName": "var3"
+                    }
+                  ]
+                },
+                "title": "Título - Checkboxes 1",
+                "description": "Descrição"
+              }
+            ],
+            "groupType": "checkboxLists"
+          }
+        },
+        {
+          "sessionItemConfig": {
+            "carouselItems": [
+              {
+                "titleSuffix": {
+                  "config": {
+                    "action": {
+                      "analytics": {
+                        "enabled": "false"
+                      }
+                    }
+                  }
+                },
+                "carouselConfig": {
+                  "items": [
+                    {
+                      "image": {
+                        "uri": "https://www.bb.com.br/docs/pub/IDC/AppPJ/ebook_ligapj_kodiak-mulheres_de_sucesso.png",
+                        "cache": true
+                      },
+                      "action": {
+                        "analytics": {
+                          "enabled": "false"
+                        },
+                        "params": {
+                          "text": "oi"
+                        },
+                        "name": "alert"
+                      }
+                    },
+                    {
+                      "image": {
+                        "uri": "https://www.bb.com.br/docs/pub/IDC/AppPJ/ebook_ligapj_kodiak-mulheres_de_sucesso.png",
+                        "cache": true
+                      },
+                      "action": {
+                        "analytics": {
+                          "enabled": "false"
+                        }
+                      }
+                    },
+                    {
+                      "image": {
+                        "uri": "https://www.bb.com.br/docs/pub/IDC/AppPJ/ebook_ligapj_kodiak-mulheres_de_sucesso.png",
+                        "cache": true
+                      },
+                      "action": {
+                        "analytics": {
+                          "enabled": "false"
+                        }
+                      }
+                    }
+                  ],
+                  "cards": {
+                    "items": [
+                      {
+                        "image": {
+                          "uri": "https://www.bb.com.br/docs/pub/IDC/AppPJ/ebook_ligapj_kodiak-mulheres_de_sucesso.png",
+                          "cache": true
+                        },
+                        "action": {
+                          "analytics": {
+                            "enabled": "false"
+                          }
+                        }
+                      },
+                      {
+                        "image": {
+                          "uri": "https://www.bb.com.br/docs/pub/IDC/AppPJ/ebook_ligapj_kodiak-mulheres_de_sucesso.png",
+                          "cache": true
+                        },
+                        "action": {
+                          "analytics": {
+                            "enabled": "false"
+                          }
+                        }
+                      },
+                      {
+                        "image": {
+                          "uri": "https://www.bb.com.br/docs/pub/IDC/AppPJ/ebook_ligapj_kodiak-mulheres_de_sucesso.png",
+                          "cache": true
+                        },
+                        "action": {
+                          "analytics": {
+                            "enabled": "false"
+                          }
+                        }
+                      }
+                    ],
+                    "cardType": "large"
+                  },
+                  "carouselType": "imageCarousel"
+                },
+                "title": "Carrossel Imagens",
+                "description": "Imagens"
+              }
+            ],
+            "groupType": "caroussel"
+          }
+        }
+      ],
+      "sessionTitleSpacing": "central"
+    },
+    "footerParams": {
+      "mainButton": {
+        "action": {
+          "analytics": {
+            "enabled": "false"
+          },
+          "params": {
+            "checkAuthorization": false,
+            "configName": "list-result"
+          },
+          "name": "navigation"
+        },
+        "iconProps": {
+          "name": "color-facebook"
+        },
+        "showInlined": false,
+        "title": "Submit Checkboxes",
+        "chevron": "false"
+      },
+      "secondaryButton": {
+        "action": {
+          "analytics": {
+            "enabled": "false"
+          },
+          "params": {
+            "text": "Teste"
+          },
+          "name": "alert"
+        },
+        "iconProps": {
+          "name": "color-google"
+        },
+        "skipValidation": false,
+        "title": "Botão Secundário"
+      }
+    },
+    "name": "Central2"
+  },
+  "configName": "central-2-v2"
+}

@@ -1,0 +1,174 @@
+# Implementation Plan
+
+Regras para todas as tarefas:
+- Os 49 testes atuais em `backend/test/` não podem ter asserção editada. Se algum falhar, o código está errado.
+- Cada passo da refatoração termina com `npm run teste` verde (rodar em `backend/`, sem modo watch).
+- Não alterar os CSVs em `BD/`, as regras de consentimento nem `tools/painel.html` (só se algo quebrar).
+- Nenhum comportamento externo muda, exceto o caminho com `%` inválido (de `500` para `400 caminho_invalido`).
+
+- [x] 1. Write preservation property tests (BEFORE implementing fix)
+  - **Property 2: Preservation** - Comportamento externo inalterado
+  - **IMPORTANT**: Follow observation-first methodology. Esta tarefa vem primeiro porque os golden precisam ser gerados com o código ATUAL, antes de qualquer mudança
+  - Rodar `npm run teste` no código atual e confirmar 49 testes passando
+  - Criar um script de geração em `backend/test/` que grava os golden em `backend/test/fixtures/` a partir do código atual
+  - `golden-vitrine.json`: hash SHA-256 do JSON de `montarVitrine` para as 8 personas oficiais e 300 cidadãos fixos (semente fixa, incluindo sem histórico), em 4 combinações de consentimento (nenhum, saúde, acessibilidade, ambos) e `limite` 1, 8 e 20
+  - `golden-http.json`: pares requisição → `{ status, corpo }` para todos os endpoints, um erro de cada código da tabela, `404`, `405`, rotas antigas (`/vitrine`, `/entrar`) e JSON inválido
+  - Mascarar campos aleatórios (`jornada_id`, `protocolo`) e datas dependentes de hoje (dias úteis, `criada_em`, `concluida_em`) antes de gravar e comparar
+  - Capturar também o objeto de índice atual de `GET /` (oráculo para `gerarIndice`), os cabeçalhos CORS de `server.js` e `lambda.js`, e a expressão original de `limite` (oráculo para `lerLimite`)
+  - Escrever testes `node:test` que comparam o código com os golden: vitrine idêntica, respostas HTTP idênticas, eventos `entrou_como` e `vitrine_vista` no resumo, jornada 352 de ponta a ponta (`400`, `422`, protocolo, `ja_concluida`)
+  - Rodar os novos testes no código ATUAL
+  - **EXPECTED OUTCOME**: Tests PASS (confirma o comportamento de base que deve ser preservado)
+  - Mapa de verificação: os golden e os 49 testes passam juntos antes de seguir
+  - Só então commitar os golden (apenas se o usuário pedir commit)
+  - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 3.10_
+
+- [x] 2. Write bug condition exploration test
+  - **Property 1: Bug Condition** - Caminho inválido e ordem do roteador
+  - **CRITICAL**: Estes testes DEVEM FALHAR no código atual - a falha confirma o defeito
+  - **DO NOT attempt to fix the test or the code when it fails**
+  - **NOTE**: Os testes codificam o comportamento esperado e validarão a correção quando passarem depois da refatoração
+  - **GOAL**: Mostrar contraexemplos do defeito
+  - **Scoped PBT Approach**: Escopo nos casos concretos que falham
+  - Teste de caminho inválido: `GET /dados/cidadaos/%E0%A4%A` deve dar `400` com `erro: "caminho_invalido"` e mensagem em texto simples, nunca `500`
+  - Teste de caminho inválido em método não permitido: continua `405` (a decodificação só ocorre depois de o método ser aceito)
+  - Teste da ordem do roteador: registrar `/x/:id` antes de `/x/texto` num roteador de teste e verificar que `GET /x/texto` cai na rota fixa. Cobrir todas as permutações de um conjunto pequeno de rotas fixas e parametrizadas
+  - Teste de padrões equivalentes: registrar dois padrões equivalentes com método em comum deve lançar erro
+  - Rodar os testes no código ATUAL
+  - **EXPECTED OUTCOME**: Tests FAIL (correto - prova que o defeito existe). Contraexemplos esperados: `500 erro_interno` no `%` inválido e rota `:id` escolhida no lugar de `texto`
+  - Documentar os contraexemplos encontrados
+  - Marcar a tarefa como concluída quando os testes estiverem escritos, rodados e a falha documentada
+  - Os 49 testes originais e os golden da tarefa 1 continuam verdes; só os novos testes falham
+  - _Requirements: 1.5, 1.9, 2.5, 2.9_
+
+- [x] 3. Fix: refatorar a clareza das APIs sem mudar o comportamento externo
+
+  - [x] 3.1 Tabela única de erros (`api/erros.js`)
+    - Criar `TABELA_ERROS` (código → status) com a lista do design, mais `falhar(codigo, mensagem, extra)` e `desembrulhar(resultado)`
+    - `falhar` lança `Error` claro se o código não estiver na tabela
+    - Registrar em comentário a divergência com a regra `200 ok:false` e os códigos afetados (`confirmacao_necessaria`, `campos_pendentes`, `decisao_invalida` e outros)
+    - `jornada.js` deixa de devolver `status`; o status sai da tabela (mesmos números de hoje: 400, 404, 409, 422)
+    - Remover o ternário `400`/`409` da rota de consentimento, usando `desembrulhar`
+    - Manter `ErroHttp` exportado por `app.js`
+    - Testes novos: `falhar` usa o status da tabela, código desconhecido lança erro claro, `desembrulhar` converte `{ erro, mensagem, jornada }` com `extra.jornada`, todo código produzível existe na tabela
+    - Rodar `npm run teste` e os golden: tudo verde
+    - _Bug_Condition: isBugCondition(input) where input.tarefa = "alterar_erro"_
+    - _Expected_Behavior: um único caminho de erro (ErroHttp), status vindo da tabela_
+    - _Preservation: mesmos status, erro, mensagem e campos extras (jornada)_
+    - _Requirements: 2.3, 3.1, 3.5, 3.10_
+
+  - [x] 3.2 Funções de entrada (`api/entrada.js`)
+    - Criar `identificarCidadao`, `lerCampo`, `lerFinalidade`, `lerLimite`, `lerCampos`, `lerTela`, `lerConfirmar`, `lerTipoDeEvento`
+    - Manter padrões, limites e códigos: `finalidade` padrão `saude_personalizacao`, `limite` via `Math.min(20, Math.max(1, Number(x ?? 8) || 8))`, `campos` texto → objeto com `400 campos_invalidos`
+    - Onde hoje só um lado é lido (`campos`, `tipo`: só corpo), ler só esse lado
+    - Mover `EVENTOS_PERMITIDOS` para `rotas/eventos.js` quando as rotas forem divididas (passo 3.5)
+    - Trocar a leitura dentro dos handlers pelas novas funções, handler por handler
+    - Testes novos: cada função com os casos de hoje (`limite` vazio, `0`, `99`, `"abc"`; `campos` válido, inválido e objeto; `finalidade` ausente e inválida) e teste de propriedade de `lerLimite` contra a expressão original (de `-5` a `50`, texto e vazio)
+    - Rodar `npm run teste` e os golden: tudo verde
+    - _Bug_Condition: isBugCondition(input) where input.tarefa = "alterar_entrada"_
+    - _Expected_Behavior: entrada lida por funções nomeadas, de origem definida em um só lugar_
+    - _Preservation: mesmos valores padrão, limites e códigos de erro; `400 id_invalido` e `404 cidadao_nao_encontrado` com as mesmas mensagens_
+    - _Requirements: 2.2, 3.1, 3.3, 3.10_
+
+  - [x] 3.3 Roteador independente da ordem (`api/roteador.js`)
+    - Inserir cada rota numa lista ordenada por especificidade (segmento literal antes de `:param`; empate mantém a ordem de registro)
+    - Lançar erro ao registrar padrões equivalentes que compartilhem método
+    - Criar `decodificar(valor)` que captura `URIError` e lança `falhar('caminho_invalido', 'O endereço tem um trecho inválido. Confira o caminho e tente de novo.')`
+    - Decodificar só depois de o método ser aceito, para `405` e `404` não mudarem
+    - Expor a lista de rotas registradas (`rotas()`) para o índice
+    - Confirmar que os testes da tarefa 2 agora passam
+    - Rodar `npm run teste` e os golden: tudo verde
+    - _Bug_Condition: isBugCondition(input) where input.tarefa = "requisicao" AND caminho tem '%' inválido, ou dependência da ordem de registro_
+    - _Expected_Behavior: `400 caminho_invalido` (nunca `500`); fixas antes de parametrizadas_
+    - _Preservation: `404 rota_nao_encontrada` e `405 metodo_nao_permitido` iguais_
+    - _Requirements: 2.5, 2.9, 3.2, 3.10_
+
+  - [x] 3.4 HTTP comum (`api/http-comum.js`)
+    - Criar `MAX_CORPO`, `criarCors(metodos)`, `METODOS_COM_CORPO`, `interpretarJson`, `verificarTamanho`, `respostaDeErro`, `cabecalhosJson`
+    - `server.js` usa `criarCors('GET,POST,PUT,PATCH,OPTIONS')` e mantém painel, leitura do stream, `SIGINT` e `SIGTERM`
+    - `lambda.js` usa `criarCors('GET,POST,PUT,PATCH,DELETE,OPTIONS')`, base64, `verificarTamanho`, `interpretarJson` e `salvarLogo()` fora de `GET`
+    - Resposta de `OPTIONS` (204 só com CORS) e cabeçalhos `Content-Type` e `Cache-Control` idênticos byte a byte
+    - Testes novos: `interpretarJson` (vazio, válido, inválido), `verificarTamanho` (limite exato e acima), `respostaDeErro` (`ErroHttp` e erro desconhecido), cabeçalhos de `criarCors` iguais aos capturados na tarefa 1
+    - Teste de integração com servidor local em porta efêmera: `GET /`, `GET /health`, `OPTIONS`, `GET /painel`, corpo acima de 100 KB (`413`), JSON inválido (`400 json_invalido`), `%` inválido (`400 caminho_invalido`)
+    - Teste do Lambda com `%` inválido pelo `handler`
+    - Rodar `npm run teste` e os golden: tudo verde
+    - _Bug_Condition: isBugCondition(input) where input.tarefa = "alterar_http"_
+    - _Expected_Behavior: CORS, limite de corpo, JSON e conversão de erro em um módulo comum_
+    - _Preservation: mesmas respostas, cabeçalhos e status em cada ambiente; Lambda grava na hora fora de GET; servidor grava em SIGINT/SIGTERM e serve /painel_
+    - _Requirements: 2.6, 3.8, 3.10_
+
+  - [x] 3.5 Rotas por área e índice gerado
+    - Criar `api/rotas/` com `cidadaos.js`, `servicos.js`, `consentimentos.js`, `jornadas.js`, `eventos.js`, `recomendacao.js`, cada um exportando `registrarRotasX(rota, ...)`
+    - `resolverCidadao` sai de `rotas-dados.js` e passa a ser `identificarCidadao` (de `entrada.js`) nos dois lados; nenhum módulo de rotas importa outro
+    - Manter a ordem de registro de hoje: cidadãos (demo, `:id`, `:id/jornadas`), serviços, consentimentos, jornadas, eventos, recomendação
+    - Aceitar `doc` (`area`, `descricao`, `consulta`) no quarto argumento de `rota(...)`; rotas sem `doc` (aliases legados, `/health`, `/`) ficam fora do índice
+    - Criar `api/indice.js` com `gerarIndice(rotas)` e registrar `GET /` em `app.js` depois das áreas, mantendo as chaves `motor_de_dados`, `motor_de_recomendacao`, `saude_da_api` e os textos de hoje (chave = método principal + caminho com `{id}` + sufixo de consulta)
+    - Remover `rotas-dados.js` e `rotas-recomendacao.js` ao final, depois de mover cada área e rodar os testes
+    - Testes novos: `gerarIndice` igual ao índice capturado na tarefa 1; toda rota com `doc` está no índice e todo item do índice tem rota; teste que varre os `import` de `src/api/rotas/*.js` e falha se um importar outro módulo de `rotas/`; teste que garante que `src/dados` e `src/recomendacao` não importam de `src/api`
+    - Rodar `npm run teste` e os golden: tudo verde (a cada área movida)
+    - _Bug_Condition: isBugCondition(input) where input.tarefa IN { achar_endpoint, listar_rotas, adicionar_rota }_
+    - _Expected_Behavior: um módulo por área, resolução de cidadão em módulo de apoio, índice gerado das rotas registradas_
+    - _Preservation: mesmas rotas, métodos, status e JSON; eventos `entrou_como` e `vitrine_vista` mantidos; `POST /dados/eventos` aceita só `tela_pulada`, `erro_entendimento`, `vitrine_vista` e `servico_aberto`_
+    - _Requirements: 2.1, 2.4, 3.1, 3.2, 3.7, 3.10_
+
+  - [x] 3.6 Dividir `dados/jornada.js` em `dados/jornada/`
+    - Criar `opcoes.js`, `telas.js`, `validacao.js`, `visao.js`, `operacoes.js` e `index.js` movendo o código sem mudar a lógica
+    - Dividir `visao` em `calcularTelas`, `calcularFaltando` e `montarVisao`
+    - Manter os nomes públicos e reexportar em `index.js` (operações e `proximosDiasUteis`)
+    - Dependências sem ciclo: `operacoes` → `visao` → `validacao` → `opcoes`; `visao` e `operacoes` também usam `telas`
+    - `rotas/jornadas.js` passa a importar `../../dados/jornada/index.js`
+    - Ajustar imports dos testes existentes apenas se o caminho do módulo mudar (sem tocar em asserções)
+    - Testes novos: passeio completo pelo serviço 352 (`POST`, `PATCH`, `confirmar` sem `true` → `400`, campos pendentes → `422`, tudo certo → protocolo, de novo → `ja_concluida`) e sequência de `PATCH` válidos e inválidos com o mesmo formato de `erros[]`, `faltando` e `pode_confirmar` do golden
+    - Rodar `npm run teste` e os golden: tudo verde
+    - _Bug_Condition: isBugCondition(input) where input.tarefa = "ler_jornada"_
+    - _Expected_Behavior: módulos separados de configuração de telas, validação, visão e operações_
+    - _Preservation: mesmas saídas; `PATCH` inválido → `200` com `erros[]`; retomada com `retomada: true`; confirmar jornada concluída devolve a visão concluída_
+    - _Requirements: 2.8, 3.5, 3.6, 3.10_
+
+  - [x] 3.7 Dividir `montarVitrine`
+    - Criar `recomendacao/vitrine/` com `candidatos.js`, `pontuacao.js`, `diversidade.js`, `item.js` e `textos.js`
+    - `vitrine.js` continua exportando `montarVitrine(id, derivados, { limite })` como orquestrador curto: `lerContexto`, `reunirCandidatos`, `pontuar`, `diversificar`, `garantirServicoNovo`, `montarItem`, `montarAvisosEConvites`
+    - Mover o código sem reescrever a lógica, inclusive a linha que insere o serviço novo
+    - Manter `saude` e `acessibilidade` lidas só com consentimento concedido, em `lerContexto`
+    - Manter o texto de motivo genérico para saúde sem consentimento (LGPD, art. 11) dentro de `candidatos.js`
+    - Testes novos: `diversificar` respeita no máximo 2 por órgão nos 5 primeiros; `garantirServicoNovo` insere um serviço novo com motivo "Pessoas como você também usam"; hash igual ao golden para as 8 personas e 300 cidadãos em 4 combinações de consentimento
+    - Teste de integração com dois cidadãos lado a lado (mãe com criança pequena e senhor de 70 anos): vitrines diferentes e sem texto de saúde sem consentimento
+    - Rodar `npm run teste` e os golden: tudo verde
+    - _Bug_Condition: isBugCondition(input) where input.tarefa = "ler_vitrine"_
+    - _Expected_Behavior: funções menores com nome claro e saída idêntica_
+    - _Preservation: ordem, diversidade, motivo, base da personalização e convites idênticos; consentimentos de saúde e de acessibilidade independentes_
+    - _Requirements: 2.8, 3.4, 3.9, 3.10_
+
+  - [x] 3.8 Contrato das APIs e README
+    - Criar `.kiro/specs/refatorar-clareza-apis/contrato-das-apis.md` em português, uma seção por endpoint na ordem do índice: método, caminho, área, entrada, saída 200, erros, efeitos colaterais, legado
+    - Marcar como **Legado**: `POST /recomendacao/{id}`, `POST /dados/jornadas/{id}` (igual ao `PATCH`) e `usa_dados_de_saude` (prefira `usa_dados`)
+    - Registrar os efeitos colaterais de `GET`: `GET /dados/cidadaos/{id}` grava `entrou_como`; `GET /recomendacao/{id}` grava `vitrine_vista`
+    - Incluir as seções "Erros e status" (tabela de erros e nota da divergência com `200 ok:false`) e "Formato de erro" (`{ erro, mensagem, ...extra }`)
+    - Atualizar `backend/README.md` com a nova estrutura de `api/` e o link para o contrato
+    - Teste novo: todo par método/caminho registrado tem seção no contrato
+    - Rodar `npm run teste` e os golden: tudo verde
+    - _Bug_Condition: isBugCondition(input) where input.tarefa = "entender_contrato"_
+    - _Expected_Behavior: contrato por endpoint fora do código, apontado pelo README_
+    - _Preservation: nenhuma mudança de código de produção neste passo_
+    - _Requirements: 2.7, 3.10_
+
+  - [x] 3.9 Verify bug condition exploration test now passes
+    - **Property 1: Expected Behavior** - Caminho inválido e ordem do roteador
+    - **IMPORTANT**: Re-run the SAME tests from task 2 - do NOT write new tests
+    - Os testes da tarefa 2 codificam o comportamento esperado
+    - **EXPECTED OUTCOME**: Tests PASS (confirma que o defeito foi corrigido)
+    - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9_
+
+  - [x] 3.10 Verify preservation tests still pass
+    - **Property 2: Preservation** - Comportamento externo inalterado
+    - **IMPORTANT**: Re-run the SAME tests from task 1 - do NOT write new tests
+    - Rodar os golden de vitrine e de HTTP e os testes de eventos, jornada e adaptadores
+    - **EXPECTED OUTCOME**: Tests PASS (confirma que não houve regressão)
+    - Confirmar que nenhum golden foi regravado durante a refatoração
+    - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 3.10_
+
+- [x] 4. Checkpoint - Ensure all tests pass
+  - Rodar `npm run teste` em `backend/`
+  - Confirmar que os 49 testes originais passam sem edição de asserção (conferir o diff dos arquivos em `backend/test/` que já existiam: só imports, se houver)
+  - Confirmar que os testes novos (caminho inválido, ordem do roteador, entrada, erros, HTTP comum, índice, contrato, dependências, golden) também passam
+  - Confirmar que `rotas-dados.js` e `rotas-recomendacao.js` foram removidos e que não restam importações para eles
+  - Ensure all tests pass, ask the user if questions arise.

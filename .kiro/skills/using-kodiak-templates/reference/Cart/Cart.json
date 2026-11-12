@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "canGoBack": "true",
+      "title": "Título"
+    },
+    "screenHeader": {},
+    "templateParams": {
+      "globalVariable": "globalCart",
+      "products": [
+        {
+          "productList": [
+            {
+              "image": {
+                "base64": "iVBORw0K..."
+              },
+              "numberFieldOptions": {
+                "name": "valor_15",
+                "value": "15.00",
+                "minSteps": "0",
+                "maxSteps": "10",
+                "initialUnits": "0",
+                "currencyType": "brl",
+                "monetaryInternalSuffixValue": "false"
+              },
+              "mainLabel": "Recarga R$ 15,00",
+              "description": "Créditos expiram em 30 dias"
+            },
+            {
+              "itemAction": {
+                "analytics": {
+                  "enabled": "false"
+                }
+              },
+              "numberFieldOptions": {
+                "name": "valor_30",
+                "value": "30.00",
+                "minSteps": "0",
+                "maxSteps": "5",
+                "initialUnits": "0",
+                "currencyType": "brl"
+              },
+              "mainLabel": "Recarga R$ 30,00",
+              "description": "Créditos expiram em 60 dias"
+            }
+          ],
+          "title": "Escolha o valor da recarga"
+        }
+      ],
+      "hideTotalBar": false,
+      "currencyType": "brl"
+    },
+    "footerParams": {
+      "mainButton": {
+        "action": {
+          "name": "navigation",
+          "configName": "switch-valida-recarga"
+        },
+        "title": "Continuar"
+      }
+    },
+    "name": "Cart"
+  },
+  "description": "Seleção de valor de recarga de celular",
+  "configName": "cart-recarga-celular"
+}

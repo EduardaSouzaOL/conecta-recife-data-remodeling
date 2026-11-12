@@ -1,0 +1,301 @@
+{
+  "parameters": {
+    "templateParams": {
+      "selectableCards": {
+        "items": [
+          {
+            "title": "GOL Smiles Gold Visa ",
+            "description": "1,8 até 3 milhas por dólar gasto.",
+            "value": "Anuidade  Grátis",
+            "id": "12184",
+            "sectionItemsWidgetProps": [
+              {
+                "radioButtonGroup": {
+                  "name": "radioGroup_13931",
+                  "options": []
+                },
+                "contentLines": {
+                  "items": [
+                    {
+                      "label": "Smiles Gold Visa",
+                      "image": {
+                        "base64": "iVBORw0KGg..."
+                      },
+                      "rightFeatures": {}
+                    }
+                  ]
+                },
+                "accordions": {
+                  "items": [
+                    {
+                      "expanded": "true",
+                      "label": "Benefícios",
+                      "content": {
+                        "items": [
+                          {
+                            "label": "Bônus de milhas na aquisição",
+                            "status": "default",
+                            "auxiliarLines": [
+                              {
+                                "description": "Ganhe até 7.500 milhas na renovação.",
+                                "status": "default"
+                              }
+                            ]
+                          },
+                          {
+                            "label": "Cartões adicionais",
+                            "status": "default",
+                            "auxiliarLines": [
+                              {
+                                "description": "Você poderá solicitar até quatro cartões adicionais.",
+                                "status": "default"
+                              }
+                            ]
+                          },
+                          {
+                            "label": "Crédito automático de milhas",
+                            "status": "default",
+                            "auxiliarLines": [
+                              {
+                                "description": "Você não precisa se preocupar em solicitar a transferência. ",
+                                "status": "default"
+                              }
+                            ]
+                          },
+                          {
+                            "label": "Benefícios Visa Gold",
+                            "status": "default",
+                            "auxiliarLines": [
+                              {
+                                "description": "Ourocard Gol Smiles Gold Visa possui todos os benefícios Visa Gold.",
+                                "status": "default"
+                              }
+                            ]
+                          }
+                        ],
+                        "type": "contentLines"
+                      },
+                      "__transformations": [
+                        {
+                          "target": "expanded",
+                          "to": "boolean"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "chartWidgetProps": {}
+              }
+            ]
+          },
+          {
+            "title": "GOL Smiles Platinum Visa ",
+            "description": "2,3 até 3,5 milhas por dólar gasto.",
+            "value": "12x R$ 9,80 ",
+            "id": "12200",
+            "sectionItemsWidgetProps": [
+              {
+                "radioButtonGroup": {
+                  "name": "radioGroup_13931",
+                  "options": []
+                },
+                "contentLines": {
+                  "items": [
+                    {
+                      "label": "Smiles Gold Visa",
+                      "image": {
+                        "base64": "iVBORw0KGg..."
+                      },
+                      "rightFeatures": {}
+                    }
+                  ]
+                },
+                "accordions": {
+                  "items": [
+                    {
+                      "expanded": "true",
+                      "label": "Benefícios",
+                      "content": {
+                        "items": [
+                          {
+                            "label": "Bônus de milhas na aquisição",
+                            "status": "default",
+                            "auxiliarLines": [
+                              {
+                                "description": "Ganhe até 7.500 milhas na renovação.",
+                                "status": "default"
+                              }
+                            ]
+                          },
+                          {
+                            "label": "Cartões adicionais",
+                            "status": "default",
+                            "auxiliarLines": [
+                              {
+                                "description": "Você poderá solicitar até quatro cartões adicionais.",
+                                "status": "default"
+                              }
+                            ]
+                          },
+                          {
+                            "label": "Crédito automático de milhas",
+                            "status": "default",
+                            "auxiliarLines": [
+                              {
+                                "description": "Você não precisa se preocupar em solicitar a transferência. ",
+                                "status": "default"
+                              }
+                            ]
+                          },
+                          {
+                            "label": "Benefícios Visa Gold",
+                            "status": "default",
+                            "auxiliarLines": [
+                              {
+                                "description": "Ourocard Gol Smiles Gold Visa possui todos os benefícios Visa Gold.",
+                                "status": "default"
+                              }
+                            ]
+                          }
+                        ],
+                        "type": "contentLines"
+                      },
+                      "__transformations": [
+                        {
+                          "target": "expanded",
+                          "to": "boolean"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "chartWidgetProps": {}
+              }
+            ]
+          },
+          {
+            "title": "GOL Smiles Visa Infinite",
+            "description": "3 até 5,5 milhas por dólar gasto.",
+            "value": "12x R$ 19,80 ",
+            "id": "12211",
+            "sectionItemsWidgetProps": [
+              {
+                "radioButtonGroup": {
+                  "name": "radioGroup_13931",
+                  "options": []
+                },
+                "contentLines": {
+                  "items": [
+                    {
+                      "label": "Smiles Gold Visa",
+                      "image": {
+                        "base64": "iVBORw0KGg..."
+                      },
+                      "rightFeatures": {}
+                    }
+                  ]
+                },
+                "accordions": {
+                  "items": [
+                    {
+                      "expanded": "true",
+                      "label": "Benefícios",
+                      "content": {
+                        "items": [
+                          {
+                            "label": "Bônus de milhas na aquisição",
+                            "status": "default",
+                            "auxiliarLines": [
+                              {
+                                "description": "Ganhe até 7.500 milhas na renovação.",
+                                "status": "default"
+                              }
+                            ]
+                          },
+                          {
+                            "label": "Cartões adicionais",
+                            "status": "default",
+                            "auxiliarLines": [
+                              {
+                                "description": "Você poderá solicitar até quatro cartões adicionais.",
+                                "status": "default"
+                              }
+                            ]
+                          },
+                          {
+                            "label": "Crédito automático de milhas",
+                            "status": "default",
+                            "auxiliarLines": [
+                              {
+                                "description": "Você não precisa se preocupar em solicitar a transferência. ",
+                                "status": "default"
+                              }
+                            ]
+                          },
+                          {
+                            "label": "Benefícios Visa Gold",
+                            "status": "default",
+                            "auxiliarLines": [
+                              {
+                                "description": "Ourocard Gol Smiles Gold Visa possui todos os benefícios Visa Gold.",
+                                "status": "default"
+                              }
+                            ]
+                          }
+                        ],
+                        "type": "contentLines"
+                      },
+                      "__transformations": [
+                        {
+                          "target": "expanded",
+                          "to": "boolean"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "chartWidgetProps": {}
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "canGoBack": "true",
+      "title": "2. Solicitar cartão de crédito",
+      "rightButtons": [
+        {
+          "icon": "ui-close",
+          "accessibilityLabel": "Botão de ação",
+          "action": {
+            "name": "alert"
+          }
+        }
+      ],
+      "collapsable": false
+    },
+    "screenHeader": {
+      "title": "Qual cartão de crédito que você quer escolher?",
+      "description": "Escolha o cartão que mais combina com você."
+    },
+    "footerParams": {
+      "mainButton": {
+        "title": "avançar",
+        "action": {
+          "name": "alert"
+        },
+        "showInlined": false
+      }
+    },
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "internalFooterDLS": {},
+    "name": "ItemPickerDLS"
+  },
+  "description": "Template ItemPickerDLS",
+  "configName": "item-picker-dls-template"
+}

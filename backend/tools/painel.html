@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel da API – Conecta Recife (dados fictícios)</title>
+<style>
+  :root { --azul: #0b4f9c; --fundo: #f5f7fa; --texto: #1a1a1a; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, sans-serif; margin: 0; background: var(--fundo); color: var(--texto); line-height: 1.5; }
+  header { background: var(--azul); color: #fff; padding: 16px 20px; }
+  header h1 { margin: 0; font-size: 1.3rem; }
+  header p { margin: 4px 0 0; font-size: .95rem; }
+  main { display: grid; grid-template-columns: minmax(300px, 420px) 1fr; gap: 16px; padding: 16px; }
+  @media (max-width: 860px) { main { grid-template-columns: 1fr; } }
+  section { background: #fff; border-radius: 8px; padding: 14px 16px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+  h2 { font-size: 1.05rem; margin: 0 0 8px; }
+  label { font-weight: 600; display: block; margin-bottom: 4px; }
+  input, select { font-size: 1rem; padding: 8px; border: 1px solid #8a8a8a; border-radius: 6px; width: 100%; }
+  .linha { display: flex; gap: 8px; align-items: end; }
+  .linha > * { flex: 1; }
+  button, a.botao { display: inline-block; font-size: .95rem; min-height: 40px; padding: 8px 12px; margin: 4px 4px 0 0; border-radius: 6px;
+    border: 2px solid var(--azul); background: #fff; color: var(--azul); cursor: pointer; text-decoration: none; }
+  button.principal { background: var(--azul); color: #fff; }
+  button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid #f5a300; outline-offset: 2px; }
+  ul { padding-left: 18px; margin: 4px 0; }
+  .ajuda { font-size: .88rem; color: #444; margin: 4px 0 0; }
+  #saida-titulo { font-family: ui-monospace, monospace; font-size: .9rem; word-break: break-all; }
+  pre { background: #0f172a; color: #e2e8f0; padding: 12px; border-radius: 6px; overflow: auto; max-height: 75vh; font-size: .85rem; margin: 0; }
+  .ok { color: #11692f; } .erro { color: #b00020; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Painel da API do protótipo Conecta Recife</h1>
+  <p>Todos os dados são fictícios. Nenhuma solicitação real é enviada à Prefeitura.</p>
+</header>
+<main>
+  <div>
+    <section aria-labelledby="t-cid">
+      <h2 id="t-cid">1. Escolha o cidadão</h2>
+      <label for="cid">Código do cidadão</label>
+      <input id="cid" value="C062244" autocomplete="off" aria-describedby="cid-ajuda">
+      <p class="ajuda" id="cid-ajuda">Aceita C000001 a C089046, ou só o número.</p>
+      <label for="personas" style="margin-top:8px">Ou escolha uma persona</label>
+      <select id="personas">
+        <option value="">Selecione…</option>
+        <optgroup label="Personas oficiais do guia">
+          <option value="C007938">C007938 · Idosa</option>
+          <option value="C068579">C068579 · Microempreendedora</option>
+          <option value="C059592">C059592 · Pessoa com deficiência</option>
+          <option value="C036462">C036462 · Jovem estudante</option>
+          <option value="C039227">C039227 · Família no Cadastro Único</option>
+          <option value="C076260">C076260 · Família com criança</option>
+          <option value="C006566">C006566 · Gestante</option>
+          <option value="C062244">C062244 · Doença crônica (70 anos)</option>
+        </optgroup>
+        <optgroup label="Outros cenários" id="outros"></optgroup>
+      </select>
+    </section>
+
+    <section aria-labelledby="t-get">
+      <h2 id="t-get">2. Consultas</h2>
+      <button class="principal" data-get="/dados/cidadaos/{id}">Entrar como</button>
+      <button class="principal" data-get="/recomendacao/{id}">Vitrine</button>
+      <button data-get="/dados/consentimentos/{id}">Consentimento do cidadão</button>
+      <button data-get="/dados/cidadaos/{id}/jornadas">Pedidos do cidadão</button>
+      <p class="ajuda">Endereços gerais:</p>
+      <button data-get="/health">Saúde da API</button>
+      <button data-get="/demo/cidadaos">Cidadãos para demo</button>
+      <button data-get="/dados/consentimentos/texto">Texto do consentimento de saúde</button>
+      <button data-get="/dados/consentimentos/texto?finalidade=acessibilidade_personalizacao">Texto do consentimento de acessibilidade</button>
+      <button data-get="/dados/eventos/resumo">Resumo de eventos</button>
+      <div class="linha" style="margin-top:8px">
+        <div><label for="sid">Serviço</label><input id="sid" value="352" inputmode="numeric"></div>
+        <div><button data-get="/dados/servicos/{sid}">Detalhe do serviço</button></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="t-cons">
+      <h2 id="t-cons">3. Consentimento</h2>
+      <label for="finalidade">Qual autorização</label>
+      <select id="finalidade">
+        <option value="saude_personalizacao">Dados de saúde</option>
+        <option value="acessibilidade_personalizacao">Acessibilidade (pessoa com deficiência)</option>
+      </select>
+      <button class="principal" data-cons="concedido">Aceitar</button>
+      <button data-cons="recusado">Agora não</button>
+      <button data-cons="revogado">Retirar</button>
+      <p class="ajuda">As duas autorizações são separadas. Depois, abra a Vitrine de novo para ver a diferença.</p>
+    </section>
+
+    <section aria-labelledby="t-jor">
+      <h2 id="t-jor">4. Jornada até a conclusão</h2>
+      <label for="servico-jornada">Serviço</label>
+      <select id="servico-jornada">
+        <option value="352">352 · Agendar atendimento do Cadastro Único</option>
+        <option value="923">923 · Carteira de identidade</option>
+        <option value="942">942 · Agendar consultas na Minha Unidade de Saúde</option>
+        <option value="494">494 · Pagar IPTU de 2026</option>
+      </select>
+      <button class="principal" id="iniciar">Iniciar ou retomar</button>
+      <button id="preencher-auto">Preencher etapa atual</button>
+      <button id="confirmar" class="principal">Confirmar</button>
+      <p class="ajuda">"Preencher etapa atual" escolhe a primeira opção válida de cada campo, para agilizar a demo.</p>
+      <p class="ajuda" id="jornada-atual" aria-live="polite">Nenhum pedido aberto.</p>
+    </section>
+  </div>
+
+  <section aria-labelledby="t-saida">
+    <h2 id="t-saida">Resposta</h2>
+    <p id="saida-titulo" aria-live="polite">Escolha uma ação ao lado.</p>
+    <p><a class="botao" id="abrir-aba" href="/health" target="_blank" rel="noopener">Abrir este endereço em nova aba</a></p>
+    <pre id="saida" tabindex="0" aria-label="Resposta da API"></pre>
+  </section>
+</main>
+<script>
+  const $ = (s) => document.querySelector(s);
+  let jornadaId = null;
+  let jornada = null;
+
+  const cid = () => $('#cid').value.trim();
+  const caminho = (m) => m.replace('{id}', encodeURIComponent(cid())).replace('{sid}', encodeURIComponent($('#sid').value.trim()));
+
+  async function chamar(metodo, url, corpo) {
+    $('#saida-titulo').textContent = `${metodo} ${url} …`;
+    $('#saida-titulo').className = '';
+    $('#abrir-aba').href = url;
+    $('#abrir-aba').hidden = metodo !== 'GET';
+    try {
+      const r = await fetch(url, { method: metodo, headers: { 'Content-Type': 'application/json' }, body: corpo ? JSON.stringify(corpo) : undefined });
+      const dados = await r.json();
+      $('#saida-titulo').textContent = `${metodo} ${url} → ${r.status}`;
+      $('#saida-titulo').className = r.ok ? 'ok' : 'erro';
+      $('#saida').textContent = JSON.stringify(dados, null, 2);
+      return { ok: r.ok, dados };
+    } catch (e) {
+      $('#saida-titulo').textContent = `${metodo} ${url} → falhou`;
+      $('#saida-titulo').className = 'erro';
+      $('#saida').textContent = String(e);
+      return { ok: false };
+    }
+  }
+
+  function atualizarJornada(j) {
+    if (!j || !j.jornada_id) return;
+    jornada = j; jornadaId = j.jornada_id;
+    const txt = j.estado === 'concluida'
+      ? `Pedido ${j.jornada_id} concluído. Protocolo ${j.protocolo}.`
+      : `Pedido ${j.jornada_id}: etapa "${j.tela_atual.titulo}" (${j.progresso.atual} de ${j.progresso.total}).`;
+    $('#jornada-atual').textContent = txt;
+  }
+
+  document.querySelectorAll('[data-get]').forEach((b) => b.addEventListener('click', () => chamar('GET', caminho(b.dataset.get))));
+  document.querySelectorAll('[data-cons]').forEach((b) => b.addEventListener('click', () =>
+    chamar('POST', caminho("/dados/consentimentos/{id}"), { decisao: b.dataset.cons, finalidade: $('#finalidade').value })));
+
+  $('#personas').addEventListener('change', (e) => { if (e.target.value) { $('#cid').value = e.target.value; jornadaId = null; $('#jornada-atual').textContent = 'Nenhum pedido aberto.'; } });
+
+  $('#iniciar').addEventListener('click', async () => {
+    const r = await chamar("POST", "/dados/jornadas", { cidadao_id: cid(), servico_id: Number($('#servico-jornada').value) });
+    if (r.ok) atualizarJornada(r.dados);
+  });
+
+  $('#preencher-auto').addEventListener('click', async () => {
+    if (!jornadaId) { $('#jornada-atual').textContent = 'Inicie um pedido primeiro.'; return; }
+    const g = await chamar('GET', `/dados/jornadas/${jornadaId}`);
+    if (!g.ok) return;
+    const tela = g.dados.tela_atual;
+    if (tela.revisao) { $('#jornada-atual').textContent = 'Tudo preenchido. Revise o resumo e toque em Confirmar.'; return; }
+    // preenche em ordem: unidade e data primeiro, porque os horários dependem deles
+    let atual = g.dados;
+    for (const c of tela.campos) {
+      const campoAtual = atual.tela_atual.campos.find((x) => x.nome === c.nome) || c;
+      let v;
+      if (campoAtual.tipo === 'select') v = campoAtual.opcoes?.[0]?.valor;
+      else if (campoAtual.tipo === 'booleano') v = true;
+      else if (campoAtual.tipo === 'numero') v = campoAtual.min ?? 1;
+      else continue; // texto opcional fica em branco
+      if (v === undefined) continue;
+      const r = await chamar('PATCH', `/dados/jornadas/${jornadaId}`, { campos: { [c.nome]: v }, tela: tela.id });
+      if (!r.ok) return;
+      atual = r.dados;
+    }
+    const fim = await chamar('GET', `/dados/jornadas/${jornadaId}`);
+    if (fim.ok) atualizarJornada(fim.dados);
+  });
+
+  $('#confirmar').addEventListener('click', async () => {
+    if (!jornadaId) { $('#jornada-atual').textContent = 'Inicie um pedido primeiro.'; return; }
+    const r = await chamar('POST', `/dados/jornadas/${jornadaId}/confirmar`, { confirmar: true });
+    if (r.dados?.jornada) atualizarJornada(r.dados.jornada); else atualizarJornada(r.dados);
+  });
+
+  fetch('/dados/cidadaos/demo').then((r) => r.json()).then((d) => {
+    for (const c of d.cidadaos || []) {
+      const o = document.createElement('option');
+      o.value = c.cidadao_id; o.textContent = `${c.cidadao_id} · ${c.cenario}`;
+      $('#outros').appendChild(o);
+    }
+  }).catch(() => {});
+</script>
+</body>
+</html>

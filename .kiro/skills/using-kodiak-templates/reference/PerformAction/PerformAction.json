@@ -1,0 +1,19 @@
+{
+  "parameters": {
+    "performAction": {
+      "action": {
+        "params": {
+          "requestParams": {
+            "param1": "valor1",
+            "param2": "valor2"
+          },
+          "configName": "cart-recarga-celular"
+        },
+        "name": "navigation"
+      }
+    },
+    "name": "PerformAction"
+  },
+  "description": "Ao navegar para esse template, ele dispara uma navegação para a tela perform-compartilhar-comprovante",
+  "configName": "perform-compartilhar-comprovante"
+}

@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "templateParams": {
+      "selectButtonsItemProps": {
+        "title": "Botões de seleção",
+        "name": "selectButton_5414",
+        "options": [
+          {
+            "id": "option_5170",
+            "label": "Smiles",
+            "disabled": "false",
+            "selected": "true"
+          },
+          {
+            "id": "option_5171",
+            "label": "Latam Pass",
+            "disabled": "false",
+            "selected": "false"
+          },
+          {
+            "id": "option_5172",
+            "label": "Tudo Azul",
+            "disabled": "false",
+            "selected": "false"
+          },
+          {
+            "id": "option_5173",
+            "label": "Entre familiares",
+            "disabled": "false",
+            "selected": "false"
+          }
+        ]
+      },
+      "cardIconWidgetProps": {
+        "label": "Smiles",
+        "description": "1 ponto Livelo = 1 ponto Smiles.\nTransferência mínima 5.000 pontos."
+      },
+      "contentLinesProps": [
+        {
+          "type": "contentLines",
+          "items": [
+            {
+              "label": "Você tem",
+              "value": "18.637 pontos",
+              "status": "default"
+            }
+          ],
+          "title": "Pontos disponíveis"
+        }
+      ]
+    },
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "canGoBack": "true",
+      "title": "2. Transferir pontos",
+      "rightButtons": [
+        {
+          "icon": "ui-close",
+          "accessibilityLabel": "Botão de ação",
+          "action": {
+            "name": "alert"
+          }
+        }
+      ],
+      "collapsable": false
+    },
+    "screenHeader": {
+      "title": "Para onde você gostaria de  transferir seus pontos Livelo?",
+      "description": "Confira seu saldo e faça transferências para as opções disponíveis."
+    },
+    "footerParams": {
+      "mainButton": {
+        "title": "transferir",
+        "action": {
+          "name": "alert"
+        },
+        "showInlined": false
+      }
+    },
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "internalFooterDLS": {},
+    "name": "ListCardDetailsDLS"
+  },
+  "description": "Template ListCardDetailsDLS",
+  "configName": "list-card-details-dls-template"
+}

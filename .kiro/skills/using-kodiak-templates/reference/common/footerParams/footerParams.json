@@ -1,0 +1,24 @@
+{
+  "mainButton": {
+    "title": "Contratar",
+    "action": {
+      "name": "navigation",
+      "configName": "form-dados-contratacao"
+    }
+  },
+  "secondaryButton": {
+    "title": "Cancelar",
+    "action": { "name": "backWithCallback" },
+    "skipValidation": true
+  },
+  "type": {
+    "type": "checkbox",
+    "paragraph": "Li e aceito os ##termos de uso##",
+    "action": {
+      "name": "navigation",
+      "configName": "text-termos-de-uso"
+    },
+    "checkboxLabel": "Concordo com os termos",
+    "checkboxDescription": "Obrigatório para prosseguir"
+  }
+}

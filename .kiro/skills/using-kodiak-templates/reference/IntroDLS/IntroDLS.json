@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "canGoBack": "true",
+      "androidPreventGoBack": "false"
+    },
+    "screenHeader": {},
+    "templateParams": {
+      "type": "Success",
+      "title": "Pagamento aprovado!",
+      "description": "Seu comprovante já está disponível no extrato e também por e-mail.",
+      "hint": "Transação concluída"
+    },
+    "footerParams": {
+      "mainButton": {
+        "action": {
+          "name": "navigation",
+          "configName": "receipt-pagamento"
+        },
+        "title": "Ver comprovante"
+      },
+      "secondaryButton": {
+        "action": {
+          "name": "reset"
+        },
+        "skipValidation": false,
+        "title": "Voltar para o início"
+      }
+    },
+    "name": "IntroDLS"
+  },
+  "description": "Tela de sucesso após confirmação de pagamento",
+  "configName": "intro-pagamento-aprovado"
+}

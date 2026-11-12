@@ -1,0 +1,12 @@
+{
+  "rating": {
+    "type": "star",
+    "title": "Como foi sua experiência?",
+    "description": "Sua avaliação ajuda a melhorar o app",
+    "caption": {
+      "showCaption": true,
+      "type": "extended",
+      "total": "1.234"
+    }
+  }
+}
