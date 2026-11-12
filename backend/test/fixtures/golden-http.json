@@ -29,7 +29,9 @@
      "GET /dados/eventos/resumo": "contagem por tipo"
     },
     "motor_de_recomendacao": {
-     "GET /recomendacao/{id}?limite=8": "serviços sugeridos com motivo, base da personalização e convites de consentimento"
+     "GET /recomendacao/{id}?limite=8": "serviços sugeridos com motivo, base da personalização e convites de consentimento",
+     "POST /recomendacao/{id}/dispensar": "\"Não me interessa\": {\"servico_id\":34} tira o serviço das sugestões",
+     "POST /recomendacao/{id}/personalizacao": "\"Não usar meus dados para sugestões\": {\"ativa\":false} desliga o uso de histórico e dados sensíveis"
     },
     "saude_da_api": "GET /health"
    }
@@ -1965,6 +1967,21 @@
     "itens": [
      {
       "posicao": 1,
+      "servico_id": 331,
+      "titulo": "Obter orientações sobre atividades físicas no Programa Academia da Cidade",
+      "nome": "Obter orientações sobre atividades físicas no Programa Academia da Cidade",
+      "orgao": "SESAU",
+      "tema": "Cidadania",
+      "tipo_servico": "Informativo",
+      "digital": true,
+      "jornada_disponivel": false,
+      "origem": "momento",
+      "tag": "Seu momento de vida",
+      "motivo": "Orientação de atividade física gratuita, indicada para pessoas com 60 anos ou mais.",
+      "outros_motivos": []
+     },
+     {
+      "posicao": 2,
       "servico_id": 908,
       "titulo": "Emitir credencial de estacionamento especial para idosos (maiores de 60 anos)",
       "nome": "Emitir credencial de estacionamento especial para idosos (maiores de 60 anos)",
@@ -1981,7 +1998,7 @@
       ]
      },
      {
-      "posicao": 2,
+      "posicao": 3,
       "servico_id": 953,
       "titulo": "Ver meus agendamentos de Saúde",
       "nome": "Ver meus agendamentos de Saúde",
@@ -1996,21 +2013,6 @@
       "outros_motivos": [
        "Você acessou este serviço em 16/08/2026. Continue de onde parou."
       ]
-     },
-     {
-      "posicao": 3,
-      "servico_id": 942,
-      "titulo": "Agendar consultas e procedimentos na Minha Unidade de Saúde",
-      "nome": "Agendar consultas e procedimentos na Minha Unidade de Saúde",
-      "orgao": "SESAU",
-      "tema": "Saúde",
-      "tipo_servico": "Agendamento",
-      "digital": true,
-      "jornada_disponivel": true,
-      "origem": "historico",
-      "tag": "Pelo seu histórico",
-      "motivo": "Quem acessou \"Ver meus agendamentos de Saúde\" também costuma acessar este serviço.",
-      "outros_motivos": []
      },
      {
       "posicao": 4,
@@ -2341,24 +2343,26 @@
     "itens": [
      {
       "posicao": 1,
-      "servico_id": 284,
-      "titulo": "Agendar atendimento para pessoas com hipertensão arterial",
-      "nome": "Agendar atendimento para pessoas com hipertensão arterial",
+      "servico_id": 1101,
+      "titulo": "Pesquisar medicamentos",
+      "nome": "Pesquisar medicamentos",
       "orgao": "SESAU",
       "tema": "Saúde",
-      "tipo_servico": "Informativo",
-      "digital": false,
+      "tipo_servico": "Consulta",
+      "digital": true,
       "jornada_disponivel": false,
       "origem": "saude",
       "tag": "Com a sua autorização",
       "motivo": "Indicado para o seu cuidado com a saúde. Aparece porque você autorizou o uso dessas informações.",
-      "outros_motivos": []
+      "outros_motivos": [
+       "Quem acessou \"Ver meus encaminhamentos\" também costuma acessar este serviço."
+      ]
      },
      {
       "posicao": 2,
-      "servico_id": 283,
-      "titulo": "Agendar atendimento para pessoas com diabete melito",
-      "nome": "Agendar atendimento para pessoas com diabete melito",
+      "servico_id": 284,
+      "titulo": "Agendar atendimento para pessoas com hipertensão arterial",
+      "nome": "Agendar atendimento para pessoas com hipertensão arterial",
       "orgao": "SESAU",
       "tema": "Saúde",
       "tipo_servico": "Informativo",
@@ -2783,6 +2787,21 @@
      },
      {
       "posicao": 2,
+      "servico_id": 331,
+      "titulo": "Obter orientações sobre atividades físicas no Programa Academia da Cidade",
+      "nome": "Obter orientações sobre atividades físicas no Programa Academia da Cidade",
+      "orgao": "SESAU",
+      "tema": "Cidadania",
+      "tipo_servico": "Informativo",
+      "digital": true,
+      "jornada_disponivel": false,
+      "origem": "momento",
+      "tag": "Seu momento de vida",
+      "motivo": "Orientação de atividade física gratuita, indicada para pessoas com 60 anos ou mais.",
+      "outros_motivos": []
+     },
+     {
+      "posicao": 3,
       "servico_id": 908,
       "titulo": "Emitir credencial de estacionamento especial para idosos (maiores de 60 anos)",
       "nome": "Emitir credencial de estacionamento especial para idosos (maiores de 60 anos)",
@@ -2799,7 +2818,7 @@
       ]
      },
      {
-      "posicao": 3,
+      "posicao": 4,
       "servico_id": 357,
       "titulo": "Solicitar atendimento especializado para pessoas com deficiência, idosas e suas…",
       "nome": "Solicitar atendimento especializado para pessoas com deficiência, idosas e suas famílias (CREAS)",
@@ -2816,7 +2835,7 @@
       ]
      },
      {
-      "posicao": 4,
+      "posicao": 5,
       "servico_id": 271,
       "titulo": "Emitir credencial de estacionamento especial para PCD/GESTANTE",
       "nome": "Emitir credencial de estacionamento especial para PCD/GESTANTE",
@@ -2833,7 +2852,7 @@
       ]
      },
      {
-      "posicao": 5,
+      "posicao": 6,
       "servico_id": 216,
       "titulo": "Solicitar isenção do IPTU nos casos específicos do código tributário municipal",
       "nome": "Solicitar isenção do IPTU nos casos específicos do código tributário municipal",
@@ -2850,7 +2869,7 @@
       ]
      },
      {
-      "posicao": 6,
+      "posicao": 7,
       "servico_id": 953,
       "titulo": "Ver meus agendamentos de Saúde",
       "nome": "Ver meus agendamentos de Saúde",
@@ -2865,7 +2884,7 @@
       "outros_motivos": []
      },
      {
-      "posicao": 7,
+      "posicao": 8,
       "servico_id": 352,
       "titulo": "Realizar agendamento para atendimento do Cadastro Único (CADÚNICO)",
       "nome": "Realizar agendamento para atendimento do Cadastro Único (CADÚNICO)",
@@ -2882,7 +2901,7 @@
       ]
      },
      {
-      "posicao": 8,
+      "posicao": 9,
       "servico_id": 34,
       "titulo": "Realizar castração de cães e gatos",
       "nome": "Realizar castração de cães e gatos",
@@ -2896,23 +2915,6 @@
       "motivo": "Você cuida de um animal. Este serviço ajuda com saúde e bem-estar do seu bichinho.",
       "outros_motivos": [
        "Pessoas como você também usam. É muito acessado por quem cuida de animais."
-      ]
-     },
-     {
-      "posicao": 9,
-      "servico_id": 1239,
-      "titulo": "Solicitar emissão do passe livre digital para pessoas de baixa renda e PCD",
-      "nome": "Solicitar emissão do passe livre digital para pessoas de baixa renda e PCD",
-      "orgao": "GOV.BR",
-      "tema": "Cidadania",
-      "tipo_servico": "Emissão de documentos",
-      "digital": true,
-      "jornada_disponivel": true,
-      "origem": "acessibilidade",
-      "tag": "Acessibilidade, com a sua autorização",
-      "motivo": "Pode ajudar com acessibilidade. Aparece porque você autorizou o uso dessa informação.",
-      "outros_motivos": [
-       "Pessoas como você também usam. É muito acessado por pessoas de 60-74 anos."
       ]
      },
      {
@@ -3280,6 +3282,21 @@
      },
      {
       "posicao": 2,
+      "servico_id": 331,
+      "titulo": "Obter orientações sobre atividades físicas no Programa Academia da Cidade",
+      "nome": "Obter orientações sobre atividades físicas no Programa Academia da Cidade",
+      "orgao": "SESAU",
+      "tema": "Cidadania",
+      "tipo_servico": "Informativo",
+      "digital": true,
+      "jornada_disponivel": false,
+      "origem": "momento",
+      "tag": "Seu momento de vida",
+      "motivo": "Orientação de atividade física gratuita, indicada para pessoas com 60 anos ou mais.",
+      "outros_motivos": []
+     },
+     {
+      "posicao": 3,
       "servico_id": 1257,
       "titulo": "Preencher a Consulta Pública Plano Municipal da Mulher",
       "nome": "Preencher a Consulta Pública Plano Municipal da Mulher",
@@ -3294,7 +3311,7 @@
       "outros_motivos": []
      },
      {
-      "posicao": 3,
+      "posicao": 4,
       "servico_id": 953,
       "titulo": "Ver meus agendamentos de Saúde",
       "nome": "Ver meus agendamentos de Saúde",
@@ -3311,7 +3328,7 @@
       ]
      },
      {
-      "posicao": 4,
+      "posicao": 5,
       "servico_id": 435,
       "titulo": "Realizar matrícula na Escola de Frevo do Recife",
       "nome": "Realizar matrícula na Escola de Frevo do Recife",
@@ -3326,7 +3343,7 @@
       "outros_motivos": []
      },
      {
-      "posicao": 5,
+      "posicao": 6,
       "servico_id": 192,
       "titulo": "Agendamento para Formação em Igualdade de Gênero",
       "nome": "Agendamento para Formação em Igualdade de Gênero",
@@ -3341,7 +3358,7 @@
       "outros_motivos": []
      },
      {
-      "posicao": 6,
+      "posicao": 7,
       "servico_id": 1359,
       "titulo": "AGENDAR CURSO Marketing Digital",
       "nome": "AGENDAR CURSO Marketing Digital",
@@ -3353,21 +3370,6 @@
       "origem": "momento",
       "tag": "Seu momento de vida",
       "motivo": "Este serviço é voltado a pessoas com 60 anos ou mais.",
-      "outros_motivos": []
-     },
-     {
-      "posicao": 7,
-      "servico_id": 1309,
-      "titulo": "Realizar exame no mamógrafo móvel",
-      "nome": "Realizar exame no mamógrafo móvel",
-      "orgao": "SESAU",
-      "tema": "Saúde",
-      "tipo_servico": "Consulta",
-      "digital": false,
-      "jornada_disponivel": false,
-      "origem": "momento",
-      "tag": "Seu momento de vida",
-      "motivo": "Cuidado preventivo indicado para mulheres da sua faixa de idade.",
       "outros_motivos": []
      },
      {
@@ -4710,6 +4712,23 @@
     "itens": [
      {
       "posicao": 1,
+      "servico_id": 1148,
+      "titulo": "Jornada do Estudante",
+      "nome": "Jornada do Estudante",
+      "orgao": "SEDUC",
+      "tema": "Educação",
+      "tipo_servico": "Plataforma",
+      "digital": true,
+      "jornada_disponivel": false,
+      "origem": "momento",
+      "tag": "Seu momento de vida",
+      "motivo": "Sua família recebe Bolsa Família e tem estudante. Este serviço ajuda a acompanhar a frequência escolar.",
+      "outros_motivos": [
+       "Pessoas como você também usam. É muito acessado por famílias com crianças."
+      ]
+     },
+     {
+      "posicao": 2,
       "servico_id": 839,
       "titulo": "Realizar matrícula On-line para creches e escolas da rede municipal 2026",
       "nome": "Realizar matrícula On-line para creches e escolas da rede municipal 2026",
@@ -4726,7 +4745,7 @@
       ]
      },
      {
-      "posicao": 2,
+      "posicao": 3,
       "servico_id": 352,
       "titulo": "Realizar agendamento para atendimento do Cadastro Único (CADÚNICO)",
       "nome": "Realizar agendamento para atendimento do Cadastro Único (CADÚNICO)",
@@ -4743,7 +4762,7 @@
       ]
      },
      {
-      "posicao": 3,
+      "posicao": 4,
       "servico_id": 942,
       "titulo": "Agendar consultas e procedimentos na Minha Unidade de Saúde",
       "nome": "Agendar consultas e procedimentos na Minha Unidade de Saúde",
@@ -4758,21 +4777,6 @@
       "outros_motivos": [
        "Você acessou este serviço em 01/09/2026. Continue de onde parou."
       ]
-     },
-     {
-      "posicao": 4,
-      "servico_id": 953,
-      "titulo": "Ver meus agendamentos de Saúde",
-      "nome": "Ver meus agendamentos de Saúde",
-      "orgao": "SESAU",
-      "tema": "Saúde",
-      "tipo_servico": "Agendamento",
-      "digital": true,
-      "jornada_disponivel": true,
-      "origem": "historico",
-      "tag": "Pelo seu histórico",
-      "motivo": "Quem acessou \"Ver resultado de exames laboratoriais\" também costuma acessar este serviço.",
-      "outros_motivos": []
      },
      {
       "posicao": 5,
@@ -4870,6 +4874,23 @@
     "itens": [
      {
       "posicao": 1,
+      "servico_id": 1148,
+      "titulo": "Jornada do Estudante",
+      "nome": "Jornada do Estudante",
+      "orgao": "SEDUC",
+      "tema": "Educação",
+      "tipo_servico": "Plataforma",
+      "digital": true,
+      "jornada_disponivel": false,
+      "origem": "momento",
+      "tag": "Seu momento de vida",
+      "motivo": "Sua família recebe Bolsa Família e tem estudante. Este serviço ajuda a acompanhar a frequência escolar.",
+      "outros_motivos": [
+       "Pessoas como você também usam. É muito acessado por famílias com crianças."
+      ]
+     },
+     {
+      "posicao": 2,
       "servico_id": 839,
       "titulo": "Realizar matrícula On-line para creches e escolas da rede municipal 2026",
       "nome": "Realizar matrícula On-line para creches e escolas da rede municipal 2026",
@@ -4886,7 +4907,7 @@
       ]
      },
      {
-      "posicao": 2,
+      "posicao": 3,
       "servico_id": 352,
       "titulo": "Realizar agendamento para atendimento do Cadastro Único (CADÚNICO)",
       "nome": "Realizar agendamento para atendimento do Cadastro Único (CADÚNICO)",
@@ -4903,7 +4924,7 @@
       ]
      },
      {
-      "posicao": 3,
+      "posicao": 4,
       "servico_id": 942,
       "titulo": "Agendar consultas e procedimentos na Minha Unidade de Saúde",
       "nome": "Agendar consultas e procedimentos na Minha Unidade de Saúde",
@@ -4920,7 +4941,7 @@
       ]
      },
      {
-      "posicao": 4,
+      "posicao": 5,
       "servico_id": 953,
       "titulo": "Ver meus agendamentos de Saúde",
       "nome": "Ver meus agendamentos de Saúde",
@@ -4933,23 +4954,6 @@
       "tag": "Pelo seu histórico",
       "motivo": "Quem acessou \"Ver resultado de exames laboratoriais\" também costuma acessar este serviço.",
       "outros_motivos": []
-     },
-     {
-      "posicao": 5,
-      "servico_id": 1148,
-      "titulo": "Jornada do Estudante",
-      "nome": "Jornada do Estudante",
-      "orgao": "SEDUC",
-      "tema": "Educação",
-      "tipo_servico": "Plataforma",
-      "digital": true,
-      "jornada_disponivel": false,
-      "origem": "momento",
-      "tag": "Seu momento de vida",
-      "motivo": "Há uma criança na sua família. Este serviço é útil para escola, atividades e acompanhamento.",
-      "outros_motivos": [
-       "Pessoas como você também usam. É muito acessado por famílias com crianças."
-      ]
      },
      {
       "posicao": 6,
@@ -5083,23 +5087,6 @@
     "itens": [
      {
       "posicao": 1,
-      "servico_id": 839,
-      "titulo": "Realizar matrícula On-line para creches e escolas da rede municipal 2026",
-      "nome": "Realizar matrícula On-line para creches e escolas da rede municipal 2026",
-      "orgao": "SEDUC",
-      "tema": "Educação",
-      "tipo_servico": "Inscrição",
-      "digital": true,
-      "jornada_disponivel": true,
-      "origem": "momento",
-      "tag": "Seu momento de vida",
-      "motivo": "Há uma criança na sua família. Este serviço é útil para escola, atividades e acompanhamento.",
-      "outros_motivos": [
-       "Muita gente está procurando este serviço nas últimas semanas."
-      ]
-     },
-     {
-      "posicao": 2,
       "servico_id": 1148,
       "titulo": "Jornada do Estudante",
       "nome": "Jornada do Estudante",
@@ -5108,11 +5095,28 @@
       "tipo_servico": "Plataforma",
       "digital": true,
       "jornada_disponivel": false,
+      "origem": "momento",
+      "tag": "Seu momento de vida",
+      "motivo": "Sua família recebe Bolsa Família e tem estudante. Este serviço ajuda a acompanhar a frequência escolar.",
+      "outros_motivos": [
+       "Pessoas como você também usam. É muito acessado por famílias com crianças."
+      ]
+     },
+     {
+      "posicao": 2,
+      "servico_id": 352,
+      "titulo": "Realizar agendamento para atendimento do Cadastro Único (CADÚNICO)",
+      "nome": "Realizar agendamento para atendimento do Cadastro Único (CADÚNICO)",
+      "orgao": "SAS",
+      "tema": "Cidadania",
+      "tipo_servico": "Agendamento",
+      "digital": true,
+      "jornada_disponivel": true,
       "origem": "popular",
       "tag": "Pessoas parecidas com você",
       "motivo": "Pessoas como você também usam. É muito acessado por famílias com crianças.",
       "outros_motivos": [
-       "Há uma criança na sua família. Este serviço é útil para escola, atividades e acompanhamento."
+       "Você já está no Cadastro Único. Aqui você consulta ou atualiza seus dados."
       ]
      }
     ],

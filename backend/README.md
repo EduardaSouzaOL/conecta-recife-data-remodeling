@@ -43,6 +43,8 @@ Resumo do motor de dados (`/dados`):
 
 Motor de recomendação:
 - `GET` ou `POST /recomendacao/{id}?limite=8`
+- `POST /recomendacao/{id}/dispensar` `{servico_id}` ("Não me interessa")
+- `POST /recomendacao/{id}/personalizacao` `{ativa}` ("Não usar meus dados para sugestões")
 
 Fora dos motores: `GET /health`, `GET /` (índice).
 

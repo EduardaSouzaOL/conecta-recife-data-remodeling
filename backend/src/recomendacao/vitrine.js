@@ -1,4 +1,5 @@
 import { dados } from '../dados/carga.js';
+import { preferencias } from '../dados/store.js';
 import { temConsentimentoSaude, temConsentimentoAcessibilidade } from '../dados/consentimento.js';
 import { reunirCandidatos } from './vitrine/candidatos.js';
 import { pontuar } from './vitrine/pontuacao.js';
@@ -10,19 +11,22 @@ import { baseDaPersonalizacao, montarAvisosEConvites } from './vitrine/textos.js
 function lerContexto(id) {
   const reg = dados.cidadaos.get(id);
   const perfil = reg.perfil;
-  const consentiu = temConsentimentoSaude(id);
-  const consentiuAcessibilidade = temConsentimentoAcessibilidade(id);
+  const pref = preferencias[id] || {};
+  const personalizar = pref.personalizar !== false; // "Não usar meus dados": só sugestões universais
+  const consentiu = personalizar && temConsentimentoSaude(id);
+  const consentiuAcessibilidade = personalizar && temConsentimentoAcessibilidade(id);
   const saude = consentiu ? reg.saude : null; // sem consentimento, o atributo de saúde nem é lido
   const acessibilidade = consentiuAcessibilidade ? reg.acessibilidade : null; // idem para pessoa com deficiência
   const consentimentoDe = { saude: consentiu, acessibilidade: consentiuAcessibilidade };
-  const hist = dados.historico.get(id) || [];
-  return { id, perfil, consentiu, consentiuAcessibilidade, saude, acessibilidade, consentimentoDe, hist };
+  const hist = personalizar ? dados.historico.get(id) || [] : [];
+  const dispensados = new Set(pref.dispensados || []);
+  return { id, dispensados, perfil, consentiu, consentiuAcessibilidade, saude, acessibilidade, consentimentoDe, hist };
 }
 
 export function montarVitrine(id, derivados, { limite = 8 } = {}) {
   const ctx = lerContexto(id);
   const candidatos = reunirCandidatos(ctx, derivados);
-  const pontuados = pontuar(candidatos, ctx);
+  const pontuados = pontuar(candidatos, ctx).filter((p) => !ctx.dispensados.has(p.sv)); // "Não me interessa"
   const escolhidos = diversificar(pontuados, limite);
   garantirServicoNovo(escolhidos, pontuados, ctx, limite);
   const itens = escolhidos.map((p, i) => montarItem(p, i + 1));

@@ -23,6 +23,7 @@ export const TABELA_ERROS = {
   decisao_invalida: 400,
   campos_invalidos: 400,
   evento_invalido: 400,
+  valor_invalido: 400,
   json_invalido: 400,
   caminho_invalido: 400,
   // regra de negócio

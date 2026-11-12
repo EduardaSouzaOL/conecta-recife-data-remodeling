@@ -22,6 +22,12 @@ export const REGRAS = [
   { id: 'crianca', origem: 'momento', ids: [839, 1240, 1148, 633],
     cond: (p) => p.criancas_na_familia === 'crianca',
     motivo: 'Há uma criança na sua família. Este serviço é útil para escola, atividades e acompanhamento.' },
+  { id: 'matricula_creche', origem: 'momento', ids: [839], bonus: 0.4, janela: ['2026-11-05', '2026-12-10'],
+    cond: (p) => p.criancas_na_familia === 'primeira_infancia',
+    motivo: 'As inscrições para vaga em creche e escola estão abertas até 10/12/2026. Há criança pequena na sua família.' },
+  { id: 'frequencia_escolar', origem: 'momento', ids: [1148], bonus: 0.3, janela: ['2026-10-01', '2026-11-30'],
+    cond: (p) => p.bolsa_familia && (p.criancas_na_familia === 'crianca' || p.criancas_na_familia === 'adolescente'),
+    motivo: 'Sua família recebe Bolsa Família e tem estudante. Este serviço ajuda a acompanhar a frequência escolar.' },
   { id: 'adolescente', origem: 'momento', ids: [1148, 954, 1292, 62],
     cond: (p) => p.criancas_na_familia === 'adolescente',
     motivo: 'Há um adolescente na sua família. Este serviço ajuda em estudos, documentos e primeiros cursos.' },
@@ -52,6 +58,9 @@ export const REGRAS = [
   { id: 'idoso', origem: 'momento', ids: [908, 435, 1359, 1427],
     cond: (p) => p.idade >= 60,
     motivo: 'Este serviço é voltado a pessoas com 60 anos ou mais.' },
+  { id: 'academia_idoso', origem: 'momento', ids: [331], bonus: 0.4,
+    cond: (p) => p.idade >= 60,
+    motivo: 'Orientação de atividade física gratuita, indicada para pessoas com 60 anos ou mais.' },
   { id: 'jovem', origem: 'momento', ids: [1292, 62, 954, 1359, 1427],
     cond: (p) => p.idade >= 16 && p.idade <= 29,
     motivo: 'Este serviço é pensado para jovens, como estudos, primeiro emprego e documentos.' },
@@ -70,8 +79,8 @@ const MOTIVO_SAUDE = 'Indicado para o seu cuidado com a saúde. Aparece porque v
 
 /** Regras que dependem de dados de saúde. Só rodam com consentimento "concedido". */
 export const REGRAS_SAUDE = [
-  { id: 'saude_hipertensao', campo: 'hipertensao', ids: [284] },
-  { id: 'saude_diabetes', campo: 'diabetes', ids: [283] },
+  { id: 'saude_hipertensao', campo: 'hipertensao', ids: [284, 1101] },
+  { id: 'saude_diabetes', campo: 'diabetes', ids: [283, 1101] },
   { id: 'saude_mental', campo: 'saude_mental', ids: [1197, 1193] },
   { id: 'saude_gestante', campo: 'gestante', ids: [892, 295, 1362, 271] },
 ];
@@ -106,10 +115,12 @@ export function categoriasSensiveis(servico) {
  */
 export function candidatosPorRegra(perfil, saude, acessibilidade = null) {
   const out = [];
+  const hoje = new Date().toISOString().slice(0, 10);
   for (const r of REGRAS) {
     if (!r.cond(perfil)) continue;
+    if (r.janela && (hoje < r.janela[0] || hoje > r.janela[1])) continue; // gatilho de calendário fora da janela
     r.ids.forEach((id, i) => {
-      if (dados.servicos.has(id)) out.push({ servico_id: id, score: 1 - i * 0.12, origem: r.origem, regra: r.id, motivo: r.motivo });
+      if (dados.servicos.has(id)) out.push({ servico_id: id, score: 1 - i * 0.12 + (r.bonus || 0), origem: r.origem, regra: r.id, motivo: r.motivo });
     });
   }
   if (saude) {

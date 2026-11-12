@@ -259,3 +259,19 @@ Divergência registrada: a regra do projeto diz que erro que o cidadão pode cor
 - `mensagem`: frase curta em português simples.
 - Extra: hoje só `jornada` (a visão atual do pedido) em `confirmacao_necessaria` e `campos_pendentes`.
 - Erro técnico: `500` com `erro: "erro_interno"` e mensagem genérica. O Kodiak trata com a tela de erro customizada.
+
+### POST /recomendacao/{id}/dispensar
+
+- Área: motor de recomendação ("Não me interessa")
+- Entrada: caminho `{id}` (`cidadao_id`); corpo, depois consulta: `servico_id`
+- Saída 200: `{ ok, cidadao_id, dispensados }` (lista de serviços dispensados). O serviço deixa de aparecer na vitrine do cidadão.
+- Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`, `404 servico_nao_encontrado`
+- Efeitos colaterais: grava a preferência e o evento `servico_dispensado`
+
+### POST /recomendacao/{id}/personalizacao
+
+- Área: motor de recomendação ("Não usar meus dados para sugestões")
+- Entrada: caminho `{id}` (`cidadao_id`); corpo, depois consulta: `ativa` (`true` ou `false`)
+- Saída 200: `{ ok, cidadao_id, personalizacao_ativa }`. Com `false`, a vitrine ignora histórico, saúde e acessibilidade e usa só o perfil geral (`base_da_personalizacao: perfil`).
+- Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`, `400 valor_invalido`
+- Efeitos colaterais: grava a preferência e o evento `personalizacao_ligada` ou `personalizacao_desligada`
