@@ -1,4 +1,6 @@
 import { montarVitrine } from '../../recomendacao/vitrine.js';
+import { montarHome } from '../../recomendacao/home.js';
+import { montarHomeVisitante } from '../../recomendacao/home-visitante.js';
 import { registrarEvento, preferencias, salvar } from '../../dados/store.js';
 import { dados } from '../../dados/carga.js';
 import { falhar } from '../erros.js';
@@ -6,6 +8,26 @@ import { identificarCidadao, lerLimite, lerCampo } from '../entrada.js';
 
 /** Motor de recomendação: a lista personalizada, com motivo em cada item. Tudo sob `/recomendacao`. */
 export function registrarRotasRecomendacao(rota, derivados) {
+  // Home simplificada de quem não entrou. Sem cidadão: nada de perfil, histórico ou saúde.
+  rota(['GET'], '/recomendacao/visitante/home', ({ consulta }) => {
+    registrarEvento(null, 'home_visitante_vista');
+    return montarHomeVisitante({ q: consulta.q });
+  }, {
+    area: 'motor_de_recomendacao',
+    descricao: 'Home simplificada para visitante sem login: mais usados e atalhos de 1 toque',
+    consulta: '?q=texto',
+  });
+
+  // Home em blocos de quem está logado. Reagrupa a lista da vitrine; a lista plana não muda.
+  rota(['GET'], '/recomendacao/:id/home', ({ p, consulta }) => {
+    const { id } = identificarCidadao(p.id);
+    registrarEvento(id, 'home_vista');
+    return montarHome(id, derivados, consulta);
+  }, {
+    area: 'motor_de_recomendacao',
+    descricao: 'Home em blocos: atalhos, recomendados com "Por que vejo isto?" e controles de personalização',
+  });
+
   // `POST` é alias legado do `GET`.
   rota(['GET', 'POST'], '/recomendacao/:id', ({ p, consulta, corpo }) => {
     const { id } = identificarCidadao(p.id);

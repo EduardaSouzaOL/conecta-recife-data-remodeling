@@ -37,6 +37,8 @@ Um teste (`backend/test/contrato.test.js`) garante que todo par método/caminho 
 | POST | `/dados/jornadas/{id}/confirmar` | Motor de dados |
 | POST | `/dados/eventos` | Motor de dados |
 | GET | `/dados/eventos/resumo` | Motor de dados |
+| GET | `/recomendacao/visitante/home` | Motor de recomendação |
+| GET | `/recomendacao/{id}/home` | Motor de recomendação |
 | GET | `/recomendacao/{id}` | Motor de recomendação |
 | POST | `/recomendacao/{id}` | Motor de recomendação (**Legado**) |
 
@@ -259,6 +261,22 @@ Divergência registrada: a regra do projeto diz que erro que o cidadão pode cor
 - `mensagem`: frase curta em português simples.
 - Extra: hoje só `jornada` (a visão atual do pedido) em `confirmacao_necessaria` e `campos_pendentes`.
 - Erro técnico: `500` com `erro: "erro_interno"` e mensagem genérica. O Kodiak trata com a tela de erro customizada.
+
+### GET /recomendacao/{id}/home
+
+- Área: motor de recomendação (Home em blocos, logado)
+- Entrada: caminho `{id}` (`cidadao_id`)
+- Saída 200: `{ perfil: "logado", cidadao_id, personalizacao_ativa, base_da_personalizacao, explicacao_geral, aviso_saude, aviso_acessibilidade, convite_consentimento, convite_acessibilidade, controles[], blocos[] }`. Cada bloco: `id`, `grupo` (`atalhos` ou `recomendados`), `titulo`, `itens[]` (até 3). Cada item: `posicao`, `servico_id`, `titulo`, `motivo`, `por_que_vejo { texto, dados_usados[] }`, `rotulo_leitor`, `acao`; itens recomendados trazem também `tag` e `dispensar`. Com menos de 3 acessos no histórico, o primeiro bloco é "Mais procurados". Sem personalização, devolve a estrutura da Home do visitante com `personalizacao_ativa: false`. Bloco vazio não é enviado; um serviço aparece em um bloco só.
+- Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`
+- Efeitos colaterais: grava o evento `home_vista`
+
+### GET /recomendacao/visitante/home
+
+- Área: motor de recomendação (Home simplificada, sem login)
+- Entrada: consulta opcional `q` (filtra pelo nome do serviço)
+- Saída 200: `{ perfil: "visitante", explicacao_geral, mensagem_busca, blocos[] }`. Blocos "Mais usados" (até 6) e "Atalhos de 1 toque" (3). Cada item: `posicao`, `servico_id`, `titulo`, `orgao`, `motivo`, `rotulo_leitor`, `acao` (`abrir_servico` ou `iniciar_jornada`). Bloco sem item não é enviado.
+- Erros: nenhum de regra de negócio
+- Efeitos colaterais: grava o evento `home_visitante_vista` (sem `cidadao_id`). Não lê perfil, histórico, saúde nem acessibilidade.
 
 ### POST /recomendacao/{id}/dispensar
 

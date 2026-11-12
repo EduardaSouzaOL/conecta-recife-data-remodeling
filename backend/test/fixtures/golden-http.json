@@ -29,6 +29,8 @@
      "GET /dados/eventos/resumo": "contagem por tipo"
     },
     "motor_de_recomendacao": {
+     "GET /recomendacao/visitante/home?q=texto": "Home simplificada para visitante sem login: mais usados e atalhos de 1 toque",
+     "GET /recomendacao/{id}/home": "Home em blocos: atalhos, recomendados com \"Por que vejo isto?\" e controles de personalização",
      "GET /recomendacao/{id}?limite=8": "serviços sugeridos com motivo, base da personalização e convites de consentimento",
      "POST /recomendacao/{id}/dispensar": "\"Não me interessa\": {\"servico_id\":34} tira o serviço das sugestões",
      "POST /recomendacao/{id}/personalizacao": "\"Não usar meus dados para sugestões\": {\"ativa\":false} desliga o uso de histórico e dados sensíveis"
