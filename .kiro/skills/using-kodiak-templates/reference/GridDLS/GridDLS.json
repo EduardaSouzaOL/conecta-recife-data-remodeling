@@ -1,0 +1,158 @@
+{
+  "parameters": {
+    "templateParams": {
+      "balanceWidgetProps": {
+        "left": {
+          "label": "R$ 320,00",
+          "description": "Total de cashbacks",
+          "action": {
+            "name": "alert"
+          }
+        },
+        "right": {
+          "label": "R$ 32,00",
+          "description": "Cashbacks em análise",
+          "action": {
+            "name": "alert"
+          }
+        }
+      },
+      "carouselCardImagesWidgetProps": {
+        "items": [
+          {
+            "action": {
+              "name": "alert"
+            },
+            "badge": "Label",
+            "title": "10% de cashback",
+            "paragraph": "Adcos",
+            "image": {
+              "base64": "iVBORw0KG..."
+            },
+            "neutral": "true"
+          },
+          {
+            "action": {
+              "name": "alert"
+            },
+            "title": "3% de cashback",
+            "paragraph": "Área Gamer BB",
+            "image": {
+              "base64": "iVBORw0KG..."
+            },
+            "neutral": "true"
+          },
+          {
+            "action": {
+              "name": "alert"
+            },
+            "badge": "Label",
+            "title": "3% de cashback",
+            "paragraph": "Amazon.com.br",
+            "image": {
+              "base64": "iVBORw0KG..."
+            },
+            "neutral": "true"
+          }
+        ]
+      },
+      "gridWidgetProps": {
+        "gridType": "cardImage",
+        "numColumns": "2",
+        "items": [
+          {
+            "action": {
+              "name": "alert"
+            },
+            "title": "12% de cashback",
+            "paragraph": "Highstil",
+            "image": {
+              "base64": "iVBORw0KG..."
+            },
+            "neutral": "true"
+          },
+          {
+            "action": {
+              "name": "alert"
+            },
+            "title": "7,5% de cashback",
+            "paragraph": "Casas Bahia",
+            "image": {
+              "base64": "iVBORw0KG..."
+            },
+            "neutral": "true"
+          },
+          {
+            "action": {
+              "name": "alert"
+            },
+            "title": "1,5% de cashback",
+            "paragraph": "Gol",
+            "image": {
+              "base64": "iVBORw0KG..."
+            },
+            "neutral": "true"
+          },
+          {
+            "action": {
+              "name": "alert"
+            },
+            "title": "1,5% de cashback",
+            "paragraph": "Decolar",
+            "image": {
+              "base64": "iVBORw0KG..."
+            },
+            "neutral": "true"
+          },
+          {
+            "action": {
+              "name": "alert"
+            },
+            "title": "4% de cashback",
+            "paragraph": "Drogaria São Paulo",
+            "image": {
+              "base64": "iVBORw0KG..."
+            },
+            "neutral": "true"
+          },
+          {
+            "action": {
+              "name": "alert"
+            },
+            "title": "2,5% de cashback",
+            "paragraph": "Drogaria Araujo",
+            "image": {
+              "base64": "iVBORw0KG..."
+            },
+            "neutral": "true"
+          }
+        ]
+      }
+    },
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "canGoBack": "true",
+      "title": "1. Cashback BB",
+      "rightButtons": [
+        {
+          "icon": "ui-close",
+          "accessibilityLabel": "Botão de ação",
+          "action": {
+            "name": "alert"
+          }
+        }
+      ],
+      "collapsable": false
+    },
+    "screenHeader": {},
+    "footerParams": {},
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "internalFooterDLS": {},
+    "name": "GridDLS"
+  },
+  "description": "Template GridDLS",
+  "configName": "grid-dls-template"
+}

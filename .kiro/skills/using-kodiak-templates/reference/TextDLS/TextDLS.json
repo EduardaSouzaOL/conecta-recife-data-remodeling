@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {},
+    "screenHeader": {
+      "title": "Termos de uso"
+    },
+    "templateParams": {
+      "subsections": [
+        {
+          "title": "Aceite dos termos",
+          "paragraph": "Ao continuar você declara estar de acordo com os termos descritos abaixo."
+        },
+        {
+          "title": "Privacidade",
+          "paragraph": "Seus dados serão tratados conforme a Política de Privacidade do Banco."
+        },
+        {
+          "paragraph": "Para dúvidas, entre em contato pelo telefone 0800 000 0000."
+        }
+      ]
+    },
+    "footerParams": {
+      "mainButton": {
+        "action": {
+          "analytics": {
+            "enabled": "false"
+          },
+          "params": {
+            "requestParams": {
+              "key1": "value1"
+            },
+            "configName": "intro-pagamento-aprovado"
+          },
+          "name": "navigation",
+          "configName": "form-dados-cliente"
+        },
+        "title": "Aceitar e continuar"
+      }
+    },
+    "name": "TextDLS"
+  },
+  "description": "Termos de uso exibidos antes da aceitação do cliente",
+  "configName": "text-termos-de-uso"
+}

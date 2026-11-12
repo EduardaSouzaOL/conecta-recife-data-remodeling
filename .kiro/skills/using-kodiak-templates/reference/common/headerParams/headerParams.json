@@ -1,0 +1,25 @@
+{
+  "title": "Minha Lista",
+  "canGoBack": "true",
+  "rightButtons": [
+    {
+      "icon": "search",
+      "accessibilityLabel": "Buscar",
+      "action": { "name": "navigation", "configName": "busca-produtos" }
+    },
+    {
+      "icon": "bell",
+      "badgeProps": { "label": "3", "showAllNumberDigits": false },
+      "accessibilityLabel": "Notificações",
+      "action": { "name": "navigation", "configName": "notificacoes" }
+    }
+  ],
+  "toolbar": {
+    "shouldShowSearchField": true,
+    "searchField": {
+      "placeholder": "Pesquisar produto",
+      "type": "search",
+      "variableName": "searchResult"
+    }
+  }
+}

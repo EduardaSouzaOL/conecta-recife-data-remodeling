@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "templateParams": {
+      "sections": [
+        {
+          "sectionTitle": "Entrega do seu cartão.",
+          "sectionData": [
+            {
+              "label": "Ourocard Visa Infinite",
+              "image": {
+                "base64": "iVBORw0K..."
+              },
+              "action": {
+                "name": "alert"
+              },
+              "rightFeatures": {
+                "status": "positive"
+              }
+            }
+          ]
+        }
+      ],
+      "trackingProgress": {
+        "title": "Andamento",
+        "progressItems": [
+          {
+            "id": "timelineItem_9429",
+            "title": "Novo cartão recebido",
+            "auxiliaryText1": "11 de novembro de 2023",
+            "link": {
+              "action": {
+                "name": "alert"
+              }
+            }
+          },
+          {
+            "id": "timelineItem_18040",
+            "title": "Cartão liberado",
+            "auxiliaryText1": "10 de novembro de 2023",
+            "link": {
+              "action": {
+                "name": "alert"
+              }
+            }
+          },
+          {
+            "id": "timelineItem_18051",
+            "title": "Cartão enviado pelos Correios",
+            "auxiliaryText1": "9 de novembro de 2023",
+            "auxiliaryText2": "YF648492999BR",
+            "link": {
+              "action": {
+                "name": "alert"
+              },
+              "label": "Copiar código"
+            }
+          },
+          {
+            "id": "timelineItem_18062",
+            "title": "Novo cartão gerado",
+            "auxiliaryText1": "3 de novembro de 2023",
+            "link": {
+              "action": {
+                "name": "alert"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "title": "1. Rastreio de cartão"
+    },
+    "screenHeader": {},
+    "footerParams": {
+      "mainButton": {
+        "title": "acompanhar envio",
+        "action": {
+          "name": "alert"
+        },
+        "showInlined": false
+      }
+    },
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "internalFooterDLS": {},
+    "name": "TrackingDLS"
+  },
+  "description": "Template TrackingDLS",
+  "configName": "tracking-dls-template"
+}

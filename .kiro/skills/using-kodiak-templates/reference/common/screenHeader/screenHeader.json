@@ -1,0 +1,14 @@
+{
+  "title": "Dados pessoais",
+  "description": "Preencha para continuar sua contratação",
+  "progressBar": {
+    "compact": false,
+    "currentStep": "2",
+    "steps": [
+      { "title": "Identificação" },
+      { "title": "Dados" },
+      { "title": "Revisão" },
+      { "title": "Concluído" }
+    ]
+  }
+}

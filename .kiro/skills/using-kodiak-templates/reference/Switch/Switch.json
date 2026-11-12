@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "__requests": [
+      {
+        "params": {
+          "param1": "param2"
+        },
+        "customHeaders": {
+          "header1": "value1"
+        },
+        "alias": "consultaSaldo",
+        "url": "https://api.exemplo.com/saldo",
+        "method": "GET",
+        "isSensitive": false
+      }
+    ],
+    "__cases": [
+      {
+        "configParams": {
+          "saldoAtual": "${consultaSaldo.response.data.saldo}"
+        },
+        "alias": "Saldo insuficiente",
+        "condition": "${consultaSaldo.response.data.saldo < 100}",
+        "configName": "intro-saldo-insuficiente"
+      },
+      {
+        "alias": "Cliente bloqueado",
+        "condition": "${consultaSaldo.response.data.status == 'BLOCKED'}",
+        "configName": "intro-conta-bloqueada"
+      }
+    ],
+    "__defaultCase": {
+      "configParams": {
+        "saldoAtual": "${consultaSaldo.response.data.saldo}"
+      },
+      "alias": "Seguir para transferência",
+      "configName": "form-dados-transferencia"
+    },
+    "name": "Switch"
+  },
+  "description": "Decide próxima tela conforme o saldo retornado pela consulta",
+  "configName": "switch-pos-consulta-saldo"
+}

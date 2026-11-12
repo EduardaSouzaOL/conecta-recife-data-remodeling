@@ -1,0 +1,172 @@
+{
+  "parameters": {
+    "templateParams": {
+      "itemDetailsTemplate": {
+        "images": [
+          {
+            "base64": "iVBORw0K...",
+            "accessibilityLabel": "Label de acessibilidade",
+            "aspectRatio": "wide"
+          },
+          {
+            "base64": "iVBORw0K...",
+            "accessibilityLabel": "Label de acessibilidade",
+            "aspectRatio": "wide"
+          }
+        ],
+        "titleAndParagraphLikable": {
+          "title": "Tênis Forum Low, Cream White",
+          "paragraph": "Cod. SGSMS908EZBCOB",
+          "favoriteAction": {
+            "name": "alert"
+          },
+          "favoriteButtonValue": "true",
+          "enableFavoriteButton": "true",
+          "__transformations": [
+            {
+              "target": "enableFavoriteButton",
+              "to": "boolean"
+            }
+          ]
+        },
+        "tags": [
+          {
+            "label": "30% OFF",
+            "style": "highlight"
+          },
+          {
+            "label": "R$ 10,00 de cashback",
+            "style": "highlightLight"
+          }
+        ],
+        "captionItem": {
+          "title": "Por R$ 650,00 à vista",
+          "captionTop": "De R$ 800,00",
+          "captionBotton": "10x de R$ 65,00 sem juros"
+        },
+        "contentLines": [
+          {
+            "label": "Vendido e entregue por",
+            "image": {
+              "base64": "iVBORw0K..."
+            },
+            "action": {
+              "name": "alert"
+            },
+            "rightFeatures": {
+              "status": "positive"
+            }
+          }
+        ],
+        "formSection": {
+          "title": "Variações e quantidade",
+          "formItems": [
+            {
+              "type": "selectField",
+              "name": "selectField_165082",
+              "label": "Modelo",
+              "selectionLabel": "Cream White - 39",
+              "optionsList": [
+                {
+                  "id": "id1",
+                  "label": "Label 1"
+                },
+                {
+                  "id": "id2",
+                  "label": "Label 2"
+                },
+                {
+                  "id": "id2",
+                  "label": "Label 3"
+                }
+              ]
+            },
+            {
+              "type": "numberField",
+              "showsSuffix": true,
+              "__transformations": [
+                {
+                  "target": "showsSuffix",
+                  "to": "boolean"
+                },
+                {
+                  "target": "showsMonetaryPrefix",
+                  "to": "boolean"
+                }
+              ],
+              "showsMonetaryPrefix": true,
+              "name": "numberField_165083",
+              "label": "Quantidade"
+            }
+          ]
+        },
+        "textInput": [
+          {
+            "title": "Simular frete",
+            "useRefresh": "true",
+            "infoBox": [
+              {
+                "label": "Grátis",
+                "description": "Em até 10 dias úteis."
+              },
+              {
+                "label": "Grátis",
+                "description": "Em até 10 dias úteis."
+              }
+            ],
+            "name": "textInput_8349",
+            "placeholder": "10.000-000",
+            "infoMessage": "Mensagem do tooltip",
+            "__transformations": [
+              {
+                "target": "useRefresh",
+                "to": "boolean"
+              }
+            ]
+          }
+        ],
+        "detailsSection": [
+          {
+            "title": "Detalhes"
+          },
+          {
+            "title": "Outras informações"
+          }
+        ]
+      }
+    },
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "canGoBack": "true",
+      "title": "2. Tênis Forum",
+      "rightButtons": [
+        {
+          "icon": "ui-close",
+          "accessibilityLabel": "Botão de ação",
+          "action": {
+            "name": "alert"
+          }
+        }
+      ],
+      "collapsable": false
+    },
+    "screenHeader": {},
+    "footerParams": {
+      "mainButton": {
+        "title": "Comprar",
+        "action": {
+          "name": "alert"
+        },
+        "showInlined": false
+      }
+    },
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "internalFooterDLS": {},
+    "name": "ItemDetails"
+  },
+  "description": "Template ItemDetails",
+  "configName": "item-details-dls-template"
+}

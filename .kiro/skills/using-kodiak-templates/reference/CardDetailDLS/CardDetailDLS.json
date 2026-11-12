@@ -1,0 +1,190 @@
+{
+  "parameters": {
+    "templateParams": {
+      "cardImageWidgetProps": {
+        "accessibilityLabel": "Label de acessibilidade",
+        "aspectRatio": "wide",
+        "image": {
+          "base64": "iVBORw0KGg..."
+        }
+      },
+      "textBoxWidgetProps": {
+        "label": "Label",
+        "title": "Value",
+        "leftLink": {
+          "iconAlign": "left",
+          "action": {
+            "name": "alert"
+          },
+          "iconName": "ui-placeholder",
+          "label": "Label do link"
+        },
+        "rightLink": {
+          "iconAlign": "left",
+          "action": {
+            "name": "alert"
+          },
+          "iconName": "ui-placeholder",
+          "label": "Label do link"
+        }
+      },
+      "secondaryTextWidgetProps": {
+        "title": "Título secundário",
+        "description": "Lorem ipsum dolor sit amet consectetur. Hac vulputate eget convallis venenatis."
+      },
+      "sectionItemsWidgetProps": [
+        {
+          "type": "mixed",
+          "contentLines": [
+            {
+              "label": "Prazo",
+              "value": "24 meses",
+              "auxiliarLines": [
+                {
+                  "description": "Primeira parcela em 30 dias",
+                  "value": "R$ 450,00"
+                }
+              ]
+            },
+            {
+              "label": "Taxa de juros",
+              "value": "1,49% a.m."
+            }
+          ],
+          "radioButtons": [
+            {
+              "name": "radioGroup_5673",
+              "title": "Group Label",
+              "options": [
+                {
+                  "id": 0,
+                  "label": "Label da opção",
+                  "description": "Texto de apoio",
+                  "selected": "false"
+                },
+                {
+                  "id": 1,
+                  "label": "Label da opção",
+                  "description": "Texto de apoio",
+                  "selected": "false"
+                }
+              ]
+            }
+          ],
+          "accordions": [
+            {
+              "expanded": "false",
+              "label": "Accordion Title",
+              "content": {
+                "type": "textAndLink",
+                "text": "Área para conteúdo",
+                "label": "Link",
+                "action": {
+                  "name": "alert"
+                }
+              },
+              "__transformations": [
+                {
+                  "target": "expanded",
+                  "to": "boolean"
+                }
+              ]
+            },
+            {
+              "expanded": "false",
+              "label": "Accordion Title",
+              "content": {
+                "type": "textAndLink",
+                "text": "Área para conteúdo",
+                "label": "Link",
+                "action": {
+                  "name": "alert"
+                }
+              },
+              "__transformations": [
+                {
+                  "target": "expanded",
+                  "to": "boolean"
+                }
+              ]
+            }
+          ],
+          "title": "Seção",
+          "button": {
+            "label": "Link Navigation",
+            "action": {
+              "name": "alert"
+            }
+          }
+        },
+        {
+          "type": "accordions",
+          "items": [
+            {
+              "expanded": "false",
+              "label": "Accordion Title",
+              "content": {
+                "type": "textAndLink",
+                "text": "Área para conteúdo",
+                "label": "Link",
+                "action": {
+                  "name": "alert"
+                }
+              },
+              "__transformations": [
+                {
+                  "target": "expanded",
+                  "to": "boolean"
+                }
+              ]
+            },
+            {
+              "expanded": "false",
+              "label": "Accordion Title",
+              "content": {
+                "type": "textAndLink",
+                "text": "Área para conteúdo",
+                "label": "Link",
+                "action": {
+                  "name": "alert"
+                }
+              },
+              "__transformations": [
+                {
+                  "target": "expanded",
+                  "to": "boolean"
+                }
+              ]
+            }
+          ],
+          "title": "Seção"
+        }
+      ]
+    },
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "canGoBack": "true",
+      "title": "Title",
+      "rightButtons": [
+        {
+          "icon": "ui-placeholder",
+          "accessibilityLabel": "Botão de ação",
+          "action": {
+            "name": "alert"
+          }
+        }
+      ],
+      "collapsable": false
+    },
+    "screenHeader": {},
+    "footerParams": {},
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "internalFooterDLS": {},
+    "name": "CardDetailDLS"
+  },
+  "description": "Template CardDetailDLS",
+  "configName": "card-detail-dls-template"
+}

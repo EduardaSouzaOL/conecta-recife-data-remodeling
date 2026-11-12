@@ -1,0 +1,16 @@
+{
+  "name": "bottomsheet-informative",
+  "infoAuto": {
+    "showOnInit": "${user.firstAccess}",
+    "iconDLS": "lightbulb",
+    "iconDLSAccessibilityLabel": "Dica",
+    "lead": "NOVIDADE",
+    "title": "Conheça o novo extrato",
+    "description": "Agora você pode filtrar por período, tipo e fazer busca.",
+    "primaryButtonTitle": "Explorar",
+    "okAction": { "name": "backWithCallback" },
+    "secondaryButtonTitle": "Agora não",
+    "secondaryAction": { "name": "backWithCallback" },
+    "inline": false
+  }
+}

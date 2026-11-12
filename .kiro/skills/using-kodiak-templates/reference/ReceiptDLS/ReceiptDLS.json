@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "templateParams": {
+      "receiptHeader": {
+        "value": "Valor",
+        "dateTime": "Data e hora"
+      },
+      "receiptContentLineSections": [
+        {
+          "sectionTitle": "Título de seção",
+          "title": "Título de destaque",
+          "items": [
+            {
+              "label": "Label1",
+              "value": "Value1",
+              "status": "default"
+            },
+            {
+              "label": "Label2",
+              "value": "Value2",
+              "status": "default"
+            }
+          ]
+        },
+        {
+          "sectionTitle": "Título de seção",
+          "title": "Título de destaque",
+          "items": [
+            {
+              "label": "Label1",
+              "value": "Value1",
+              "status": "default"
+            },
+            {
+              "label": "Label2",
+              "value": "Value2",
+              "status": "default"
+            }
+          ]
+        }
+      ],
+      "receiptMessageBox": {
+        "message": "Mensagem"
+      },
+      "infoCard": {
+        "title": "Card Info Title",
+        "description": "Nullam id dolor id nibh ultricies vehicula ut id elit. Duis mollis, est non commodo luctu.",
+        "onPressCard": {
+          "name": "alert"
+        },
+        "buttonGroup": {
+          "secondaryButton": {
+            "style": "secondary",
+            "action": {
+              "name": "alert"
+            },
+            "name": "BUTTON LABEL"
+          },
+          "mainButton": {
+            "style": "secondary",
+            "action": {
+              "name": "alert"
+            },
+            "name": "BUTTON LABEL"
+          }
+        }
+      },
+      "qrCodeCard": {
+        "title": "Título de seção",
+        "documentTitle": "Label",
+        "documentDescription": "Value",
+        "authenticationTitle": "Label",
+        "authenticationDescription": "Value",
+        "notificationTitle": "Label",
+        "notificationDescription": "Value"
+      },
+      "receiptFooter": {
+        "paragraphOne": "Parágrafo de texto.",
+        "paragraphTwo": "Parágrafo de texto."
+      }
+    },
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "canGoBack": "true",
+      "title": "Title",
+      "rightButtons": [
+        {
+          "icon": "ui-placeholder",
+          "accessibilityLabel": "Botão de ação",
+          "action": {
+            "name": "alert"
+          }
+        }
+      ]
+    },
+    "screenHeader": {},
+    "footerParams": {
+      "mainButton": {
+        "title": "AÇÃO PRIMÁRIA",
+        "action": {
+          "name": "alert"
+        }
+      }
+    },
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "internalFooterDLS": {},
+    "name": "ReceiptDLS"
+  },
+  "description": "Template ReceiptDLS",
+  "configName": "receipt-template"
+}

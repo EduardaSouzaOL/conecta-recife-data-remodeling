@@ -1,0 +1,25 @@
+{
+  "configName": "exemplo-tela",
+  "description": "Exemplo mínimo de wrapper padrão",
+  "parameters": {
+    "name": "TemplateName",
+    "templateParams": {
+    },
+    "headerParams": {
+      "title": "Título da tela",
+      "canGoBack": "true"
+    },
+    "screenHeader": {
+      "title": "Título do conteúdo",
+      "description": "Subtítulo opcional"
+    },
+    "footerParams": {
+      "mainButton": {
+        "title": "Continuar",
+        "action": { "name": "navigation", "configName": "proxima-tela" }
+      }
+    },
+    "isErrorScreen": false,
+    "useCustomErrorHandler": false
+  }
+}

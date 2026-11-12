@@ -1,0 +1,255 @@
+{
+  "parameters": {
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "rightButtons": [
+        {
+          "action": {
+            "analytics": {
+              "enabled": "false"
+            },
+            "name": "alert"
+          },
+          "icon": "ui-share",
+          "accessibilityLabel": "Botão de ação"
+        }
+      ],
+      "title": "1. Fatura detalhada"
+    },
+    "screenHeader": {},
+    "templateParams": {
+      "selectButtonsWidgetProps": {
+        "options": [
+          {
+            "id": "option_5170",
+            "label": "Conta Corrente",
+            "disabled": "false",
+            "selected": "false"
+          },
+          {
+            "id": "option_5171",
+            "label": "Poupança",
+            "disabled": "false",
+            "selected": "false"
+          },
+          {
+            "id": "option_5172",
+            "label": "Cartão de crédito",
+            "disabled": "false",
+            "selected": "true"
+          }
+        ],
+        "title": "Botões de seleção",
+        "name": "selectButton_6697",
+        "isVisible": "true",
+        "multiple": "false"
+      },
+      "tabsWidgetProps": {
+        "type": {
+          "action": {
+            "name": "alert"
+          },
+          "tabArray": [
+            {
+              "tabAction": {
+                "analytics": {
+                  "enabled": "false"
+                },
+                "name": "alert"
+              },
+              "key": "tab7372",
+              "name": "dez"
+            },
+            {
+              "tabAction": {
+                "analytics": {
+                  "enabled": "false"
+                },
+                "name": "alert"
+              },
+              "key": "tab7373",
+              "name": "jan"
+            },
+            {
+              "tabAction": {
+                "analytics": {
+                  "enabled": "false"
+                },
+                "name": "alert"
+              },
+              "key": "tab7374",
+              "name": "fev"
+            },
+            {
+              "tabAction": {
+                "analytics": {
+                  "enabled": "false"
+                },
+                "name": "alert"
+              },
+              "key": "tab7375",
+              "name": "mar"
+            },
+            {
+              "tabAction": {
+                "analytics": {
+                  "enabled": "false"
+                },
+                "name": "alert"
+              },
+              "key": "tab7376",
+              "name": " "
+            },
+            {
+              "tabAction": {
+                "analytics": {
+                  "enabled": "false"
+                },
+                "name": "alert"
+              },
+              "key": "tab7377",
+              "name": " "
+            }
+          ],
+          "type": "month",
+          "initialSelectedTabValue": "tab7375",
+          "tabKey": "tabs_83338",
+          "startTabValue": "2026-01",
+          "endTabValue": "2026-06",
+          "calendarTitle": "Título do calendário"
+        }
+      },
+      "valueBoxWidgetProps": {
+        "description": "Fatura parcial",
+        "value": "R$ 1.098,16",
+        "valueColorKey": "primary"
+      },
+      "searchContentLinesWidgetProps": {
+        "searchFieldProps": {},
+        "contentLinesProps": [
+          {
+            "items": [
+              {
+                "auxiliarLines": [
+                  {
+                    "description": "Vencimento",
+                    "value": "Dia 20",
+                    "status": "default",
+                    "coloringAuxiliarLines": " Em ambos os lados"
+                  }
+                ],
+                "label": "Saldo anterior",
+                "value": "R$ 1.519,22",
+                "status": "default"
+              }
+            ]
+          },
+          {
+            "action": {
+              "analytics": {
+                "enabled": "false"
+              }
+            },
+            "items": [
+              {
+                "auxiliarLines": [
+                  {
+                    "description": "11/fev, terça-feira",
+                    "status": "default",
+                    "coloringAuxiliarLines": " Em ambos os lados"
+                  }
+                ],
+                "label": "Ifd*ifood Club",
+                "value": "-R$ 1,00",
+                "status": "negative"
+              },
+              {
+                "auxiliarLines": [
+                  {
+                    "description": "12/fev, quarta-feira",
+                    "status": "default",
+                    "coloringAuxiliarLines": " Em ambos os lados"
+                  }
+                ],
+                "label": "Ifd*ifood Club",
+                "value": "-R$ 1,00",
+                "status": "negative",
+                "showDivider": "true"
+              },
+              {
+                "label": "Total",
+                "value": "-R$ 2,00",
+                "status": "default"
+              }
+            ],
+            "title": "Lançamentos em processamento"
+          },
+          {
+            "items": [
+              {
+                "auxiliarLines": [
+                  {
+                    "description": "06/fev, quinta-feira",
+                    "status": "default",
+                    "coloringAuxiliarLines": " Em ambos os lados"
+                  }
+                ],
+                "label": "Ifd Ifood Jundiai BR",
+                "value": "-R$ 25,00",
+                "status": "negative"
+              },
+              {
+                "auxiliarLines": [
+                  {
+                    "description": "Description 1",
+                    "status": "default",
+                    "coloringAuxiliarLines": " Em ambos os lados"
+                  }
+                ],
+                "label": "Mapfree Seguro",
+                "value": "-R$ 551,33",
+                "status": "negative"
+              },
+              {
+                "auxiliarLines": [
+                  {
+                    "description": "Description 1",
+                    "status": "default",
+                    "coloringAuxiliarLines": " Em ambos os lados"
+                  }
+                ],
+                "label": "Lvielo S.A.",
+                "value": "-R$ 409,83 ",
+                "status": "negative"
+              },
+              {
+                "auxiliarLines": [
+                  {
+                    "description": "Description 1",
+                    "status": "default",
+                    "coloringAuxiliarLines": " Em ambos os lados"
+                  }
+                ],
+                "label": "Farmácia Ana Terra",
+                "value": "-R$ 110,00",
+                "status": "negative",
+                "showDivider": "true"
+              },
+              {
+                "label": "Total",
+                "value": "R$ 1.096,16 ",
+                "status": "default"
+              }
+            ],
+            "title": "Compras à vista"
+          }
+        ]
+      }
+    },
+    "name": "StatementDLS"
+  },
+  "description": "Template StatementDLS",
+  "configName": "statement-dls-template"
+}

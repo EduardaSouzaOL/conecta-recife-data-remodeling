@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "templateParams": {
+      "sectionItemsWidgetProps": [
+        {
+          "contentImage": {
+            "base64": "iVBORw0KGg...",
+            "accessibilityLabel": "Label de acessibilidade"
+          },
+          "button": {
+            "action": {
+              "name": "alert"
+            },
+            "label": "Link navigation"
+          },
+          "label": "Label",
+          "value": "R$ 1.500,00",
+          "action": {
+            "name": "alert"
+          }
+        },
+        {
+          "contentImage": {
+            "base64": "iVBORw0KGg...",
+            "accessibilityLabel": "Label de acessibilidade"
+          },
+          "button": {
+            "action": {
+              "name": "alert"
+            },
+            "label": "Link navigation"
+          },
+          "label": "Label",
+          "value": "R$ 2.300,00",
+          "action": {
+            "name": "alert"
+          }
+        }
+      ]
+    },
+    "screenParams": {
+      "style": "dlsdefault"
+    },
+    "headerParams": {
+      "canGoBack": "true",
+      "title": "Title",
+      "rightButtons": [
+        {
+          "icon": "ui-placeholder",
+          "accessibilityLabel": "Botão de ação",
+          "action": {
+            "name": "alert"
+          }
+        }
+      ],
+      "collapsable": false
+    },
+    "screenHeader": {},
+    "footerParams": {},
+    "useCustomErrorHandler": false,
+    "isErrorScreen": false,
+    "internalFooterDLS": {},
+    "name": "CardInfoResumedDLS"
+  },
+  "description": "Template CardInfoResumedDLS",
+  "configName": "card-info-resumed-dls-template"
+}
