@@ -47,7 +47,7 @@ export function iniciarJornada(cidadao_id, servico_id) {
   const j = {
     jornada_id: 'J-' + crypto.randomBytes(5).toString('hex').toUpperCase(),
     cidadao_id, servico_id: servico.servico_id, estado: 'em_andamento',
-    campos: {}, auto: [], criada_em: new Date().toISOString(),
+    campos: {}, auto: [], criada_em: new Date().toISOString(), atualizada_em: new Date().toISOString(),
   };
   prefill(j, servico);
   jornadas[j.jornada_id] = j;
@@ -98,6 +98,7 @@ export function preencherJornada(id, camposNovos, { tela } = {}) {
     j.auto = j.auto.filter((x) => x !== nome); // agora é escolha da pessoa
   }
   limparInvalidos(j);
+  j.atualizada_em = new Date().toISOString();
   const alterados = Object.keys(antes).filter((k) => j.campos[k] === undefined && !(k in (camposNovos || {})));
   salvar();
   return { jornada: visao(j, { telaPedida: tela, erros, alterados }) };
@@ -106,6 +107,7 @@ export function preencherJornada(id, camposNovos, { tela } = {}) {
 export function confirmarJornada(id, confirmar) {
   const j = jornadas[id];
   if (!j) return { erro: 'jornada_nao_encontrada', mensagem: 'Não encontramos esse pedido.' };
+  if (j.estado === 'cancelada') return { erro: 'jornada_encerrada', mensagem: 'Este pedido foi cancelado.' };
   if (j.estado === 'concluida') return { jornada: visao(j), ja_concluida: true };
   const v = visao(j);
   if (confirmar !== true && confirmar !== 'true') {
@@ -116,6 +118,7 @@ export function confirmarJornada(id, confirmar) {
   }
   j.estado = 'concluida';
   j.concluida_em = new Date().toISOString();
+  j.atualizada_em = j.concluida_em;
   j.protocolo = `DEMO-${new Date().getFullYear()}-${crypto.randomBytes(3).toString('hex').toUpperCase()}`;
   salvar();
   registrarEvento(j.cidadao_id, 'jornada_concluida', { servico_id: j.servico_id });

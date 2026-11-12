@@ -33,6 +33,10 @@ export const TABELA_ERROS = {
   jornada_encerrada: 409,
   campos_pendentes: 422,
   jornada_indisponivel: 422,
+  jornada_nao_concluida: 409,
+  ja_avaliada: 409,
+  nota_invalida: 422,
+  alteracao_indisponivel: 422,
   // não encontrado e roteamento
   cidadao_nao_encontrado: 404,
   servico_nao_encontrado: 404,

@@ -13,7 +13,7 @@ Testes em `backend/test` (`npm run teste`, Node test runner). Cada rota nova tam
   - Criar `recomendacao/home.js` (classificação do design, seção 3) e a rota `GET /recomendacao/{id}/home`; incluir `controles` e `por_que_vejo`; evento `home_vista`.
   - Teste: persona C059592 e C036462 geram blocos diferentes; um serviço em um só bloco; máximo 3 itens por bloco; sem consentimento de saúde não há "Cuidar de você" nem termo de saúde no texto; personalização desligada devolve a estrutura de visitante; golden de `GET /recomendacao/{id}` segue passando.
 
-- [ ] 3. Ações da jornada (R3, 12 min)
+- [x] 3. Ações da jornada (R3, 12 min)
   - Criar `dados/jornada/acoes.js` (`problema`, `cancelar`, `alterar`, `avaliar`), as 4 rotas em `rotas/jornadas.js`, códigos novos em `erros.js`, `acoes[]` em `visao.js`.
   - Teste: cancelar muda o estado e repetir dá 409; alterar só em 352 e 942; avaliar só após concluir, uma vez, nota 1 a 5 ou `nao_consegui`; problema com motivo fora da lista dá 422.
 

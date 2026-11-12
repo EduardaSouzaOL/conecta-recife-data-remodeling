@@ -35,6 +35,10 @@ Um teste (`backend/test/contrato.test.js`) garante que todo par método/caminho 
 | PATCH | `/dados/jornadas/{id}` | Motor de dados |
 | POST | `/dados/jornadas/{id}` | Motor de dados (**Legado**) |
 | POST | `/dados/jornadas/{id}/confirmar` | Motor de dados |
+| GET | `/dados/jornadas/{id}/problema` | Motor de dados |
+| POST | `/dados/jornadas/{id}/cancelar` | Motor de dados |
+| POST | `/dados/jornadas/{id}/alterar` | Motor de dados |
+| POST | `/dados/jornadas/{id}/avaliar` | Motor de dados |
 | POST | `/dados/eventos` | Motor de dados |
 | GET | `/dados/eventos/resumo` | Motor de dados |
 | GET | `/recomendacao/visitante/home` | Motor de recomendação |
@@ -170,6 +174,38 @@ Também existem, fora do roteador e só no servidor local: `OPTIONS` em qualquer
 - Erros: `404 jornada_nao_encontrada`, `400 confirmacao_necessaria`, `422 campos_pendentes`. Os dois últimos trazem `jornada` (a visão atual) além de `erro` e `mensagem`.
 - Efeitos colaterais: ao concluir, grava o evento `jornada_concluida`
 
+### GET /dados/jornadas/{id}/problema
+
+- Área: motor de dados ("Relatar problema": o app encaminha ao canal certo; não registra o problema)
+- Entrada: caminho `{id}` (`jornada_id`)
+- Saída 200: `{ jornada_id, servico, texto, canais[] }`. Cada canal: `id`, `rotulo`, `detalhe`, `acao` (`abrir_link`, `abrir_app`, `discar`, `abrir_email` ou `nenhuma`). Primeiro os canais do serviço (`canal_web`, `canal_app` do catálogo), depois a Ouvidoria Geral. Sem chat. Sem dado pessoal nos links.
+- Erros: `404 jornada_nao_encontrada`
+- Efeitos colaterais: grava o evento `canais_vistos`
+
+### POST /dados/jornadas/{id}/cancelar
+
+- Área: motor de dados (simulado)
+- Entrada: caminho `{id}`
+- Saída 200: `{ ok, jornada }` com `estado: "cancelada"`
+- Erros: `404 jornada_nao_encontrada`, `409 jornada_encerrada` (já concluída ou cancelada)
+- Efeitos colaterais: grava o evento `jornada_cancelada`
+
+### POST /dados/jornadas/{id}/alterar
+
+- Área: motor de dados (simulado; só serviços 352 e 942)
+- Entrada: caminho `{id}`
+- Saída 200: `{ ok, jornada }`. Reabre o pedido concluído (`estado: "em_andamento"`), mantém os campos e remove o protocolo e a avaliação.
+- Erros: `404 jornada_nao_encontrada`, `422 alteracao_indisponivel`, `409 jornada_encerrada` (pedido não concluído)
+- Efeitos colaterais: grava o evento `jornada_alterada`
+
+### POST /dados/jornadas/{id}/avaliar
+
+- Área: motor de dados (avaliação final)
+- Entrada: caminho `{id}`; corpo, depois consulta: `nota` (1 a 5) ou `nao_consegui: true`
+- Saída 200: `{ ok, avaliacao: { jornada_id, nota | nao_consegui, ts, mensagem } }`. Uma vez só, em pedido concluído.
+- Erros: `404 jornada_nao_encontrada`, `409 jornada_nao_concluida`, `409 ja_avaliada`, `422 nota_invalida`
+- Efeitos colaterais: grava o evento `avaliacao_registrada` (com `nota` ou `nao_consegui`)
+
 ### POST /dados/eventos
 
 - Área: motor de dados
@@ -211,6 +247,8 @@ Também existem, fora do roteador e só no servidor local: `OPTIONS` em qualquer
 ---
 
 ## Visão da jornada
+
+Campo `acoes[]` (relatar problema, cancelar, alterar, avaliar, conforme o estado), com `rotulo`, `rotulo_leitor` e `acao` prontos. O estado `cancelada` é novo.
 
 Formato devolvido por `POST /dados/jornadas`, `GET`, `PATCH` e `POST .../confirmar`. A tela só mostra e envia; quem decide é a API.
 

@@ -96,6 +96,8 @@ export async function carregarDados() {
       requisitos: itensLista(r.requisitos),
       passos: itensLista(r.passos),
       gratuito: r.gratuito === 'true',
+      canal_web: r.canal_web || null,
+      canal_app: r.canal_app || null,
       nivel_digital: r.nivel_digital_atual === '' ? null : Number(r.nivel_digital_atual),
       cliques: Number(r.cliques_historico || 0),
       pessoas_unicas: Number(r.pessoas_unicas_historico || 0),

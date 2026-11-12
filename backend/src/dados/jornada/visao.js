@@ -1,5 +1,6 @@
 import { dados } from '../carga.js';
 import { telasDoServico } from './telas.js';
+import { acoesDisponiveis } from './acoes-visao.js';
 import { opcoesDoCampo, todosValidos, validar } from './validacao.js';
 
 // ---------- montagem da resposta ----------
@@ -86,6 +87,7 @@ function montarVisao(j, servico, ctx, { puladas, atual, visiveis, idx }, faltand
     faltando,
     erros,
     pode_confirmar: faltando.length === 0 && j.estado === 'em_andamento',
+    acoes: acoesDisponiveis(j),
     resumo: atual.revisao || j.estado === 'concluida' ? resumoDe(j) : undefined,
   };
   if (j.estado === 'concluida') {

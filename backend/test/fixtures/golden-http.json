@@ -25,6 +25,10 @@
      "GET /dados/jornadas/{id}": "etapa atual do pedido",
      "PATCH /dados/jornadas/{id}": "{\"campos\":{...}}",
      "POST /dados/jornadas/{id}/confirmar": "{\"confirmar\":true}",
+     "GET /dados/jornadas/{id}/problema": "canais para relatar problema: do serviço e da Ouvidoria",
+     "POST /dados/jornadas/{id}/cancelar": "cancela o pedido em andamento (simulado)",
+     "POST /dados/jornadas/{id}/alterar": "reabre um pedido concluído dos serviços 352 e 942 (simulado)",
+     "POST /dados/jornadas/{id}/avaliar": "{\"nota\":5} ou {\"nao_consegui\":true}, uma vez, depois de concluir",
      "POST /dados/eventos": "{\"cidadao_id\":\"C000003\",\"tipo\":\"servico_aberto\",\"servico_id\":352}",
      "GET /dados/eventos/resumo": "contagem por tipo"
     },
@@ -5715,7 +5719,29 @@
      "hora"
     ],
     "erros": [],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -5826,6 +5852,28 @@
     ],
     "erros": [],
     "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ],
     "retomada": true
    }
   },
@@ -5933,7 +5981,29 @@
      "hora"
     ],
     "erros": [],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -6019,7 +6089,29 @@
      "hora"
     ],
     "erros": [],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -6128,7 +6220,29 @@
      "hora"
     ],
     "erros": [],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -6263,7 +6377,29 @@
       "hora"
      ],
      "erros": [],
-     "pode_confirmar": false
+     "pode_confirmar": false,
+     "acoes": [
+      {
+       "id": "problema",
+       "rotulo": "Relatar problema",
+       "rotulo_leitor": "Relatar um problema com este pedido",
+       "acao": {
+        "tipo": "api",
+        "metodo": "GET",
+        "caminho": "/dados/jornadas/J-<ID>/problema"
+       }
+      },
+      {
+       "id": "cancelar",
+       "rotulo": "Cancelar pedido",
+       "rotulo_leitor": "Cancelar este pedido",
+       "acao": {
+        "tipo": "api",
+        "metodo": "POST",
+        "caminho": "/dados/jornadas/J-<ID>/cancelar"
+       }
+      }
+     ]
     }
    }
   },
@@ -6374,7 +6510,29 @@
       "hora"
      ],
      "erros": [],
-     "pode_confirmar": false
+     "pode_confirmar": false,
+     "acoes": [
+      {
+       "id": "problema",
+       "rotulo": "Relatar problema",
+       "rotulo_leitor": "Relatar um problema com este pedido",
+       "acao": {
+        "tipo": "api",
+        "metodo": "GET",
+        "caminho": "/dados/jornadas/J-<ID>/problema"
+       }
+      },
+      {
+       "id": "cancelar",
+       "rotulo": "Cancelar pedido",
+       "rotulo_leitor": "Cancelar este pedido",
+       "acao": {
+        "tipo": "api",
+        "metodo": "POST",
+        "caminho": "/dados/jornadas/J-<ID>/cancelar"
+       }
+      }
+     ]
     }
    }
   },
@@ -6487,7 +6645,29 @@
       "hora"
      ],
      "erros": [],
-     "pode_confirmar": false
+     "pode_confirmar": false,
+     "acoes": [
+      {
+       "id": "problema",
+       "rotulo": "Relatar problema",
+       "rotulo_leitor": "Relatar um problema com este pedido",
+       "acao": {
+        "tipo": "api",
+        "metodo": "GET",
+        "caminho": "/dados/jornadas/J-<ID>/problema"
+       }
+      },
+      {
+       "id": "cancelar",
+       "rotulo": "Cancelar pedido",
+       "rotulo_leitor": "Cancelar este pedido",
+       "acao": {
+        "tipo": "api",
+        "metodo": "POST",
+        "caminho": "/dados/jornadas/J-<ID>/cancelar"
+       }
+      }
+     ]
     }
    }
   },
@@ -6600,7 +6780,29 @@
       "hora"
      ],
      "erros": [],
-     "pode_confirmar": false
+     "pode_confirmar": false,
+     "acoes": [
+      {
+       "id": "problema",
+       "rotulo": "Relatar problema",
+       "rotulo_leitor": "Relatar um problema com este pedido",
+       "acao": {
+        "tipo": "api",
+        "metodo": "GET",
+        "caminho": "/dados/jornadas/J-<ID>/problema"
+       }
+      },
+      {
+       "id": "cancelar",
+       "rotulo": "Cancelar pedido",
+       "rotulo_leitor": "Cancelar este pedido",
+       "acao": {
+        "tipo": "api",
+        "metodo": "POST",
+        "caminho": "/dados/jornadas/J-<ID>/cancelar"
+       }
+      }
+     ]
     }
    }
   },
@@ -6722,7 +6924,29 @@
       "mensagem": "Escolha uma das opções da lista."
      }
     ],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -6838,7 +7062,29 @@
       "mensagem": "Esse campo não existe neste pedido."
      }
     ],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -6963,7 +7209,29 @@
      "hora"
     ],
     "erros": [],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -7070,7 +7338,29 @@
      "hora"
     ],
     "erros": [],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -7182,7 +7472,29 @@
      "hora"
     ],
     "erros": [],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -7285,7 +7597,29 @@
      "hora"
     ],
     "erros": [],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -7423,7 +7757,29 @@
      "hora"
     ],
     "erros": [],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -7582,7 +7938,29 @@
      "hora"
     ],
     "erros": [],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -7739,7 +8117,29 @@
      "hora"
     ],
     "erros": [],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -7818,6 +8218,28 @@
     "faltando": [],
     "erros": [],
     "pode_confirmar": true,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ],
     "resumo": [
      {
       "rotulo": "O que você precisa",
@@ -7926,6 +8348,28 @@
     "faltando": [],
     "erros": [],
     "pode_confirmar": true,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ],
     "resumo": [
      {
       "rotulo": "O que você precisa",
@@ -8034,6 +8478,28 @@
     "faltando": [],
     "erros": [],
     "pode_confirmar": true,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ],
     "resumo": [
      {
       "rotulo": "O que você precisa",
@@ -8147,6 +8613,28 @@
      }
     ],
     "pode_confirmar": true,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ],
     "resumo": [
      {
       "rotulo": "O que você precisa",
@@ -8253,6 +8741,70 @@
     "faltando": [],
     "erros": [],
     "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "alterar",
+      "rotulo": "Alterar pedido",
+      "rotulo_leitor": "Alterar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/alterar"
+      }
+     },
+     {
+      "id": "avaliar",
+      "rotulo": "Avaliar o serviço",
+      "rotulo_leitor": "Dar uma nota para este serviço",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/avaliar"
+      },
+      "opcoes": [
+       {
+        "nota": 1,
+        "rotulo": "1",
+        "rotulo_leitor": "Nota 1 de 5"
+       },
+       {
+        "nota": 2,
+        "rotulo": "2",
+        "rotulo_leitor": "Nota 2 de 5"
+       },
+       {
+        "nota": 3,
+        "rotulo": "3",
+        "rotulo_leitor": "Nota 3 de 5"
+       },
+       {
+        "nota": 4,
+        "rotulo": "4",
+        "rotulo_leitor": "Nota 4 de 5"
+       },
+       {
+        "nota": 5,
+        "rotulo": "5",
+        "rotulo_leitor": "Nota 5 de 5"
+       },
+       {
+        "nao_consegui": true,
+        "rotulo": "Não consegui",
+        "rotulo_leitor": "Não consegui usar o serviço"
+       }
+      ]
+     }
+    ],
     "resumo": [
      {
       "rotulo": "O que você precisa",
@@ -8362,6 +8914,70 @@
     "faltando": [],
     "erros": [],
     "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "alterar",
+      "rotulo": "Alterar pedido",
+      "rotulo_leitor": "Alterar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/alterar"
+      }
+     },
+     {
+      "id": "avaliar",
+      "rotulo": "Avaliar o serviço",
+      "rotulo_leitor": "Dar uma nota para este serviço",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/avaliar"
+      },
+      "opcoes": [
+       {
+        "nota": 1,
+        "rotulo": "1",
+        "rotulo_leitor": "Nota 1 de 5"
+       },
+       {
+        "nota": 2,
+        "rotulo": "2",
+        "rotulo_leitor": "Nota 2 de 5"
+       },
+       {
+        "nota": 3,
+        "rotulo": "3",
+        "rotulo_leitor": "Nota 3 de 5"
+       },
+       {
+        "nota": 4,
+        "rotulo": "4",
+        "rotulo_leitor": "Nota 4 de 5"
+       },
+       {
+        "nota": 5,
+        "rotulo": "5",
+        "rotulo_leitor": "Nota 5 de 5"
+       },
+       {
+        "nao_consegui": true,
+        "rotulo": "Não consegui",
+        "rotulo_leitor": "Não consegui usar o serviço"
+       }
+      ]
+     }
+    ],
     "resumo": [
      {
       "rotulo": "O que você precisa",
@@ -8487,6 +9103,70 @@
     "faltando": [],
     "erros": [],
     "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "alterar",
+      "rotulo": "Alterar pedido",
+      "rotulo_leitor": "Alterar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/alterar"
+      }
+     },
+     {
+      "id": "avaliar",
+      "rotulo": "Avaliar o serviço",
+      "rotulo_leitor": "Dar uma nota para este serviço",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/avaliar"
+      },
+      "opcoes": [
+       {
+        "nota": 1,
+        "rotulo": "1",
+        "rotulo_leitor": "Nota 1 de 5"
+       },
+       {
+        "nota": 2,
+        "rotulo": "2",
+        "rotulo_leitor": "Nota 2 de 5"
+       },
+       {
+        "nota": 3,
+        "rotulo": "3",
+        "rotulo_leitor": "Nota 3 de 5"
+       },
+       {
+        "nota": 4,
+        "rotulo": "4",
+        "rotulo_leitor": "Nota 4 de 5"
+       },
+       {
+        "nota": 5,
+        "rotulo": "5",
+        "rotulo_leitor": "Nota 5 de 5"
+       },
+       {
+        "nao_consegui": true,
+        "rotulo": "Não consegui",
+        "rotulo_leitor": "Não consegui usar o serviço"
+       }
+      ]
+     }
+    ],
     "resumo": [
      {
       "rotulo": "O que você precisa",
@@ -8631,7 +9311,29 @@
      "hora"
     ],
     "erros": [],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -8722,7 +9424,29 @@
       "hora"
      ],
      "erros": [],
-     "pode_confirmar": false
+     "pode_confirmar": false,
+     "acoes": [
+      {
+       "id": "problema",
+       "rotulo": "Relatar problema",
+       "rotulo_leitor": "Relatar um problema com este pedido",
+       "acao": {
+        "tipo": "api",
+        "metodo": "GET",
+        "caminho": "/dados/jornadas/J-<ID>/problema"
+       }
+      },
+      {
+       "id": "cancelar",
+       "rotulo": "Cancelar pedido",
+       "rotulo_leitor": "Cancelar este pedido",
+       "acao": {
+        "tipo": "api",
+        "metodo": "POST",
+        "caminho": "/dados/jornadas/J-<ID>/cancelar"
+       }
+      }
+     ]
     }
    }
   },
@@ -8818,7 +9542,29 @@
       "mensagem": "Escolha uma das opções da lista."
      }
     ],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
@@ -8904,7 +9650,29 @@
      "hora"
     ],
     "erros": [],
-    "pode_confirmar": false
+    "pode_confirmar": false,
+    "acoes": [
+     {
+      "id": "problema",
+      "rotulo": "Relatar problema",
+      "rotulo_leitor": "Relatar um problema com este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "GET",
+       "caminho": "/dados/jornadas/J-<ID>/problema"
+      }
+     },
+     {
+      "id": "cancelar",
+      "rotulo": "Cancelar pedido",
+      "rotulo_leitor": "Cancelar este pedido",
+      "acao": {
+       "tipo": "api",
+       "metodo": "POST",
+       "caminho": "/dados/jornadas/J-<ID>/cancelar"
+      }
+     }
+    ]
    }
   },
   {
