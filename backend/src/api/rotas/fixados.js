@@ -1,7 +1,7 @@
 import { dados } from '../../dados/carga.js';
 import { definirFixado, listarFixados, registrarEvento, FIXADOS_MAX } from '../../dados/store.js';
 import { falhar } from '../erros.js';
-import { identificarCidadao } from '../entrada.js';
+import { identificarCidadao, exigirLogin } from '../entrada.js';
 
 const resposta = (id, fixados) => ({ cidadao_id: id, fixados, limite: FIXADOS_MAX });
 
@@ -15,7 +15,7 @@ export function registrarRotasFixados(rota) {
     descricao: 'serviços fixados nos atalhos do cidadão',
   });
   rota(['POST'], '/dados/fixados/:id', ({ p, corpo }) => {
-    const { id } = identificarCidadao(p.id);
+    const { id } = exigirLogin(identificarCidadao(p.id));
     if (typeof corpo.fixar !== 'boolean') falhar('fixar_invalido', 'Informe "fixar" como true ou false.');
     const bruto = corpo.servico_id;
     const servicoId = typeof bruto === 'number' || (typeof bruto === 'string' && /^\d+$/.test(bruto.trim())) ? Number(bruto) : NaN;

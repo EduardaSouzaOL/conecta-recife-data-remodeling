@@ -4,6 +4,7 @@ import { carregarDados, DIR_DATA } from '../dados/carga.js';
 import { carregarEstado, salvarLogo } from '../dados/store.js';
 import { carregarDerivados } from '../recomendacao/derivados.js';
 import { criarApp } from './app.js';
+import { iniciarDemo } from '../dados/demo.js';
 import { cabecalhosJson, criarCors, interpretarJson, METODOS_COM_CORPO, respostaDeErro, verificarTamanho } from './http-comum.js';
 
 /**
@@ -36,6 +37,7 @@ function iniciar() {
       prepararDados();
       await carregarDados();
       carregarEstado();
+      iniciarDemo(); // cidadã fictícia DEMO001 e pedidos de exemplo (só em memória)
       const derivados = await carregarDerivados();
       return criarApp(derivados);
     })().catch((e) => { pronto = null; throw e; });

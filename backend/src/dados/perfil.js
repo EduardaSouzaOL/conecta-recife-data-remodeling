@@ -1,6 +1,7 @@
 import { dados, normalizarId, CAMPOS_SAUDE, CAMPOS_ACESSIBILIDADE } from './carga.js';
 import { FINALIDADE_ACESSIBILIDADE, resumoConsentimento, temConsentimentoSaude, temConsentimentoAcessibilidade } from './consentimento.js';
 import { dataBR } from './servicos.js';
+import { DEMO_ID, VISITANTE_ID, nomeParaExibir, resumoConsentimentoVisitante } from './demo.js';
 
 // Motor de dados: "entrar como" um cidadão e cenários de demonstração.
 
@@ -45,6 +46,7 @@ export function entrarComo(id, reg) {
   const consentiuAcessibilidade = temConsentimentoAcessibilidade(id);
   return {
     cidadao_id: id,
+    nome_exibicao: nomeParaExibir(id),
     saudacao: `Você entrou como ${id} (dados fictícios).`,
     perfil: { ...reg.perfil },
     perfil_resumo: descreverPerfil(reg.perfil),
@@ -58,6 +60,27 @@ export function entrarComo(id, reg) {
     historico_recente: recente,
     consentimento: resumoConsentimento(id),
     consentimento_acessibilidade: resumoConsentimento(id, FINALIDADE_ACESSIBILIDADE),
+  };
+}
+
+/** "Entrar como" visitante: sem perfil, sem histórico e sem consentimento. */
+export function entrarComoVisitante() {
+  return {
+    cidadao_id: VISITANTE_ID,
+    visitante: true,
+    nome_exibicao: nomeParaExibir(VISITANTE_ID),
+    saudacao: 'Você está como visitante. Entre na sua conta para ver sugestões feitas para você.',
+    perfil: null,
+    perfil_resumo: null,
+    saude_liberada: false,
+    saude: null,
+    acessibilidade_liberada: false,
+    acessibilidade: null,
+    tem_historico: false,
+    total_acessos: 0,
+    historico_recente: [],
+    consentimento: resumoConsentimentoVisitante('saude_personalizacao'),
+    consentimento_acessibilidade: resumoConsentimentoVisitante(FINALIDADE_ACESSIBILIDADE),
   };
 }
 
@@ -81,6 +104,7 @@ function cenarios() {
     if (!saudeComHist && (saude.gestante || saude.diabetes) && saude.hipertensao && n >= 3) saudeComHist = id;
   }
   for (const [id, rotulo] of PERSONAS) if (dados.cidadaos.has(id)) add(`Persona oficial: ${rotulo}`, id);
+  if (dados.cidadaos.has(DEMO_ID)) add('Demonstração: Ana, cidadã fictícia com pedidos de exemplo', DEMO_ID);
   add('Sem nenhum histórico', semHist);
   add('Com muito histórico', longo[0]);
   add('Família com criança pequena e sem histórico', infancia);

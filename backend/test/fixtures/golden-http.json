@@ -21,14 +21,14 @@
      "GET /dados/consentimentos/texto?finalidade=": "texto de cada consentimento",
      "GET /dados/consentimentos/{id}?finalidade=": "situação do consentimento",
      "POST /dados/consentimentos/{id}": "{\"decisao\":\"concedido|recusado|revogado\",\"finalidade\":\"saude_personalizacao|acessibilidade_personalizacao\"}",
-     "POST /dados/jornadas": "{\"cidadao_id\":\"C000003\",\"servico_id\":352}",
+     "POST /dados/jornadas": "{\"cidadao_id\":\"C000003\",\"servico_id\":352,\"valor_campo\":\"texto digitado (opcional)\",\"idempotency_key\":\"chave-unica (opcional)\"}",
      "GET /dados/jornadas/{id}": "etapa atual do pedido",
      "PATCH /dados/jornadas/{id}": "{\"campos\":{...}}",
      "POST /dados/jornadas/{id}/confirmar": "{\"confirmar\":true}",
      "GET /dados/jornadas/{id}/problema": "canais para relatar problema: do serviço e da Ouvidoria",
      "POST /dados/jornadas/{id}/cancelar": "cancela o pedido em andamento (simulado)",
      "POST /dados/jornadas/{id}/alterar": "reabre um pedido concluído dos serviços 352 e 942 (simulado)",
-     "POST /dados/jornadas/{id}/avaliar": "{\"nota\":5} ou {\"nao_consegui\":true}, uma vez, depois de concluir",
+     "POST /dados/jornadas/{id}/avaliar": "{\"nota\":5,\"resolvido\":\"sim|em_parte|nao\",\"comentario\":\"opcional\"} ou {\"nao_consegui\":true}, uma vez, depois de concluir",
      "POST /dados/eventos": "{\"cidadao_id\":\"C000003\",\"tipo\":\"servico_aberto\",\"servico_id\":352}",
      "GET /dados/eventos/resumo": "contagem por tipo",
      "GET /dados/fixados/{id}": "serviços fixados nos atalhos do cidadão",
@@ -39,7 +39,12 @@
      "GET /recomendacao/{id}/home": "Home em blocos: atalhos, recomendados com \"Por que vejo isto?\" e controles de personalização",
      "GET /recomendacao/{id}?limite=8": "serviços sugeridos com motivo, base da personalização e convites de consentimento",
      "POST /recomendacao/{id}/dispensar": "\"Não me interessa\": {\"servico_id\":34} tira o serviço das sugestões",
-     "POST /recomendacao/{id}/personalizacao": "\"Não usar meus dados para sugestões\": {\"ativa\":false} desliga o uso de histórico e dados sensíveis"
+     "GET /recomendacao/{id}/personalizacao": "situação da personalização: sugestões ligadas e autorização de dados de saúde, com o botão para mudar",
+     "POST /recomendacao/{id}/personalizacao": "{\"ativa\":false} desliga o uso de histórico e dados sensíveis; {\"consentimento_saude\":\"concedido|recusado|revogado\"} registra a autorização de saúde"
+    },
+    "demo": {
+     "POST /demo/jornadas/{id}/avancar": "passa o pedido confirmado para a próxima etapa (simulado)",
+     "POST /demo/reiniciar": "recria os 2 pedidos de exemplo da DEMO001"
     },
     "saude_da_api": "GET /health"
    }
@@ -57,7 +62,7 @@
     "ok": true,
     "cidadaos": 89046,
     "servicos": 843,
-    "derivados_gerados_em": "2026-11-12T19:11:31.711Z"
+    "derivados_gerados_em": "2026-11-13T01:58:04.883Z"
    }
   },
   {
@@ -73,7 +78,7 @@
     "ok": true,
     "cidadaos": 89046,
     "servicos": 843,
-    "derivados_gerados_em": "2026-11-12T19:11:31.711Z"
+    "derivados_gerados_em": "2026-11-13T01:58:04.883Z"
    }
   },
   {
@@ -285,6 +290,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C007938",
+    "nome_exibicao": null,
     "saudacao": "Você entrou como C007938 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C007938",
@@ -373,6 +379,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C068579",
+    "nome_exibicao": null,
     "saudacao": "Você entrou como C068579 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C068579",
@@ -496,6 +503,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C059592",
+    "nome_exibicao": null,
     "saudacao": "Você entrou como C059592 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C059592",
@@ -633,6 +641,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C036462",
+    "nome_exibicao": null,
     "saudacao": "Você entrou como C036462 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C036462",
@@ -721,6 +730,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C039227",
+    "nome_exibicao": null,
     "saudacao": "Você entrou como C039227 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C039227",
@@ -844,6 +854,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C076260",
+    "nome_exibicao": null,
     "saudacao": "Você entrou como C076260 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C076260",
@@ -981,6 +992,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C006566",
+    "nome_exibicao": null,
     "saudacao": "Você entrou como C006566 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C006566",
@@ -1097,6 +1109,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C062244",
+    "nome_exibicao": null,
     "saudacao": "Você entrou como C062244 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C062244",
@@ -1234,6 +1247,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C007938",
+    "nome_exibicao": null,
     "saudacao": "Você entrou como C007938 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C007938",
@@ -1322,6 +1336,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C000003",
+    "nome_exibicao": null,
     "saudacao": "Você entrou como C000003 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C000003",
@@ -2567,6 +2582,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C062244",
+    "nome_exibicao": null,
     "saudacao": "Você entrou como C062244 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C062244",
@@ -2996,6 +3012,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C059592",
+    "nome_exibicao": null,
     "saudacao": "Você entrou como C059592 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C059592",
@@ -5743,7 +5760,51 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Não quero avisos"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": null,
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "andamento"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 1,
+     "total": 5,
+     "titulo": "Sobre o atendimento"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -5876,6 +5937,50 @@
       }
      }
     ],
+    "resumo": [
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Não quero avisos"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": null,
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "andamento"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 1,
+     "total": 5,
+     "titulo": "Sobre o atendimento"
+    },
+    "situacao": "preenchendo",
+    "previsao": null,
     "retomada": true
    }
   },
@@ -6005,7 +6110,51 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Não quero avisos"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": null,
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "andamento"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 1,
+     "total": 5,
+     "titulo": "Sobre o atendimento"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -6113,7 +6262,51 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Não quero avisos"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": null,
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "feita"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "andamento"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 2,
+     "total": 5,
+     "titulo": "Leve estes documentos"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -6244,7 +6437,51 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Não quero avisos"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": null,
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "andamento"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 1,
+     "total": 5,
+     "titulo": "Sobre o atendimento"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -6265,7 +6502,14 @@
       "servico": "Realizar agendamento para atendimento do Cadastro Único (CADÚNICO)",
       "estado": "em_andamento",
       "protocolo": null,
-      "criada_em": "2026-11-12T15:00:00.000Z"
+      "criada_em": "2026-11-12T15:00:00.000Z",
+      "situacao": "preenchendo",
+      "etapa_atual": {
+       "numero": 1,
+       "total": 5,
+       "titulo": "Sobre o atendimento"
+      },
+      "previsao": null
      }
     ]
    }
@@ -6401,7 +6645,51 @@
         "caminho": "/dados/jornadas/J-<ID>/cancelar"
        }
       }
-     ]
+     ],
+     "resumo": [
+      {
+       "rotulo": "Como quer receber avisos",
+       "valor": "Não quero avisos"
+      }
+     ],
+     "protocolo": null,
+     "concluida_em": null,
+     "mensagem_final": null,
+     "unidade": null,
+     "etapas": [
+      {
+       "id": "sobre",
+       "titulo": "Sobre o atendimento",
+       "estado": "andamento"
+      },
+      {
+       "id": "documentos",
+       "titulo": "Leve estes documentos",
+       "estado": "a_fazer"
+      },
+      {
+       "id": "local",
+       "titulo": "Escolha o local",
+       "estado": "a_fazer"
+      },
+      {
+       "id": "data_hora",
+       "titulo": "Escolha dia e horário",
+       "estado": "a_fazer"
+      },
+      {
+       "id": "revisar",
+       "titulo": "Revise e confirme",
+       "estado": "a_fazer"
+      }
+     ],
+     "etapa_atual": {
+      "numero": 1,
+      "total": 5,
+      "titulo": "Sobre o atendimento"
+     },
+     "situacao": "preenchendo",
+     "previsao": null
     }
    }
   },
@@ -6534,7 +6822,51 @@
         "caminho": "/dados/jornadas/J-<ID>/cancelar"
        }
       }
-     ]
+     ],
+     "resumo": [
+      {
+       "rotulo": "Como quer receber avisos",
+       "valor": "Não quero avisos"
+      }
+     ],
+     "protocolo": null,
+     "concluida_em": null,
+     "mensagem_final": null,
+     "unidade": null,
+     "etapas": [
+      {
+       "id": "sobre",
+       "titulo": "Sobre o atendimento",
+       "estado": "andamento"
+      },
+      {
+       "id": "documentos",
+       "titulo": "Leve estes documentos",
+       "estado": "a_fazer"
+      },
+      {
+       "id": "local",
+       "titulo": "Escolha o local",
+       "estado": "a_fazer"
+      },
+      {
+       "id": "data_hora",
+       "titulo": "Escolha dia e horário",
+       "estado": "a_fazer"
+      },
+      {
+       "id": "revisar",
+       "titulo": "Revise e confirme",
+       "estado": "a_fazer"
+      }
+     ],
+     "etapa_atual": {
+      "numero": 1,
+      "total": 5,
+      "titulo": "Sobre o atendimento"
+     },
+     "situacao": "preenchendo",
+     "previsao": null
     }
    }
   },
@@ -6669,7 +7001,51 @@
         "caminho": "/dados/jornadas/J-<ID>/cancelar"
        }
       }
-     ]
+     ],
+     "resumo": [
+      {
+       "rotulo": "Como quer receber avisos",
+       "valor": "Não quero avisos"
+      }
+     ],
+     "protocolo": null,
+     "concluida_em": null,
+     "mensagem_final": null,
+     "unidade": null,
+     "etapas": [
+      {
+       "id": "sobre",
+       "titulo": "Sobre o atendimento",
+       "estado": "andamento"
+      },
+      {
+       "id": "documentos",
+       "titulo": "Leve estes documentos",
+       "estado": "a_fazer"
+      },
+      {
+       "id": "local",
+       "titulo": "Escolha o local",
+       "estado": "a_fazer"
+      },
+      {
+       "id": "data_hora",
+       "titulo": "Escolha dia e horário",
+       "estado": "a_fazer"
+      },
+      {
+       "id": "revisar",
+       "titulo": "Revise e confirme",
+       "estado": "a_fazer"
+      }
+     ],
+     "etapa_atual": {
+      "numero": 1,
+      "total": 5,
+      "titulo": "Sobre o atendimento"
+     },
+     "situacao": "preenchendo",
+     "previsao": null
     }
    }
   },
@@ -6804,7 +7180,51 @@
         "caminho": "/dados/jornadas/J-<ID>/cancelar"
        }
       }
-     ]
+     ],
+     "resumo": [
+      {
+       "rotulo": "Como quer receber avisos",
+       "valor": "Não quero avisos"
+      }
+     ],
+     "protocolo": null,
+     "concluida_em": null,
+     "mensagem_final": null,
+     "unidade": null,
+     "etapas": [
+      {
+       "id": "sobre",
+       "titulo": "Sobre o atendimento",
+       "estado": "andamento"
+      },
+      {
+       "id": "documentos",
+       "titulo": "Leve estes documentos",
+       "estado": "a_fazer"
+      },
+      {
+       "id": "local",
+       "titulo": "Escolha o local",
+       "estado": "a_fazer"
+      },
+      {
+       "id": "data_hora",
+       "titulo": "Escolha dia e horário",
+       "estado": "a_fazer"
+      },
+      {
+       "id": "revisar",
+       "titulo": "Revise e confirme",
+       "estado": "a_fazer"
+      }
+     ],
+     "etapa_atual": {
+      "numero": 1,
+      "total": 5,
+      "titulo": "Sobre o atendimento"
+     },
+     "situacao": "preenchendo",
+     "previsao": null
     }
    }
   },
@@ -6948,7 +7368,51 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Não quero avisos"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": null,
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "andamento"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 1,
+     "total": 5,
+     "titulo": "Sobre o atendimento"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -7086,7 +7550,51 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Não quero avisos"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": null,
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "andamento"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 1,
+     "total": 5,
+     "titulo": "Sobre o atendimento"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -7233,7 +7741,55 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "O que você precisa",
+      "valor": "Atualizar meu cadastro"
+     },
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Não quero avisos"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": null,
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "andamento"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 1,
+     "total": 5,
+     "titulo": "Sobre o atendimento"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -7362,7 +7918,55 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "O que você precisa",
+      "valor": "Atualizar meu cadastro"
+     },
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Não quero avisos"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": null,
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "andamento"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 1,
+     "total": 5,
+     "titulo": "Sobre o atendimento"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -7496,7 +8100,59 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "O que você precisa",
+      "valor": "Atualizar meu cadastro"
+     },
+     {
+      "rotulo": "Quantas pessoas moram com você",
+      "valor": "3"
+     },
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Não quero avisos"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": null,
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "andamento"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 1,
+     "total": 5,
+     "titulo": "Sobre o atendimento"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -7621,7 +8277,63 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "O que você precisa",
+      "valor": "Atualizar meu cadastro"
+     },
+     {
+      "rotulo": "Quantas pessoas moram com você",
+      "valor": "3"
+     },
+     {
+      "rotulo": "Estou ciente dos documentos necessários",
+      "valor": "Sim"
+     },
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Não quero avisos"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": null,
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "feita"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "feita"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "andamento"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 3,
+     "total": 5,
+     "titulo": "Escolha o local"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -7781,7 +8493,70 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "O que você precisa",
+      "valor": "Atualizar meu cadastro"
+     },
+     {
+      "rotulo": "Quantas pessoas moram com você",
+      "valor": "3"
+     },
+     {
+      "rotulo": "Estou ciente dos documentos necessários",
+      "valor": "Sim"
+     },
+     {
+      "rotulo": "Onde você quer ser atendido",
+      "valor": "Unidade Demo Casa Amarela (RPA 3)"
+     },
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Não quero avisos"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": {
+     "nome": "Unidade Demo Casa Amarela (RPA 3)",
+     "endereco": "Rua da Demonstração, 100, Casa Amarela, Recife (endereço fictício)."
+    },
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "feita"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "feita"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "feita"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "andamento"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 4,
+     "total": 5,
+     "titulo": "Escolha dia e horário"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -7962,7 +8737,74 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "O que você precisa",
+      "valor": "Atualizar meu cadastro"
+     },
+     {
+      "rotulo": "Quantas pessoas moram com você",
+      "valor": "3"
+     },
+     {
+      "rotulo": "Estou ciente dos documentos necessários",
+      "valor": "Sim"
+     },
+     {
+      "rotulo": "Onde você quer ser atendido",
+      "valor": "Unidade Demo Casa Amarela (RPA 3)"
+     },
+     {
+      "rotulo": "Dia",
+      "valor": "sex, 13/11"
+     },
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Não quero avisos"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": {
+     "nome": "Unidade Demo Casa Amarela (RPA 3)",
+     "endereco": "Rua da Demonstração, 100, Casa Amarela, Recife (endereço fictício)."
+    },
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "feita"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "feita"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "feita"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "andamento"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 4,
+     "total": 5,
+     "titulo": "Escolha dia e horário"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -8141,7 +8983,74 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "O que você precisa",
+      "valor": "Atualizar meu cadastro"
+     },
+     {
+      "rotulo": "Quantas pessoas moram com você",
+      "valor": "3"
+     },
+     {
+      "rotulo": "Estou ciente dos documentos necessários",
+      "valor": "Sim"
+     },
+     {
+      "rotulo": "Onde você quer ser atendido",
+      "valor": "Unidade Demo Casa Amarela (RPA 3)"
+     },
+     {
+      "rotulo": "Dia",
+      "valor": "sex, 13/11"
+     },
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Não quero avisos"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": {
+     "nome": "Unidade Demo Casa Amarela (RPA 3)",
+     "endereco": "Rua da Demonstração, 100, Casa Amarela, Recife (endereço fictício)."
+    },
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "feita"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "feita"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "feita"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "andamento"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 4,
+     "total": 5,
+     "titulo": "Escolha dia e horário"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -8271,7 +9180,48 @@
       "rotulo": "Como quer receber avisos",
       "valor": "Não quero avisos"
      }
-    ]
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": {
+     "nome": "Unidade Demo Casa Amarela (RPA 3)",
+     "endereco": "Rua da Demonstração, 100, Casa Amarela, Recife (endereço fictício)."
+    },
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "feita"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "feita"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "feita"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "feita"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "andamento"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 5,
+     "total": 5,
+     "titulo": "Revise e confirme"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -8401,7 +9351,48 @@
       "rotulo": "Como quer receber avisos",
       "valor": "Não quero avisos"
      }
-    ]
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": {
+     "nome": "Unidade Demo Casa Amarela (RPA 3)",
+     "endereco": "Rua da Demonstração, 100, Casa Amarela, Recife (endereço fictício)."
+    },
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "feita"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "feita"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "feita"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "feita"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "andamento"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 5,
+     "total": 5,
+     "titulo": "Revise e confirme"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -8531,7 +9522,48 @@
       "rotulo": "Como quer receber avisos",
       "valor": "Não quero avisos"
      }
-    ]
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": {
+     "nome": "Unidade Demo Casa Amarela (RPA 3)",
+     "endereco": "Rua da Demonstração, 100, Casa Amarela, Recife (endereço fictício)."
+    },
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "feita"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "feita"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "feita"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "feita"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "andamento"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 5,
+     "total": 5,
+     "titulo": "Revise e confirme"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -8666,7 +9698,48 @@
       "rotulo": "Como quer receber avisos",
       "valor": "Não quero avisos"
      }
-    ]
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": {
+     "nome": "Unidade Demo Casa Amarela (RPA 3)",
+     "endereco": "Rua da Demonstração, 100, Casa Amarela, Recife (endereço fictício)."
+    },
+    "etapas": [
+     {
+      "id": "sobre",
+      "titulo": "Sobre o atendimento",
+      "estado": "feita"
+     },
+     {
+      "id": "documentos",
+      "titulo": "Leve estes documentos",
+      "estado": "feita"
+     },
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "feita"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "feita"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "andamento"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 5,
+     "total": 5,
+     "titulo": "Revise e confirme"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -8839,7 +9912,40 @@
     ],
     "protocolo": "DEMO-2026-<COD>",
     "concluida_em": "2026-11-12T15:00:00.000Z",
-    "mensagem_final": "Pedido registrado (demonstração). Seu protocolo fictício é DEMO-2026-<COD>."
+    "mensagem_final": "Pedido registrado (demonstração). Seu protocolo fictício é DEMO-2026-<COD>.",
+    "unidade": {
+     "nome": "Unidade Demo Casa Amarela (RPA 3)",
+     "endereco": "Rua da Demonstração, 100, Casa Amarela, Recife (endereço fictício)."
+    },
+    "etapas": [
+     {
+      "id": "etapa_1",
+      "titulo": "Pedido enviado",
+      "estado": "feita"
+     },
+     {
+      "id": "etapa_2",
+      "titulo": "Aguardando confirmação da unidade",
+      "estado": "andamento"
+     },
+     {
+      "id": "etapa_3",
+      "titulo": "Atendimento confirmado",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "etapa_4",
+      "titulo": "Atendimento realizado",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 2,
+     "total": 4,
+     "titulo": "Aguardando confirmação da unidade"
+    },
+    "situacao": "em_andamento",
+    "previsao": "até 2 dias úteis"
    }
   },
   {
@@ -9012,7 +10118,40 @@
     ],
     "protocolo": "DEMO-2026-<COD>",
     "concluida_em": "2026-11-12T15:00:00.000Z",
-    "mensagem_final": "Pedido registrado (demonstração). Seu protocolo fictício é DEMO-2026-<COD>."
+    "mensagem_final": "Pedido registrado (demonstração). Seu protocolo fictício é DEMO-2026-<COD>.",
+    "unidade": {
+     "nome": "Unidade Demo Casa Amarela (RPA 3)",
+     "endereco": "Rua da Demonstração, 100, Casa Amarela, Recife (endereço fictício)."
+    },
+    "etapas": [
+     {
+      "id": "etapa_1",
+      "titulo": "Pedido enviado",
+      "estado": "feita"
+     },
+     {
+      "id": "etapa_2",
+      "titulo": "Aguardando confirmação da unidade",
+      "estado": "andamento"
+     },
+     {
+      "id": "etapa_3",
+      "titulo": "Atendimento confirmado",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "etapa_4",
+      "titulo": "Atendimento realizado",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 2,
+     "total": 4,
+     "titulo": "Aguardando confirmação da unidade"
+    },
+    "situacao": "em_andamento",
+    "previsao": "até 2 dias úteis"
    }
   },
   {
@@ -9201,7 +10340,40 @@
     ],
     "protocolo": "DEMO-2026-<COD>",
     "concluida_em": "2026-11-12T15:00:00.000Z",
-    "mensagem_final": "Pedido registrado (demonstração). Seu protocolo fictício é DEMO-2026-<COD>."
+    "mensagem_final": "Pedido registrado (demonstração). Seu protocolo fictício é DEMO-2026-<COD>.",
+    "unidade": {
+     "nome": "Unidade Demo Casa Amarela (RPA 3)",
+     "endereco": "Rua da Demonstração, 100, Casa Amarela, Recife (endereço fictício)."
+    },
+    "etapas": [
+     {
+      "id": "etapa_1",
+      "titulo": "Pedido enviado",
+      "estado": "feita"
+     },
+     {
+      "id": "etapa_2",
+      "titulo": "Aguardando confirmação da unidade",
+      "estado": "andamento"
+     },
+     {
+      "id": "etapa_3",
+      "titulo": "Atendimento confirmado",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "etapa_4",
+      "titulo": "Atendimento realizado",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 2,
+     "total": 4,
+     "titulo": "Aguardando confirmação da unidade"
+    },
+    "situacao": "em_andamento",
+    "previsao": "até 2 dias úteis"
    }
   },
   {
@@ -9222,7 +10394,14 @@
       "servico": "Realizar agendamento para atendimento do Cadastro Único (CADÚNICO)",
       "estado": "concluida",
       "protocolo": "DEMO-2026-<COD>",
-      "criada_em": "2026-11-12T15:00:00.000Z"
+      "criada_em": "2026-11-12T15:00:00.000Z",
+      "situacao": "em_andamento",
+      "etapa_atual": {
+       "numero": 2,
+       "total": 4,
+       "titulo": "Aguardando confirmação da unidade"
+      },
+      "previsao": "até 2 dias úteis"
      }
     ]
    }
@@ -9335,7 +10514,41 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Avisar pelo app"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": null,
+    "etapas": [
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "andamento"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 1,
+     "total": 3,
+     "titulo": "Escolha o local"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -9448,7 +10661,41 @@
         "caminho": "/dados/jornadas/J-<ID>/cancelar"
        }
       }
-     ]
+     ],
+     "resumo": [
+      {
+       "rotulo": "Como quer receber avisos",
+       "valor": "Avisar pelo app"
+      }
+     ],
+     "protocolo": null,
+     "concluida_em": null,
+     "mensagem_final": null,
+     "unidade": null,
+     "etapas": [
+      {
+       "id": "local",
+       "titulo": "Escolha o local",
+       "estado": "andamento"
+      },
+      {
+       "id": "data_hora",
+       "titulo": "Escolha dia e horário",
+       "estado": "a_fazer"
+      },
+      {
+       "id": "revisar",
+       "titulo": "Revise e confirme",
+       "estado": "a_fazer"
+      }
+     ],
+     "etapa_atual": {
+      "numero": 1,
+      "total": 3,
+      "titulo": "Escolha o local"
+     },
+     "situacao": "preenchendo",
+     "previsao": null
     }
    }
   },
@@ -9566,7 +10813,41 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Avisar pelo app"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": null,
+    "etapas": [
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "andamento"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 1,
+     "total": 3,
+     "titulo": "Escolha o local"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {
@@ -9674,7 +10955,41 @@
        "caminho": "/dados/jornadas/J-<ID>/cancelar"
       }
      }
-    ]
+    ],
+    "resumo": [
+     {
+      "rotulo": "Como quer receber avisos",
+      "valor": "Avisar pelo app"
+     }
+    ],
+    "protocolo": null,
+    "concluida_em": null,
+    "mensagem_final": null,
+    "unidade": null,
+    "etapas": [
+     {
+      "id": "local",
+      "titulo": "Escolha o local",
+      "estado": "andamento"
+     },
+     {
+      "id": "data_hora",
+      "titulo": "Escolha dia e horário",
+      "estado": "a_fazer"
+     },
+     {
+      "id": "revisar",
+      "titulo": "Revise e confirme",
+      "estado": "a_fazer"
+     }
+    ],
+    "etapa_atual": {
+     "numero": 1,
+     "total": 3,
+     "titulo": "Escolha o local"
+    },
+    "situacao": "preenchendo",
+    "previsao": null
    }
   },
   {

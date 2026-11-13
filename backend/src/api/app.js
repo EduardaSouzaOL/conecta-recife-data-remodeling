@@ -8,6 +8,7 @@ import { registrarRotasEventos } from './rotas/eventos.js';
 import { registrarRotasFixados } from './rotas/fixados.js';
 import { registrarRotasRecomendacao } from './rotas/recomendacao.js';
 import { gerarIndice } from './indice.js';
+import { quantosDemo } from '../dados/demo.js';
 
 export { ErroHttp } from './erros.js';
 
@@ -18,7 +19,7 @@ export { ErroHttp } from './erros.js';
 export function criarApp(derivados) {
   const { rota, tratar, rotas } = criarRoteador();
 
-  rota(['GET'], '/health', () => ({ ok: true, cidadaos: dados.cidadaos.size, servicos: dados.servicos.size, derivados_gerados_em: derivados.gerado_em }));
+  rota(['GET'], '/health', () => ({ ok: true, cidadaos: dados.cidadaos.size - quantosDemo(), servicos: dados.servicos.size, derivados_gerados_em: derivados.gerado_em }));
 
   registrarRotasCidadaos(rota);
   registrarRotasServicos(rota);

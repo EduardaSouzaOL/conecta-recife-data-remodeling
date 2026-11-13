@@ -38,6 +38,14 @@ export function unidadesDaRpa(rpa) {
   ];
 }
 
+/** Endereço fictício da unidade (valor como "U3A", "UONLINE"). Nenhum endereço real. */
+export function enderecoDaUnidade(valor) {
+  if (valor === 'UONLINE') return 'Atendimento pela internet, sem precisar ir ao local.';
+  const m = /^U(\d)([AB])$/.exec(String(valor));
+  if (!m) return null;
+  const b = BAIRROS_RPA[Number(m[1])] || 'Centro';
+  return `Rua da Demonstração, ${m[2] === 'A' ? 100 : 200}, ${b}, Recife (endereço fictício).`;
+}
 export const CANAIS = [
   { valor: 'app', rotulo: 'Avisar pelo app' },
   { valor: 'nenhum', rotulo: 'Não quero avisos' },

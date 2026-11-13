@@ -80,7 +80,7 @@ function itemSimples(s, posicao, motivo, origem) {
 
 const podeMostrar = (s, id) => categoriasSensiveis(s).every((c) => (c === 'saude' ? temConsentimentoSaude(id) : temConsentimentoAcessibilidade(id)));
 
-function controles(id, ativa) {
+export function controles(id, ativa) {
   return [{
     id: ativa ? 'desligar_personalizacao' : 'ligar_personalizacao',
     rotulo: ativa ? 'Não usar meus dados para sugestões' : 'Usar meus dados para sugestões',
@@ -117,7 +117,14 @@ export function montarHome(id, derivados, consulta = {}) {
   const pref = preferencias[id] || {};
   if (pref.personalizar === false) {
     const v = montarHomeVisitante(consulta);
-    return { ...v, perfil: 'logado', cidadao_id: id, personalizacao_ativa: false, controles: controles(id, false) };
+    return {
+      ...v,
+      perfil: 'logado',
+      cidadao_id: id,
+      personalizacao_ativa: false,
+      explicacao_geral: 'Você desligou as sugestões com os seus dados. Mostramos os serviços mais usados por todas as pessoas.',
+      controles: controles(id, false),
+    };
   }
 
   const vit = montarVitrine(id, derivados, { limite: 20 });

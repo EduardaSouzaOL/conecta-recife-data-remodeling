@@ -1,5 +1,5 @@
 import { listarJornadas } from '../../dados/jornada/index.js';
-import { entrarComo, cidadaosDemo } from '../../dados/perfil.js';
+import { entrarComo, entrarComoVisitante, cidadaosDemo } from '../../dados/perfil.js';
 import { registrarEvento } from '../../dados/store.js';
 import { identificarCidadao } from '../entrada.js';
 
@@ -11,8 +11,9 @@ export function registrarRotasCidadaos(rota) {
     descricao: 'personas oficiais e cenários para "entrar como"',
   });
   rota(['GET'], '/dados/cidadaos/:id', ({ p }) => {
-    const { id, reg } = identificarCidadao(p.id);
-    registrarEvento(id, 'entrou_como');
+    const { id, reg, visitante } = identificarCidadao(p.id);
+    registrarEvento(visitante ? null : id, visitante ? 'entrou_como_visitante' : 'entrou_como');
+    if (visitante) return entrarComoVisitante();
     return entrarComo(id, reg);
   }, {
     area: 'motor_de_dados',

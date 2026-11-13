@@ -1,8 +1,8 @@
-import { HORAS, ocupado, proximosDiasUteis, unidadesDaRpa } from './opcoes.js';
+import { HORAS, ocupado, proximosDiasUteis, unidadesDaRpa, enderecoDaUnidade } from './opcoes.js';
 
 // ---------- validação ----------
 
-const PADRAO_SENSIVEL = /\d{3}\.?\d{3}\.?\d{3}-?\d{2}|\b\d{8,}\b|\(?\d{2}\)?\s?9?\d{4}-?\d{4}|\S+@\S+\.\S+|\b(rua|avenida|av\.|travessa)\s/i;
+export const PADRAO_SENSIVEL = /\d{3}\.?\d{3}\.?\d{3}-?\d{2}|\b\d{8,}\b|\(?\d{2}\)?\s?9?\d{4}-?\d{4}|\S+@\S+\.\S+|\b(rua|avenida|av\.|travessa)\s/i;
 
 export function opcoesDoCampo(campo, ctx) {
   if (campo.nome === 'unidade') return unidadesDaRpa(ctx.rpa);
@@ -52,4 +52,12 @@ export function todosValidos(tela, ctx) {
     if (v === undefined) return !c.obrigatorio;
     return !validar(c, v, ctx).erro;
   });
+}
+
+/** Local escolhido no pedido, com endereço fictício. `null` enquanto a pessoa não escolheu. */
+export function unidadeEscolhida(campos, ctx) {
+  const v = campos.unidade;
+  if (v === undefined) return null;
+  const nome = (opcoesDoCampo({ nome: 'unidade' }, ctx) || []).find((o) => o.valor === v)?.rotulo ?? String(v);
+  return { nome, endereco: enderecoDaUnidade(v) };
 }

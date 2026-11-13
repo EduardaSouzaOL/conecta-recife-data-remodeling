@@ -78,6 +78,24 @@ test('personalização desligada devolve a estrutura do visitante com personaliz
   await amb.tratar({ metodo: 'POST', caminho: `/recomendacao/${id}/personalizacao`, consulta: {}, corpo: { ativa: true } });
 });
 
+test('GET personalizacao mostra o estado (ligada por padrão, desligada depois do POST) e o botão para mudar', async () => {
+  const id = 'C076260';
+  const ler = async () => (await amb.tratar({ metodo: 'GET', caminho: `/recomendacao/${id}/personalizacao`, consulta: {}, corpo: {} })).corpo;
+  let r = await ler();
+  assert.equal(r.cidadao_id, id);
+  assert.equal(r.personalizacao_ativa, true);
+  assert.equal(r.controle.id, 'desligar_personalizacao');
+  assert.deepEqual(r.controle.acao.corpo, { ativa: false });
+  await amb.tratar({ metodo: 'POST', caminho: `/recomendacao/${id}/personalizacao`, consulta: {}, corpo: { ativa: false } });
+  r = await ler();
+  assert.equal(r.personalizacao_ativa, false);
+  assert.equal(r.controle.id, 'ligar_personalizacao');
+  assert.match((await home(id)).explicacao_geral, /desligou as sugestões/);
+  await amb.tratar({ metodo: 'POST', caminho: `/recomendacao/${id}/personalizacao`, consulta: {}, corpo: { ativa: true } });
+  // visitante não tem personalização: a rota responde (sem erro 500) com o estado "desligado"
+  const vis = (await amb.tratar({ metodo: 'GET', caminho: '/recomendacao/visitante/personalizacao', consulta: {}, corpo: {} })).corpo;
+  assert.equal(vis.personalizacao_ativa, false);
+});
 test('id inexistente dá 404 e a lista plana segue com "itens"', async () => {
   await assert.rejects(() => amb.tratar({ metodo: 'GET', caminho: '/recomendacao/C999999/home', consulta: {}, corpo: {} }), (e) => e.status === 404 || e.codigo === 'cidadao_nao_encontrado' || /cidadao_nao_encontrado/.test(JSON.stringify(e)));
   const plana = await amb.tratar({ metodo: 'GET', caminho: '/recomendacao/C007938', consulta: {}, corpo: {} });

@@ -349,3 +349,21 @@ Divergência registrada: a regra do projeto diz que erro que o cidadão pode cor
 - Saída 200: `{ ok, cidadao_id, personalizacao_ativa }`. Com `false`, a vitrine ignora histórico, saúde e acessibilidade e usa só o perfil geral (`base_da_personalizacao: perfil`).
 - Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`, `400 valor_invalido`
 - Efeitos colaterais: grava a preferência e o evento `personalizacao_ligada` ou `personalizacao_desligada`
+### GET /recomendacao/{id}/personalizacao
+- Área: motor de recomendação (situação da personalização)
+- Entrada: caminho `{id}` (`cidadao_id` ou `visitante`)
+- Saída 200: `{ cidadao_id, personalizacao_ativa, autorizou_dados_de_saude, rotulo, consentimento_saude, controle }`. Visitante: `personalizacao_ativa: false`, `consentimento_saude: null`, `controle: null`.
+- Erros: `404 cidadao_nao_encontrado`
+- Efeitos colaterais: nenhum
+### POST /demo/jornadas/{id}/avancar
+- Área: demonstração (simulado)
+- Entrada: caminho `{id}` (`jornada_id`); sem corpo
+- Saída 200: `{ ok, etapa_atual, jornada }`. Passa o pedido confirmado para a próxima etapa do acompanhamento.
+- Erros: `404 jornada_nao_encontrada`, `409 jornada_nao_concluida`, `409 etapa_final`
+- Efeitos colaterais: grava o evento `pedido_avancado`
+### POST /demo/reiniciar
+- Área: demonstração
+- Entrada: sem corpo
+- Saída 200: `{ ok, cidadao_id: "DEMO001", pedidos[] }`. Recria os dois pedidos de exemplo da cidadã fictícia DEMO001.
+- Erros: nenhum
+- Efeitos colaterais: regrava os pedidos J-DEMO0001 e J-DEMO0002 e os atalhos fixados da DEMO001

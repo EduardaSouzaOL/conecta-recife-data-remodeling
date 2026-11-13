@@ -47,6 +47,8 @@ const lista = (s) => (s ? s.split('|').map((x) => x.trim()).filter(Boolean) : []
 const itensLista = (s) => (s ? s.split('\n').map((l) => l.replace(/^\s*[-•]\s*/, '').trim()).filter(Boolean) : []);
 
 export function normalizarId(bruto) {
+  const demo = /^\s*demo\s*0*(\d{1,3})\s*$/i.exec(String(bruto ?? ''));
+  if (demo) return 'DEMO' + demo[1].padStart(3, '0'); // cidadão fictício de demonstração (DEMO001)
   const m = /^\s*[cC]?\s*0*(\d{1,6})\s*$/.exec(String(bruto ?? ''));
   if (!m) return null;
   return 'C' + m[1].padStart(6, '0');
