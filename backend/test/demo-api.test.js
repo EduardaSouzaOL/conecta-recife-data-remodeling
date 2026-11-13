@@ -62,7 +62,9 @@ test('pedido: resumo, protocolo e mensagem_final sempre existem; avançar, avali
   assert.equal((await chamar('POST', `/demo/jornadas/${id}/avancar`)).corpo.erro, 'etapa_final');
   const ok = (await chamar('POST', `/dados/jornadas/${id}/avaliar`, { nota: 4, resolvido: 'em_parte', comentario: 'Demorou um pouco' })).corpo;
   assert.equal(ok.avaliacao.resolvido, 'em_parte');
+  await chamar('POST', '/dados/jornadas', { cidadao_id: 'DEMO001', servico_id: 352 });
   await chamar('POST', '/demo/reiniciar');
+  assert.deepEqual((await chamar('GET', '/dados/cidadaos/DEMO001/jornadas')).corpo.jornadas.map((x) => x.jornada_id).sort(), ['J-DEMO0001', 'J-DEMO0002']);
   assert.equal((await chamar('GET', `/dados/jornadas/${id}`)).corpo.etapa_atual.numero, 2);
 });
 test('personalização: GET mostra o estado e POST aceita só o campo escolhido', async () => {

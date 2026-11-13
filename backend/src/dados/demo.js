@@ -76,6 +76,11 @@ function pedidosDeExemplo() {
 /** Cria os pedidos de exemplo que faltam. Com `refazer`, volta os dois ao estado inicial. */
 export function semearPedidosDemo({ refazer = false } = {}) {
   if (!dados.cidadaos.has(DEMO_ID)) return;
+  // Ao reiniciar, a cidadã fictícia volta a ter só os 2 pedidos de exemplo (os de teste dela saem).
+  // Só pedidos da DEMO001; nenhum outro cidadão é tocado.
+  if (refazer) {
+    for (const [id, j] of Object.entries(jornadas)) if (j.cidadao_id === DEMO_ID) delete jornadas[id];
+  }
   for (const [id, j] of Object.entries(pedidosDeExemplo())) {
     if (refazer || !jornadas[id]) jornadas[id] = j;
   }

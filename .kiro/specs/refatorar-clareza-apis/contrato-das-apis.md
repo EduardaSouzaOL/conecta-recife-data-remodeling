@@ -366,7 +366,7 @@ Divergência registrada: a regra do projeto diz que erro que o cidadão pode cor
 - Entrada: sem corpo
 - Saída 200: `{ ok, cidadao_id: "DEMO001", pedidos[] }`. Recria os dois pedidos de exemplo da cidadã fictícia DEMO001.
 - Erros: nenhum
-- Efeitos colaterais: regrava os pedidos J-DEMO0001 e J-DEMO0002 e os atalhos fixados da DEMO001
+- Efeitos colaterais: regrava os pedidos J-DEMO0001 e J-DEMO0002, tira os outros pedidos da DEMO001 e regrava os atalhos fixados dela (nenhum outro cidadão é tocado)
 ### GET /dados/busca
 - Área: motor de dados (busca no catálogo)
 - Entrada: consulta `q` (termo) e `limite` (1 a 50, padrão 20)
