@@ -5,6 +5,7 @@ import { listarJornadas } from '../dados/jornada/index.js';
 import { curto } from '../dados/servicos.js';
 import { itemDeServico } from '../dados/catalogo.js';
 import { montarVitrine } from './vitrine.js';
+import { temHomeFixa, blocosFixos } from './home-fixa.js';
 import { REGRAS, categoriasSensiveis } from './regras.js';
 import { montarHomeVisitante, servicosMaisUsados, acaoDoServico } from './home-visitante.js';
 
@@ -62,10 +63,13 @@ function extrasDoServico(s) {
   return { descricao: i.descricao, tipo_servico: i.tipo };
 }
 
-function itemDaVitrine(v, id, posicao) {
+function itemDaVitrine(v, id, posicao, id_bloco) {
   const s = dados.servicos.get(v.servico_id);
   const base = porQueVejo(v);
-  const motivo = v.motivo || base.texto;
+  // No bloco de direitos, o motivo sempre fala de direito ("pode ter direito"), nunca de outro bloco.
+  const motivo = id_bloco === 'direitos' && !/direito/i.test(v.motivo || '')
+    ? 'Você pode ter direito a este serviço. Confira as regras antes de pedir.'
+    : (v.motivo || base.texto);
   const p = { ...base, texto: motivo === base.texto ? motivo : `${motivo} ${base.texto}` };
   return {
     ...extrasDoServico(s),
@@ -173,7 +177,7 @@ export function montarHome(id, derivados, consulta = {}) {
   for (const b of BLOCOS) {
     const itens = porBloco.get(b.id);
     if (!itens.length) continue;
-    blocos.push({ id: b.id, grupo: 'recomendados', titulo: b.titulo, itens: itens.map((v, i) => itemDaVitrine(v, id, i + 1)) });
+    blocos.push({ id: b.id, grupo: 'recomendados', titulo: b.titulo, itens: itens.map((v, i) => itemDaVitrine(v, id, i + 1, b.id)) });
   }
 
   const prox = proximoPasso(id, derivados);
@@ -197,6 +201,7 @@ export function montarHome(id, derivados, consulta = {}) {
     convite_consentimento: vit.convite_consentimento,
     convite_acessibilidade: vit.convite_acessibilidade,
     controles: controles(id, true),
-    blocos,
+    // Personas da apresentação (C076260 e C062244): blocos definidos pela equipe.
+    blocos: temHomeFixa(id) ? blocosFixos(id) : blocos,
   };
 }

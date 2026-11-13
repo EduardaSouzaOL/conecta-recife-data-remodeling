@@ -212,75 +212,129 @@
     "cidadaos": [
      {
       "cidadao_id": "C007938",
-      "cenario": "Persona oficial: Idosa"
+      "cenario": "Persona oficial: Idosa",
+      "rotulo": "Idosa",
+      "nome_curto": "Idosa",
+      "nome_exibicao": "Idosa"
      },
      {
       "cidadao_id": "C068579",
-      "cenario": "Persona oficial: Microempreendedora"
+      "cenario": "Persona oficial: Microempreendedora",
+      "rotulo": "Microempreendedora",
+      "nome_curto": "Microempreendedora",
+      "nome_exibicao": "Microempreendedora"
      },
      {
       "cidadao_id": "C059592",
-      "cenario": "Persona oficial: Pessoa com deficiência"
+      "cenario": "Persona oficial: Pessoa com deficiência",
+      "rotulo": "Pessoa com deficiência",
+      "nome_curto": "Pessoa com deficiência",
+      "nome_exibicao": "Pessoa com deficiência"
      },
      {
       "cidadao_id": "C036462",
-      "cenario": "Persona oficial: Jovem estudante"
+      "cenario": "Persona oficial: Jovem estudante",
+      "rotulo": "Jovem estudante",
+      "nome_curto": "Jovem estudante",
+      "nome_exibicao": "Jovem estudante"
      },
      {
       "cidadao_id": "C039227",
-      "cenario": "Persona oficial: Família no Cadastro Único"
+      "cenario": "Persona oficial: Família no Cadastro Único",
+      "rotulo": "Família no Cadastro Único",
+      "nome_curto": "Família no Cadastro Único",
+      "nome_exibicao": "Família no Cadastro Único"
      },
      {
       "cidadao_id": "C076260",
-      "cenario": "Persona oficial: Família com criança"
+      "cenario": "Persona oficial: Família com criança",
+      "rotulo": "Família com criança",
+      "nome_curto": "Família com criança",
+      "nome_exibicao": "Família com criança"
      },
      {
       "cidadao_id": "C006566",
-      "cenario": "Persona oficial: Gestante"
+      "cenario": "Persona oficial: Gestante",
+      "rotulo": "Gestante",
+      "nome_curto": "Gestante",
+      "nome_exibicao": "Gestante"
      },
      {
       "cidadao_id": "C062244",
-      "cenario": "Persona oficial: Doença crônica"
+      "cenario": "Persona oficial: Doença crônica",
+      "rotulo": "Idoso com cuidado contínuo",
+      "nome_curto": "Idoso com cuidado contínuo",
+      "nome_exibicao": "Idoso com cuidado contínuo"
      },
      {
       "cidadao_id": "C000003",
-      "cenario": "Sem nenhum histórico"
+      "cenario": "Sem nenhum histórico",
+      "rotulo": "Sem histórico",
+      "nome_curto": "Sem histórico",
+      "nome_exibicao": "Sem histórico"
      },
      {
       "cidadao_id": "C038064",
-      "cenario": "Com muito histórico"
+      "cenario": "Com muito histórico",
+      "rotulo": "Muito histórico",
+      "nome_curto": "Muito histórico",
+      "nome_exibicao": "Muito histórico"
      },
      {
       "cidadao_id": "C000467",
-      "cenario": "Família com criança pequena e sem histórico"
+      "cenario": "Família com criança pequena e sem histórico",
+      "rotulo": "Criança pequena",
+      "nome_curto": "Criança pequena",
+      "nome_exibicao": "Criança pequena"
      },
      {
       "cidadao_id": "C000004",
-      "cenario": "Empreendedor (MEI)"
+      "cenario": "Empreendedor (MEI)",
+      "rotulo": "Empreendedor MEI",
+      "nome_curto": "Empreendedor MEI",
+      "nome_exibicao": "Empreendedor MEI"
      },
      {
       "cidadao_id": "C000012",
-      "cenario": "Pessoa idosa"
+      "cenario": "Pessoa idosa",
+      "rotulo": "Pessoa idosa",
+      "nome_curto": "Pessoa idosa",
+      "nome_exibicao": "Pessoa idosa"
      },
      {
       "cidadao_id": "C000314",
-      "cenario": "Jovem estudante"
+      "cenario": "Jovem estudante",
+      "rotulo": "Jovem estudante",
+      "nome_curto": "Jovem estudante",
+      "nome_exibicao": "Jovem estudante"
      },
      {
       "cidadao_id": "C000005",
-      "cenario": "Quem cuida de animal"
+      "cenario": "Quem cuida de animal",
+      "rotulo": "Tutor de pet",
+      "nome_curto": "Tutor de pet",
+      "nome_exibicao": "Tutor de pet"
      },
      {
       "cidadao_id": "C000001",
-      "cenario": "Cadastro Único e Bolsa Família"
+      "cenario": "Cadastro Único e Bolsa Família",
+      "rotulo": "Cadastro Único",
+      "nome_curto": "Cadastro Único",
+      "nome_exibicao": "Cadastro Único"
      },
      {
       "cidadao_id": "C000037",
-      "cenario": "Demonstração do consentimento de dados de saúde"
+      "cenario": "Demonstração do consentimento de dados de saúde",
+      "rotulo": "Consentimento de saúde",
+      "nome_curto": "Consentimento de saúde",
+      "nome_exibicao": "Consentimento de saúde"
      },
      {
       "cidadao_id": "C000052",
-      "cenario": "Demonstração do consentimento de acessibilidade (sem dado de saúde)"
+      "cenario": "Demonstração do consentimento de acessibilidade (sem dado de saúde)",
+      "rotulo": "Consentimento de acessibilidade",
+      "nome_curto": "Consentimento de acessibilidade",
+      "nome_exibicao": "Consentimento de acessibilidade"
      }
     ]
    }
@@ -296,7 +350,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C007938",
-    "nome_exibicao": null,
+    "nome_exibicao": "Idosa",
     "saudacao": "Você entrou como C007938 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C007938",
@@ -385,7 +439,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C068579",
-    "nome_exibicao": null,
+    "nome_exibicao": "Microempreendedora",
     "saudacao": "Você entrou como C068579 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C068579",
@@ -509,7 +563,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C059592",
-    "nome_exibicao": null,
+    "nome_exibicao": "Pessoa com deficiência",
     "saudacao": "Você entrou como C059592 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C059592",
@@ -647,7 +701,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C036462",
-    "nome_exibicao": null,
+    "nome_exibicao": "Jovem estudante",
     "saudacao": "Você entrou como C036462 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C036462",
@@ -736,7 +790,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C039227",
-    "nome_exibicao": null,
+    "nome_exibicao": "Família no Cadastro Único",
     "saudacao": "Você entrou como C039227 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C039227",
@@ -860,7 +914,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C076260",
-    "nome_exibicao": null,
+    "nome_exibicao": "Família com criança",
     "saudacao": "Você entrou como C076260 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C076260",
@@ -998,7 +1052,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C006566",
-    "nome_exibicao": null,
+    "nome_exibicao": "Gestante",
     "saudacao": "Você entrou como C006566 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C006566",
@@ -1115,7 +1169,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C062244",
-    "nome_exibicao": null,
+    "nome_exibicao": "Idoso com cuidado contínuo",
     "saudacao": "Você entrou como C062244 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C062244",
@@ -1253,7 +1307,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C007938",
-    "nome_exibicao": null,
+    "nome_exibicao": "Idosa",
     "saudacao": "Você entrou como C007938 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C007938",
@@ -2588,7 +2642,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C062244",
-    "nome_exibicao": null,
+    "nome_exibicao": "Idoso com cuidado contínuo",
     "saudacao": "Você entrou como C062244 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C062244",
@@ -3018,7 +3072,7 @@
    "status": 200,
    "corpo": {
     "cidadao_id": "C059592",
-    "nome_exibicao": null,
+    "nome_exibicao": "Pessoa com deficiência",
     "saudacao": "Você entrou como C059592 (dados fictícios).",
     "perfil": {
      "cidadao_id": "C059592",

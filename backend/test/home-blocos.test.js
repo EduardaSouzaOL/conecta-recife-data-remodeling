@@ -53,10 +53,18 @@ test('com consentimento de saúde o bloco aparece e o título não cita a condi�
   const id = 'C062244';
   await amb.tratar({ metodo: 'POST', caminho: `/dados/consentimentos/${id}`, consulta: {}, corpo: { decisao: 'concedido', finalidade: 'saude_personalizacao' } });
   const h = await home(id);
-  const b = h.blocos.find((x) => x.id === 'saude');
-  assert.ok(b, 'bloco saude ausente');
-  assert.equal(b.titulo, 'Cuidar de você');
-  for (const i of b.itens) assert.equal(i.motivo, 'Com base no seu uso do app.');
+  // C062244 tem Home definida pela equipe: com consentimento ganha "Cuidados contínuos".
+  const b = h.blocos.find((x) => x.id === 'cuidados_continuos');
+  assert.ok(b, 'bloco cuidados_continuos ausente');
+  assert.equal(b.titulo, 'Cuidados contínuos');
+  for (const x of h.blocos) {
+    assert.doesNotMatch(x.titulo, /hipertens|diabet|gestan|saúde mental/i);
+    for (const i of x.itens) assert.doesNotMatch(i.motivo_curto, /hipertens|diabet|gestan|saúde mental/i);
+  }
+  await amb.tratar({ metodo: 'POST', caminho: `/dados/consentimentos/${id}`, consulta: {}, corpo: { decisao: 'revogado', finalidade: 'saude_personalizacao' } });
+  const sem = await home(id);
+  assert.ok(!sem.blocos.some((x) => x.id === 'cuidados_continuos'));
+  assert.doesNotMatch(JSON.stringify(sem.blocos), /hipertens|diabet/i);
 });
 
 test('pouco ou nenhum histórico: primeiro bloco é "Mais procurados", nunca vazio', async () => {

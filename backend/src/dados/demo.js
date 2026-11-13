@@ -75,12 +75,40 @@ function pedidosDeExemplo() {
 
 const PERSONAS_PEDIDO = ['C007938', 'C068579', 'C059592', 'C036462', 'C039227', 'C076260', 'C006566', 'C062244'];
 
+// Pedidos fictícios das 2 personas da apresentação. "Hoje" do protótipo: 28/09/2026.
+// [cidadao, servico, protocolo, campos]. Todos em acompanhamento (etapa 2 de 4).
+const PEDIDOS_APRESENTACAO = [
+  ['C076260', 519, 'CNX-2026-000123', { motivo: 'primeira_vez', canal_aviso: 'app' }],
+  ['C076260', 1475, 'CNX-2026-000124', { motivo: 'primeira_vez', canal_aviso: 'app' }],
+  ['C062244', 1475, 'CNX-2026-000123', { motivo: 'primeira_vez', canal_aviso: 'app' }],
+  ['C062244', 953, 'CNX-2026-000124', { canal_aviso: 'app', data: '2026-09-30', hora: '09:00' }],
+];
+
+function pedidosDaApresentacao() {
+  const out = {};
+  for (const [cid, sv, protocolo, campos] of PEDIDOS_APRESENTACAO) {
+    const reg = dados.cidadaos.get(cid);
+    if (!reg) continue;
+    const id = `J-DEMO-${cid}-${sv}`;
+    const c = { ...campos };
+    if (c.data) c.unidade = `U${reg.perfil.rpa}A`;
+    out[id] = {
+      jornada_id: id, cidadao_id: cid, servico_id: sv, estado: 'concluida', campos: c, auto: ['canal_aviso'],
+      criada_em: '2026-09-26T13:00:00.000Z', atualizada_em: '2026-09-26T13:05:00.000Z', concluida_em: '2026-09-26T13:05:00.000Z',
+      protocolo, acompanhamento: 2,
+    };
+  }
+  return out;
+}
+const COM_PEDIDOS_DA_APRESENTACAO = new Set(PEDIDOS_APRESENTACAO.map((p) => p[0]));
+
 /** Um pedido fictício concluído (acompanhamento em andamento) para cada persona oficial. */
 function pedidosDasPersonas() {
   const dias = proximosDiasUteis(4);
   const ha = (h) => iso(new Date(Date.now() - h * 3600e3));
   const out = {};
   PERSONAS_PEDIDO.forEach((cid, i) => {
+    if (COM_PEDIDOS_DA_APRESENTACAO.has(cid)) return; // estas têm os pedidos da apresentação
     const id = `J-DEMO-${cid}`;
     const cadu = i % 2 === 1;
     out[id] = cadu ? {
@@ -107,6 +135,8 @@ export function semearPedidosDemo({ refazer = false } = {}) {
   for (const [id, j] of Object.entries(pedidosDeExemplo())) {
     if (refazer || !jornadas[id]) jornadas[id] = j;
   }
+  for (const [id, j] of Object.entries(pedidosDaApresentacao())) if (refazer || !jornadas[id]) jornadas[id] = j;
+  for (const id of ['J-DEMO-C076260', 'J-DEMO-C062244']) delete jornadas[id]; // versão anterior, se ficou no estado
   for (const [id, j] of Object.entries(pedidosDasPersonas())) {
     if (dados.cidadaos.has(j.cidadao_id) && (refazer || !jornadas[id])) jornadas[id] = j;
   }

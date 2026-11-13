@@ -84,12 +84,18 @@ export function entrarComoVisitante() {
   };
 }
 
-const rotuloPersona = (id) => PERSONAS.find((p) => p[0] === id)?.[1] ?? null;
+// Nomes da apresentação (não são nomes de pessoas: são rótulos de perfil).
+const NOMES_APRESENTACAO = { C076260: 'Família com criança', C062244: 'Idoso com cuidado contínuo' };
+const rotuloPersona = (id) => NOMES_APRESENTACAO[id] ?? PERSONAS.find((p) => p[0] === id)?.[1] ?? null;
 
 let cache = null;
 function cenarios() {
   const out = [];
-  const add = (rotulo, id, curto) => { if (id && !out.some((o) => o.cidadao_id === id)) out.push({ cidadao_id: id, cenario: rotulo, rotulo: curto || rotulo, nome_curto: curto || rotulo }); };
+  const add = (rotulo, id, curto) => {
+    if (!id || out.some((o) => o.cidadao_id === id)) return;
+    const nome = NOMES_APRESENTACAO[id] || curto || rotulo;
+    out.push({ cidadao_id: id, cenario: rotulo, rotulo: nome, nome_curto: nome, nome_exibicao: nome });
+  };
   let semHist, longo = ['', 0], emp, prop, infancia, idoso, jovem, saudeComHist, cadu, tutor, pcd;
   for (const [id, { perfil: p, saude, acessibilidade }] of dados.cidadaos) {
     const n = (dados.historico.get(id) || []).length;
