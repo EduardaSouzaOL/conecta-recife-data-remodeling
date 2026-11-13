@@ -16,7 +16,7 @@ const trilhaDoServico = (servico) => {
       'Atendimento realizado',
     ];
   }
-  return ['Pedido enviado', 'Em análise', 'Resposta pronta', 'Pedido concluído'];
+  return ['Pedido enviado', 'Aguardando confirmação', 'Resposta pronta', 'Pedido concluído'];
 };
 
 /** Etapa atual (1 a 4) de um pedido confirmado. */
