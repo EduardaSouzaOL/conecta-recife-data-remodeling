@@ -24,6 +24,7 @@ before(async () => {
   (await import('../src/api/rotas/eventos.js')).registrarRotasEventos(rota);
   (await import('../src/api/rotas/fixados.js')).registrarRotasFixados(rota);
   (await import('../src/api/rotas/recomendacao.js')).registrarRotasRecomendacao(rota, amb.derivados);
+  (await import('../src/api/rotas/catalogo.js')).registrarRotasCatalogo(rota);
 });
 after(() => amb?.limpar());
 
@@ -80,7 +81,7 @@ const arquivosJs = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap
 test('nenhum módulo de src/api/rotas importa outro módulo de rotas', () => {
   const dirRotas = path.join(SRC, 'api', 'rotas');
   const arquivos = arquivosJs(dirRotas);
-  assert.equal(arquivos.length, 7, 'cidadaos, servicos, consentimentos, jornadas, eventos, fixados, recomendacao');
+  assert.equal(arquivos.length, 8, 'cidadaos, servicos, consentimentos, jornadas, eventos, fixados, recomendacao, catalogo');
   for (const arq of arquivos) {
     for (const imp of importsDe(arq).filter((i) => i.startsWith('.'))) {
       const alvo = path.resolve(path.dirname(arq), imp);

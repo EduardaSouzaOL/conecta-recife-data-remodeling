@@ -198,7 +198,13 @@
       "POST /dados/eventos": "{\"cidadao_id\":\"C000003\",\"tipo\":\"servico_aberto\",\"servico_id\":352}",
       "GET /dados/eventos/resumo": "contagem por tipo",
       "GET /dados/fixados/{id}": "serviços fixados nos atalhos do cidadão",
-      "POST /dados/fixados/{id}": "{\"servico_id\":216,\"fixar\":true} fixa (ou desafixa com false) um serviço nos atalhos, até 6"
+      "POST /dados/fixados/{id}": "{\"servico_id\":216,\"fixar\":true} fixa (ou desafixa com false) um serviço nos atalhos, até 6",
+      "GET /dados/busca?q=termo&limite=20": "busca por texto no título e na descrição dos serviços",
+      "GET /dados/categorias": "categorias (temas do catálogo) com a quantidade de serviços",
+      "GET /dados/categorias/{categoria_id}/servicos?limite=50": "serviços de uma categoria, mais procurados primeiro",
+      "GET /dados/cidadaos/{id}/interesses": "temas escolhidos no onboarding",
+      "PUT /dados/cidadaos/{id}/interesses": "{\"interesses\":[\"saude\",\"educacao\"]} guarda os temas escolhidos no onboarding (ids de /dados/categorias)",
+      "GET /dados/metricas": "contagens de uso (pedidos criados, confirmados, avaliados) para a Medição"
      },
      "motor_de_recomendacao": {
       "GET /recomendacao/visitante/home?q=texto": "Home simplificada para visitante sem login: mais usados e atalhos de 1 toque",

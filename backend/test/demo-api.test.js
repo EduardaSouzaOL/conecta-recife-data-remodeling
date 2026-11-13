@@ -76,3 +76,25 @@ test('personalização: GET mostra o estado e POST aceita só o campo escolhido'
   await chamar('POST', `/recomendacao/${id}/personalizacao`, { ativa: true, consentimento_saude: 'revogado' });
   assert.equal((await chamar('POST', `/recomendacao/${id}/personalizacao`, {})).corpo.erro, 'valor_invalido');
 });
+test('busca, categorias, interesses e métricas', async () => {
+  const b = (await chamar('GET', '/dados/busca', {}, { q: 'agendar consulta' })).corpo;
+  assert.ok(b.total > 0);
+  assert.deepEqual(Object.keys(b.itens[0]).sort(), ['descricao', 'id', 'orgao', 'tipo', 'titulo']);
+  assert.ok(['Agendamento', 'Solicitacao', 'Informacao'].includes(b.itens[0].tipo));
+  const vazio = (await chamar('GET', '/dados/busca', {}, { q: 'xyzxyzxyz' })).corpo;
+  assert.deepEqual(vazio.itens, []); assert.ok(vazio.mensagem);
+  const cats = (await chamar('GET', '/dados/categorias')).corpo;
+  assert.equal(cats.total, 17);
+  assert.equal(cats.categorias[0].categoria_id, 'saude');
+  const s = (await chamar('GET', '/dados/categorias/saude/servicos', {}, { limite: '5' })).corpo;
+  assert.equal(s.itens.length, 5); assert.equal(s.total, cats.categorias[0].total_servicos);
+  assert.equal((await chamar('GET', '/dados/categorias/nada/servicos')).status, 404);
+  const put = (await chamar('PUT', '/dados/cidadaos/C007938/interesses', { interesses: ['saude', 'animais', 'saude'] })).corpo;
+  assert.deepEqual(put.interesses, ['saude', 'animais']);
+  assert.deepEqual((await chamar('GET', '/dados/cidadaos/C007938/interesses')).corpo.interesses, ['saude', 'animais']);
+  assert.equal((await chamar('PUT', '/dados/cidadaos/C007938/interesses', { interesses: ['inexistente'] })).corpo.erro, 'tema_invalido');
+  assert.equal((await chamar('PUT', '/dados/cidadaos/visitante/interesses', { interesses: ['saude'] })).status, 403);
+  const m = (await chamar('GET', '/dados/metricas')).corpo;
+  assert.ok(m.pedidos_criados >= 1 && m.pedidos_confirmados >= 0 && m.avaliacoes >= 1);
+  assert.ok(Array.isArray(m.por_dia));
+});

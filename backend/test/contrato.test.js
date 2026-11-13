@@ -24,6 +24,7 @@ before(async () => {
   (await import('../src/api/rotas/eventos.js')).registrarRotasEventos(rota);
   (await import('../src/api/rotas/fixados.js')).registrarRotasFixados(rota);
   (await import('../src/api/rotas/recomendacao.js')).registrarRotasRecomendacao(rota, amb.derivados);
+  (await import('../src/api/rotas/catalogo.js')).registrarRotasCatalogo(rota);
 });
 after(() => amb?.limpar());
 
@@ -68,7 +69,7 @@ test('o teste enxerga todas as áreas: app.js importa cada módulo de rotas', ()
   const app = fs.readFileSync(path.join(g.BACKEND, 'src', 'api', 'app.js'), 'utf8');
   const modulos = fs.readdirSync(path.join(g.BACKEND, 'src', 'api', 'rotas')).filter((f) => f.endsWith('.js'));
   for (const m of modulos) assert.ok(app.includes(`./rotas/${m}`), `app.js não importa rotas/${m}; inclua-o neste teste também`);
-  assert.equal(modulos.length, 7);
+  assert.equal(modulos.length, 8);
 });
 
 test('legados e efeitos colaterais de GET estão marcados no contrato', () => {
