@@ -1,0 +1,212 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Escrever o teste de exploração da condição do bug": [
+      {
+        "executionId": "97d73607-7c39-488a-b7c1-38bbd8bb7319",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794534946412
+      },
+      {
+        "executionId": "1e6d1d3d-fe3a-4385-a2fc-53c56b78ce3f",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535051749
+      },
+      {
+        "executionId": "1e6d1d3d-fe3a-4385-a2fc-53c56b78ce3f",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535111645
+      }
+    ],
+    "2. Escrever os testes de preservação (antes da correção)": [
+      {
+        "executionId": "97d73607-7c39-488a-b7c1-38bbd8bb7319",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794534951788
+      },
+      {
+        "executionId": "1e6d1d3d-fe3a-4385-a2fc-53c56b78ce3f",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535118875
+      },
+      {
+        "executionId": "1e6d1d3d-fe3a-4385-a2fc-53c56b78ce3f",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535177075
+      }
+    ],
+    "3.1 Normalização de temas": [
+      {
+        "executionId": "97d73607-7c39-488a-b7c1-38bbd8bb7319",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794534956232
+      },
+      {
+        "executionId": "1e6d1d3d-fe3a-4385-a2fc-53c56b78ce3f",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535186019
+      },
+      {
+        "executionId": "1e6d1d3d-fe3a-4385-a2fc-53c56b78ce3f",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535223124
+      }
+    ],
+    "3.2 Agrupamento, ordenação e limites": [
+      {
+        "executionId": "97d73607-7c39-488a-b7c1-38bbd8bb7319",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794534961548
+      },
+      {
+        "executionId": "1e6d1d3d-fe3a-4385-a2fc-53c56b78ce3f",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535231291
+      },
+      {
+        "executionId": "1e6d1d3d-fe3a-4385-a2fc-53c56b78ce3f",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535286229
+      }
+    ],
+    "3.3 Item, banner e filtros": [
+      {
+        "executionId": "97d73607-7c39-488a-b7c1-38bbd8bb7319",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794534965974
+      },
+      {
+        "executionId": "1e6d1d3d-fe3a-4385-a2fc-53c56b78ce3f",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535294516
+      }
+    ],
+    "3.4 Privacidade": [
+      {
+        "executionId": "97d73607-7c39-488a-b7c1-38bbd8bb7319",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794534970475
+      }
+    ],
+    "4. Ligar em `recomendacao/home.js`": [
+      {
+        "executionId": "97d73607-7c39-488a-b7c1-38bbd8bb7319",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794534975044
+      },
+      {
+        "executionId": "b255b69a-7139-484d-ba14-5d785f65a4b4",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535435272
+      }
+    ],
+    "5.1 O teste de exploração da tarefa 1 passa": [
+      {
+        "executionId": "97d73607-7c39-488a-b7c1-38bbd8bb7319",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794534979488
+      },
+      {
+        "executionId": "b255b69a-7139-484d-ba14-5d785f65a4b4",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535440611
+      }
+    ],
+    "5.2 Os testes de preservação da tarefa 2 seguem passando": [
+      {
+        "executionId": "97d73607-7c39-488a-b7c1-38bbd8bb7319",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794534983855
+      },
+      {
+        "executionId": "b255b69a-7139-484d-ba14-5d785f65a4b4",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535447915
+      }
+    ],
+    "6. Atualizar `.kiro/specs/refatorar-clareza-apis/contrato-das-apis.md`": [
+      {
+        "executionId": "97d73607-7c39-488a-b7c1-38bbd8bb7319",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794534988702
+      },
+      {
+        "executionId": "b255b69a-7139-484d-ba14-5d785f65a4b4",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535453063
+      }
+    ],
+    "7. Checkpoint: rodar `npm run teste`": [
+      {
+        "executionId": "97d73607-7c39-488a-b7c1-38bbd8bb7319",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794534993750
+      },
+      {
+        "executionId": "b255b69a-7139-484d-ba14-5d785f65a4b4",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535458425
+      }
+    ],
+    "3.3 Fixados: store, rotas e eventos": [
+      {
+        "executionId": "b255b69a-7139-484d-ba14-5d785f65a4b4",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535406606
+      },
+      {
+        "executionId": "b255b69a-7139-484d-ba14-5d785f65a4b4",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535669131
+      },
+      {
+        "executionId": "b255b69a-7139-484d-ba14-5d785f65a4b4",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794536005118
+      }
+    ],
+    "3.4 Nichos com fixados": [
+      {
+        "executionId": "b255b69a-7139-484d-ba14-5d785f65a4b4",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535413064
+      },
+      {
+        "executionId": "b255b69a-7139-484d-ba14-5d785f65a4b4",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794536014785
+      },
+      {
+        "executionId": "b255b69a-7139-484d-ba14-5d785f65a4b4",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794536180025
+      },
+      {
+        "executionId": "5bba8f53-1965-4ff7-9f73-ee9572e5005b",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794536198233
+      }
+    ],
+    "3.5 Item, banner e filtros": [
+      {
+        "executionId": "b255b69a-7139-484d-ba14-5d785f65a4b4",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535418481
+      }
+    ],
+    "3.6 Campos de fixado no item": [
+      {
+        "executionId": "b255b69a-7139-484d-ba14-5d785f65a4b4",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535423475
+      }
+    ],
+    "3.7 Privacidade": [
+      {
+        "executionId": "b255b69a-7139-484d-ba14-5d785f65a4b4",
+        "chatSessionId": "sess_2154b8a7-aeab-498d-89d3-0b8030bf9fa3",
+        "timestamp": 1794535428981
+      }
+    ]
+  }
+}

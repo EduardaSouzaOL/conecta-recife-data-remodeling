@@ -1,7 +1,7 @@
 import { eventos, registrarEvento } from '../../dados/store.js';
 import { identificarCidadao, lerTipoDeEvento } from '../entrada.js';
 
-// Eventos que o cliente (Kodiak) pode registrar. Os da jornada e da vitrine o servidor registra sozinho.
+// Eventos que o cliente (Kodiak) pode registrar. Os da jornada, da vitrine e dos fixados (servico_fixado, servico_desafixado) o servidor registra sozinho.
 export const EVENTOS_PERMITIDOS = new Set(['tela_pulada', 'erro_entendimento', 'vitrine_vista', 'servico_aberto']);
 
 /** Eventos de uso para medir o protótipo. Tudo sob `/dados/eventos`. */

@@ -196,7 +196,9 @@
       "POST /dados/jornadas/{id}/alterar": "reabre um pedido concluído dos serviços 352 e 942 (simulado)",
       "POST /dados/jornadas/{id}/avaliar": "{\"nota\":5} ou {\"nao_consegui\":true}, uma vez, depois de concluir",
       "POST /dados/eventos": "{\"cidadao_id\":\"C000003\",\"tipo\":\"servico_aberto\",\"servico_id\":352}",
-      "GET /dados/eventos/resumo": "contagem por tipo"
+      "GET /dados/eventos/resumo": "contagem por tipo",
+      "GET /dados/fixados/{id}": "serviços fixados nos atalhos do cidadão",
+      "POST /dados/fixados/{id}": "{\"servico_id\":216,\"fixar\":true} fixa (ou desafixa com false) um serviço nos atalhos, até 6"
      },
      "motor_de_recomendacao": {
       "GET /recomendacao/visitante/home?q=texto": "Home simplificada para visitante sem login: mais usados e atalhos de 1 toque",

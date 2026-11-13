@@ -3,14 +3,13 @@ inclusion: always
 ---
 # Escopo da solução (Conecta Recife)
 
-Três frentes, construídas nesta ordem: **A. Home personalizada**, **C. Serviços solicitados**, **B. Voz (Broto)**.
+Duas frentes, construídas nesta ordem: **A. Home personalizada** e **C. Serviços solicitados**. Tudo por toque.
 
 - Perfis: logado com dados (inovação), logado com pouco histórico (mesma tela, sugestões menos precisas) e sem login (Home simplificada: menos blocos e texto, mais usados primeiro, busca e atalhos de 1 toque).
 - Home em blocos: Seus atalhos, Recomendados (Continue seu pedido, Para sua família, Seus direitos, Quem é como você também usa, Nesta época do ano, Para não esquecer, Cuidar de você, Você e seu pet, Salvos, Próximo passo dentro do serviço) e Acompanhamento.
 - Todo item tem motivo e "Por que vejo isso?", com opção de desligar a personalização.
 - Saúde só com consentimento, sem citar a condição no título. Pet não precisa de consentimento.
 - Serviços solicitados em 2 serviços (942 e Agendar atendimento no Cadastro Único); relatar problema, cancelar e alterar simulados; sem chat; avaliação final.
-- Voz: nunca pede CPF, nome completo real ou endereço; todo comando tem equivalente por toque; sempre confirma antes de enviar; não guarda áudio.
 - Dados 100% fictícios; nunca enviar solicitações reais.
 
 ## Onde estão os detalhes

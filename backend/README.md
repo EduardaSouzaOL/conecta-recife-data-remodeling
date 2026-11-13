@@ -59,7 +59,7 @@ npm run teste
 ```
 
 ## O que foi removido na refatoração
-Rotas sem prefixo (`/vitrine`, `/entrar`, `/consentimento`, `/jornadas`, `/servicos`, `/eventos`), métodos duplicados (PUT, `POST /entrar`), eventos de voz e funções sem uso.
+Rotas sem prefixo (`/vitrine`, `/entrar`, `/consentimento`, `/jornadas`, `/servicos`, `/eventos`), métodos duplicados (PUT, `POST /entrar`) e funções sem uso.
 
 ## Publicar na AWS (Lambda com Function URL)
 

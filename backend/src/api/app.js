@@ -5,6 +5,7 @@ import { registrarRotasServicos } from './rotas/servicos.js';
 import { registrarRotasConsentimentos } from './rotas/consentimentos.js';
 import { registrarRotasJornadas } from './rotas/jornadas.js';
 import { registrarRotasEventos } from './rotas/eventos.js';
+import { registrarRotasFixados } from './rotas/fixados.js';
 import { registrarRotasRecomendacao } from './rotas/recomendacao.js';
 import { gerarIndice } from './indice.js';
 
@@ -24,6 +25,7 @@ export function criarApp(derivados) {
   registrarRotasConsentimentos(rota);
   registrarRotasJornadas(rota);
   registrarRotasEventos(rota);
+  registrarRotasFixados(rota);
   registrarRotasRecomendacao(rota, derivados);
   // O índice vem das rotas registradas; por isso é registrado depois das áreas.
   rota(['GET'], '', () => gerarIndice(rotas()));

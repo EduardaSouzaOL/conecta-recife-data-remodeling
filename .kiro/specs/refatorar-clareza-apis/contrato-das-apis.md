@@ -222,6 +222,24 @@ Também existem, fora do roteador e só no servidor local: `OPTIONS` em qualquer
 - Erros: nenhum específico
 - Efeitos colaterais: nenhum
 
+### GET /dados/fixados/{id}
+
+- Área: motor de dados
+- Entrada: caminho `{id}` (`cidadao_id`)
+- Saída 200: `{ cidadao_id, fixados: [servico_id], limite }`. `fixados` está na ordem de fixação; `limite` é 6.
+- Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`
+- Efeitos colaterais: nenhum
+- Observação: seção mínima da tarefa 3.3; a tarefa 6 completa.
+
+### POST /dados/fixados/{id}
+
+- Área: motor de dados
+- Entrada: caminho `{id}` (`cidadao_id`); corpo: `servico_id` e `fixar` (`true` ou `false`)
+- Saída 200: a mesma de `GET /dados/fixados/{id}`. Idempotente: fixar quem já está fixado ou desafixar quem não está não muda nada.
+- Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`, `404 servico_nao_encontrado`, `422 fixar_invalido` (corpo inválido), `422 limite_de_fixados` (já são 6)
+- Efeitos colaterais: quando o estado muda, grava o evento `servico_fixado` ou `servico_desafixado`
+- Observação: seção mínima da tarefa 3.3; a tarefa 6 completa.
+
 ---
 
 ## Motor de recomendação

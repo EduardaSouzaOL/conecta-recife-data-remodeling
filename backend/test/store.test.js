@@ -50,7 +50,7 @@ test('salvarLogo grava exatamente o que está em memória, de forma atômica', (
   store.salvarLogo();
   assert.equal(fs.existsSync(ARQ + '.tmp'), false);
   const f = lerArquivo();
-  assert.deepEqual(Object.keys(f).sort(), ['consentimentos', 'eventos', 'jornadas', 'preferencias']);
+  assert.deepEqual(Object.keys(f).sort(), ['consentimentos', 'eventos', 'fixados', 'jornadas', 'preferencias']);
   assert.equal(f.consentimentos.C000003.at(-1).status, 'concedido');
   assert.ok(f.consentimentos.C000003.at(-1).ts, 'o registro de consentimento tem data');
   assert.ok(f.eventos.some((e) => e.tipo === 'consentimento_concedido'));
