@@ -34,7 +34,7 @@ test('dependências entre módulos seguem operacoes → visao → validacao → 
     'validacao.js': ['opcoes.js'],
     'acompanhamento.js': [],
     'visao.js': ['telas.js', 'validacao.js', 'acompanhamento.js'],
-    'operacoes.js': ['telas.js', 'validacao.js', 'visao.js'],
+    'operacoes.js': ['telas.js', 'validacao.js', 'visao.js', 'acompanhamento.js'],
     'acoes.js': ['visao.js', 'validacao.js', 'acompanhamento.js'],
     'index.js': ['opcoes.js', 'operacoes.js', 'acoes.js'],
   };

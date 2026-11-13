@@ -116,7 +116,7 @@ function atalhosDoHistorico(hist, id) {
 
 /** Serviço sugerido depois do último pedido concluído, se houver. */
 function proximoPasso(id, derivados) {
-  const concluida = listarJornadas(id).find((j) => j.estado === 'concluida');
+  const concluida = listarJornadas(id).find((j) => j.estado === 'concluida' || (j.estado === 'em_andamento' && j.protocolo));
   if (!concluida) return null;
   for (const [dest] of derivados.proximo[concluida.servico_id] || []) {
     const s = dados.servicos.get(dest);

@@ -2,7 +2,7 @@ import { dados } from '../carga.js';
 import { telasDoServico } from './telas.js';
 import { acoesDisponiveis } from './acoes-visao.js';
 import { opcoesDoCampo, todosValidos, validar, unidadeEscolhida } from './validacao.js';
-import { acompanhar, rotuloDeData } from './acompanhamento.js';
+import { acompanhar, rotuloDeData, estadoPublico } from './acompanhamento.js';
 
 // ---------- montagem da resposta ----------
 
@@ -71,7 +71,7 @@ function montarVisao(j, servico, ctx, { puladas, atual, visiveis, idx }, faltand
     jornada_id: j.jornada_id,
     cidadao_id: j.cidadao_id,
     servico: { servico_id: servico.servico_id, nome: servico.nome, orgao: servico.orgao_sigla },
-    estado: j.estado,
+    estado: estadoPublico(j),
     aviso: AVISO,
     telas: visiveis.map((t) => ({ id: t.id, titulo: t.titulo })),
     telas_puladas: puladas,

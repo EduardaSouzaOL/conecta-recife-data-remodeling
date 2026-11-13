@@ -1,3 +1,4 @@
+import { estadoPublico } from './acompanhamento.js';
 import crypto from 'node:crypto';
 import { dados } from '../carga.js';
 import { jornadas, registrarEvento, salvar } from '../store.js';
@@ -103,7 +104,7 @@ export function listarJornadas(cidadao_id) {
     .sort((a, b) => b.criada_em.localeCompare(a.criada_em))
     .map((j) => ({
       jornada_id: j.jornada_id, servico_id: j.servico_id, servico: dados.servicos.get(j.servico_id)?.nome,
-      estado: j.estado, protocolo: j.protocolo || null, criada_em: j.criada_em,
+      estado: estadoPublico(j), protocolo: j.protocolo || null, criada_em: j.criada_em,
       ...resumoDoAcompanhamento(j),
     }));
 }

@@ -22,6 +22,8 @@ const trilhaDoServico = (servico) => {
 /** Etapa atual (1 a 4) de um pedido confirmado. */
 export const etapaDoAcompanhamento = (j) => Math.min(TOTAL_ETAPAS, Math.max(1, j.acompanhamento ?? ETAPA_INICIAL));
 
+/** Estado mostrado ao app: pedido fictício de demonstração ainda em acompanhamento aparece "em_andamento", igual à situação. */
+export const estadoPublico = (j) => (j.estado === 'concluida' && String(j.jornada_id).startsWith('J-DEMO') && !acompanhamentoFinalizado(j) ? 'em_andamento' : j.estado);
 /** O pedido confirmado já passou por todas as etapas? */
 export const acompanhamentoFinalizado = (j) => etapaDoAcompanhamento(j) >= TOTAL_ETAPAS;
 
