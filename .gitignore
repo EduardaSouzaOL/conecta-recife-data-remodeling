@@ -1,2 +1,4 @@
 # Dados volumosos do hackathon (visitas_sem_login.csv tem ~157 MB)
 BD/
+# Pacote de envio (recomendacoes.csv tem ~73 MB)
+entrega/
