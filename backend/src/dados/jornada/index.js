@@ -3,3 +3,4 @@ export { proximosDiasUteis } from './opcoes.js';
 export {
   iniciarJornada, obterJornada, listarJornadas, preencherJornada, confirmarJornada,
 } from './operacoes.js';
+export { canaisDeProblema, cancelarJornada, alterarJornada, avaliarJornada } from './acoes.js';

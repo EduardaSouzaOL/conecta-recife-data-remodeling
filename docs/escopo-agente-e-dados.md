@@ -1,6 +1,5 @@
 # Escopo do agente e modelo de dados
 
-> Voz (Broto) foi retirada do escopo em 12/11/2026. Ficam a Home personalizada e os Serviços solicitados, ambos por toque.
 
 ## 1. O que os dados mostram (verificado nos CSVs)
 
@@ -33,7 +32,6 @@ Atenção: `pessoa_com_deficiencia` é verdadeiro em apenas 1.618 cidadãos e `g
 - CPF, nome completo ou endereço.
 - Inferir saúde a partir de comportamento (por exemplo, "visitou serviço de diabetes, logo tem diabetes").
 - Pressionar o cidadão a concluir ou a consentir.
-- Voz e assistente falado (fora do escopo desde 12/11/2026).
 
 ### Decisões do agente
 | Situação | Comportamento |

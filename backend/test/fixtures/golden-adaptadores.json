@@ -191,11 +191,21 @@
       "GET /dados/jornadas/{id}": "etapa atual do pedido",
       "PATCH /dados/jornadas/{id}": "{\"campos\":{...}}",
       "POST /dados/jornadas/{id}/confirmar": "{\"confirmar\":true}",
+      "GET /dados/jornadas/{id}/problema": "canais para relatar problema: do serviço e da Ouvidoria",
+      "POST /dados/jornadas/{id}/cancelar": "cancela o pedido em andamento (simulado)",
+      "POST /dados/jornadas/{id}/alterar": "reabre um pedido concluído dos serviços 352 e 942 (simulado)",
+      "POST /dados/jornadas/{id}/avaliar": "{\"nota\":5} ou {\"nao_consegui\":true}, uma vez, depois de concluir",
       "POST /dados/eventos": "{\"cidadao_id\":\"C000003\",\"tipo\":\"servico_aberto\",\"servico_id\":352}",
-      "GET /dados/eventos/resumo": "contagem por tipo"
+      "GET /dados/eventos/resumo": "contagem por tipo",
+      "GET /dados/fixados/{id}": "serviços fixados nos atalhos do cidadão",
+      "POST /dados/fixados/{id}": "{\"servico_id\":216,\"fixar\":true} fixa (ou desafixa com false) um serviço nos atalhos, até 6"
      },
      "motor_de_recomendacao": {
-      "GET /recomendacao/{id}?limite=8": "serviços sugeridos com motivo, base da personalização e convites de consentimento"
+      "GET /recomendacao/visitante/home?q=texto": "Home simplificada para visitante sem login: mais usados e atalhos de 1 toque",
+      "GET /recomendacao/{id}/home": "Home em blocos: atalhos, recomendados com \"Por que vejo isto?\" e controles de personalização",
+      "GET /recomendacao/{id}?limite=8": "serviços sugeridos com motivo, base da personalização e convites de consentimento",
+      "POST /recomendacao/{id}/dispensar": "\"Não me interessa\": {\"servico_id\":34} tira o serviço das sugestões",
+      "POST /recomendacao/{id}/personalizacao": "\"Não usar meus dados para sugestões\": {\"ativa\":false} desliga o uso de histórico e dados sensíveis"
      },
      "saude_da_api": "GET /health"
     }

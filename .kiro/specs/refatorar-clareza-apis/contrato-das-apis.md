@@ -35,8 +35,14 @@ Um teste (`backend/test/contrato.test.js`) garante que todo par método/caminho 
 | PATCH | `/dados/jornadas/{id}` | Motor de dados |
 | POST | `/dados/jornadas/{id}` | Motor de dados (**Legado**) |
 | POST | `/dados/jornadas/{id}/confirmar` | Motor de dados |
+| GET | `/dados/jornadas/{id}/problema` | Motor de dados |
+| POST | `/dados/jornadas/{id}/cancelar` | Motor de dados |
+| POST | `/dados/jornadas/{id}/alterar` | Motor de dados |
+| POST | `/dados/jornadas/{id}/avaliar` | Motor de dados |
 | POST | `/dados/eventos` | Motor de dados |
 | GET | `/dados/eventos/resumo` | Motor de dados |
+| GET | `/recomendacao/visitante/home` | Motor de recomendação |
+| GET | `/recomendacao/{id}/home` | Motor de recomendação |
 | GET | `/recomendacao/{id}` | Motor de recomendação |
 | POST | `/recomendacao/{id}` | Motor de recomendação (**Legado**) |
 
@@ -168,6 +174,38 @@ Também existem, fora do roteador e só no servidor local: `OPTIONS` em qualquer
 - Erros: `404 jornada_nao_encontrada`, `400 confirmacao_necessaria`, `422 campos_pendentes`. Os dois últimos trazem `jornada` (a visão atual) além de `erro` e `mensagem`.
 - Efeitos colaterais: ao concluir, grava o evento `jornada_concluida`
 
+### GET /dados/jornadas/{id}/problema
+
+- Área: motor de dados ("Relatar problema": o app encaminha ao canal certo; não registra o problema)
+- Entrada: caminho `{id}` (`jornada_id`)
+- Saída 200: `{ jornada_id, servico, texto, canais[] }`. Cada canal: `id`, `rotulo`, `detalhe`, `acao` (`abrir_link`, `abrir_app`, `discar`, `abrir_email` ou `nenhuma`). Primeiro os canais do serviço (`canal_web`, `canal_app` do catálogo), depois a Ouvidoria Geral. Sem chat. Sem dado pessoal nos links.
+- Erros: `404 jornada_nao_encontrada`
+- Efeitos colaterais: grava o evento `canais_vistos`
+
+### POST /dados/jornadas/{id}/cancelar
+
+- Área: motor de dados (simulado)
+- Entrada: caminho `{id}`
+- Saída 200: `{ ok, jornada }` com `estado: "cancelada"`
+- Erros: `404 jornada_nao_encontrada`, `409 jornada_encerrada` (já concluída ou cancelada)
+- Efeitos colaterais: grava o evento `jornada_cancelada`
+
+### POST /dados/jornadas/{id}/alterar
+
+- Área: motor de dados (simulado; só serviços 352 e 942)
+- Entrada: caminho `{id}`
+- Saída 200: `{ ok, jornada }`. Reabre o pedido concluído (`estado: "em_andamento"`), mantém os campos e remove o protocolo e a avaliação.
+- Erros: `404 jornada_nao_encontrada`, `422 alteracao_indisponivel`, `409 jornada_encerrada` (pedido não concluído)
+- Efeitos colaterais: grava o evento `jornada_alterada`
+
+### POST /dados/jornadas/{id}/avaliar
+
+- Área: motor de dados (avaliação final)
+- Entrada: caminho `{id}`; corpo, depois consulta: `nota` (1 a 5) ou `nao_consegui: true`
+- Saída 200: `{ ok, avaliacao: { jornada_id, nota | nao_consegui, ts, mensagem } }`. Uma vez só, em pedido concluído.
+- Erros: `404 jornada_nao_encontrada`, `409 jornada_nao_concluida`, `409 ja_avaliada`, `422 nota_invalida`
+- Efeitos colaterais: grava o evento `avaliacao_registrada` (com `nota` ou `nao_consegui`)
+
 ### POST /dados/eventos
 
 - Área: motor de dados
@@ -183,6 +221,24 @@ Também existem, fora do roteador e só no servidor local: `OPTIONS` em qualquer
 - Saída 200: `{ total, por_tipo: { "<tipo>": quantidade } }`
 - Erros: nenhum específico
 - Efeitos colaterais: nenhum
+
+### GET /dados/fixados/{id}
+
+- Área: motor de dados
+- Entrada: caminho `{id}` (`cidadao_id`)
+- Saída 200: `{ cidadao_id, fixados: [servico_id], limite }`. `fixados` está na ordem de fixação; `limite` é 6.
+- Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`
+- Efeitos colaterais: nenhum
+- Observação: seção mínima da tarefa 3.3; a tarefa 6 completa.
+
+### POST /dados/fixados/{id}
+
+- Área: motor de dados
+- Entrada: caminho `{id}` (`cidadao_id`); corpo: `servico_id` e `fixar` (`true` ou `false`)
+- Saída 200: a mesma de `GET /dados/fixados/{id}`. Idempotente: fixar quem já está fixado ou desafixar quem não está não muda nada.
+- Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`, `404 servico_nao_encontrado`, `422 fixar_invalido` (corpo inválido), `422 limite_de_fixados` (já são 6)
+- Efeitos colaterais: quando o estado muda, grava o evento `servico_fixado` ou `servico_desafixado`
+- Observação: seção mínima da tarefa 3.3; a tarefa 6 completa.
 
 ---
 
@@ -209,6 +265,8 @@ Também existem, fora do roteador e só no servidor local: `OPTIONS` em qualquer
 ---
 
 ## Visão da jornada
+
+Campo `acoes[]` (relatar problema, cancelar, alterar, avaliar, conforme o estado), com `rotulo`, `rotulo_leitor` e `acao` prontos. O estado `cancelada` é novo.
 
 Formato devolvido por `POST /dados/jornadas`, `GET`, `PATCH` e `POST .../confirmar`. A tela só mostra e envia; quem decide é a API.
 
@@ -259,3 +317,35 @@ Divergência registrada: a regra do projeto diz que erro que o cidadão pode cor
 - `mensagem`: frase curta em português simples.
 - Extra: hoje só `jornada` (a visão atual do pedido) em `confirmacao_necessaria` e `campos_pendentes`.
 - Erro técnico: `500` com `erro: "erro_interno"` e mensagem genérica. O Kodiak trata com a tela de erro customizada.
+
+### GET /recomendacao/{id}/home
+
+- Área: motor de recomendação (Home em blocos, logado)
+- Entrada: caminho `{id}` (`cidadao_id`)
+- Saída 200: `{ perfil: "logado", cidadao_id, personalizacao_ativa, base_da_personalizacao, explicacao_geral, aviso_saude, aviso_acessibilidade, convite_consentimento, convite_acessibilidade, controles[], blocos[] }`. Cada bloco: `id`, `grupo` (`atalhos` ou `recomendados`), `titulo`, `itens[]` (até 3). Cada item: `posicao`, `servico_id`, `titulo`, `motivo`, `por_que_vejo { texto, dados_usados[] }`, `rotulo_leitor`, `acao`; itens recomendados trazem também `tag` e `dispensar`. Com menos de 3 acessos no histórico, o primeiro bloco é "Mais procurados". Sem personalização, devolve a estrutura da Home do visitante com `personalizacao_ativa: false`. Bloco vazio não é enviado; um serviço aparece em um bloco só.
+- Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`
+- Efeitos colaterais: grava o evento `home_vista`
+
+### GET /recomendacao/visitante/home
+
+- Área: motor de recomendação (Home simplificada, sem login)
+- Entrada: consulta opcional `q` (filtra pelo nome do serviço)
+- Saída 200: `{ perfil: "visitante", explicacao_geral, mensagem_busca, blocos[] }`. Blocos "Mais usados" (até 6) e "Atalhos de 1 toque" (3). Cada item: `posicao`, `servico_id`, `titulo`, `orgao`, `motivo`, `rotulo_leitor`, `acao` (`abrir_servico` ou `iniciar_jornada`). Bloco sem item não é enviado.
+- Erros: nenhum de regra de negócio
+- Efeitos colaterais: grava o evento `home_visitante_vista` (sem `cidadao_id`). Não lê perfil, histórico, saúde nem acessibilidade.
+
+### POST /recomendacao/{id}/dispensar
+
+- Área: motor de recomendação ("Não me interessa")
+- Entrada: caminho `{id}` (`cidadao_id`); corpo, depois consulta: `servico_id`
+- Saída 200: `{ ok, cidadao_id, dispensados }` (lista de serviços dispensados). O serviço deixa de aparecer na vitrine do cidadão.
+- Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`, `404 servico_nao_encontrado`
+- Efeitos colaterais: grava a preferência e o evento `servico_dispensado`
+
+### POST /recomendacao/{id}/personalizacao
+
+- Área: motor de recomendação ("Não usar meus dados para sugestões")
+- Entrada: caminho `{id}` (`cidadao_id`); corpo, depois consulta: `ativa` (`true` ou `false`)
+- Saída 200: `{ ok, cidadao_id, personalizacao_ativa }`. Com `false`, a vitrine ignora histórico, saúde e acessibilidade e usa só o perfil geral (`base_da_personalizacao: perfil`).
+- Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`, `400 valor_invalido`
+- Efeitos colaterais: grava a preferência e o evento `personalizacao_ligada` ou `personalizacao_desligada`
