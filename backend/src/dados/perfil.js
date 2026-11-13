@@ -46,7 +46,7 @@ export function entrarComo(id, reg) {
   const consentiuAcessibilidade = temConsentimentoAcessibilidade(id);
   return {
     cidadao_id: id,
-    nome_exibicao: nomeParaExibir(id),
+    nome_exibicao: nomeParaExibir(id) ?? rotuloPersona(id),
     saudacao: `Você entrou como ${id} (dados fictícios).`,
     perfil: { ...reg.perfil },
     perfil_resumo: descreverPerfil(reg.perfil),
@@ -84,10 +84,12 @@ export function entrarComoVisitante() {
   };
 }
 
+const rotuloPersona = (id) => PERSONAS.find((p) => p[0] === id)?.[1] ?? null;
+
 let cache = null;
 function cenarios() {
   const out = [];
-  const add = (rotulo, id) => { if (id && !out.some((o) => o.cidadao_id === id)) out.push({ cidadao_id: id, cenario: rotulo }); };
+  const add = (rotulo, id, curto) => { if (id && !out.some((o) => o.cidadao_id === id)) out.push({ cidadao_id: id, cenario: rotulo, rotulo: curto || rotulo, nome_curto: curto || rotulo }); };
   let semHist, longo = ['', 0], emp, prop, infancia, idoso, jovem, saudeComHist, cadu, tutor, pcd;
   for (const [id, { perfil: p, saude, acessibilidade }] of dados.cidadaos) {
     const n = (dados.historico.get(id) || []).length;
@@ -103,19 +105,19 @@ function cenarios() {
     if (!pcd && acessibilidade.pessoa_com_deficiencia && CAMPOS_SAUDE.every((k) => !saude[k]) && n >= 3) pcd = id;
     if (!saudeComHist && (saude.gestante || saude.diabetes) && saude.hipertensao && n >= 3) saudeComHist = id;
   }
-  for (const [id, rotulo] of PERSONAS) if (dados.cidadaos.has(id)) add(`Persona oficial: ${rotulo}`, id);
-  if (dados.cidadaos.has(DEMO_ID)) add('Demonstração: Ana, cidadã fictícia com pedidos de exemplo', DEMO_ID);
-  add('Sem nenhum histórico', semHist);
-  add('Com muito histórico', longo[0]);
-  add('Família com criança pequena e sem histórico', infancia);
-  add('Empreendedor (MEI)', emp);
-  add('Proprietário de imóvel', prop);
-  add('Pessoa idosa', idoso);
-  add('Jovem estudante', jovem);
-  add('Quem cuida de animal', tutor);
-  add('Cadastro Único e Bolsa Família', cadu);
-  add('Demonstração do consentimento de dados de saúde', saudeComHist);
-  add('Demonstração do consentimento de acessibilidade (sem dado de saúde)', pcd);
+  for (const [id, rotulo] of PERSONAS) if (dados.cidadaos.has(id)) add(`Persona oficial: ${rotulo}`, id, rotulo);
+  if (dados.cidadaos.has(DEMO_ID)) add('Demonstração: Ana, cidadã fictícia com pedidos de exemplo', DEMO_ID, 'Ana');
+  add('Sem nenhum histórico', semHist, 'Sem histórico');
+  add('Com muito histórico', longo[0], 'Muito histórico');
+  add('Família com criança pequena e sem histórico', infancia, 'Criança pequena');
+  add('Empreendedor (MEI)', emp, 'Empreendedor MEI');
+  add('Proprietário de imóvel', prop, 'Proprietário');
+  add('Pessoa idosa', idoso, 'Pessoa idosa');
+  add('Jovem estudante', jovem, 'Jovem estudante');
+  add('Quem cuida de animal', tutor, 'Tutor de pet');
+  add('Cadastro Único e Bolsa Família', cadu, 'Cadastro Único');
+  add('Demonstração do consentimento de dados de saúde', saudeComHist, 'Consentimento de saúde');
+  add('Demonstração do consentimento de acessibilidade (sem dado de saúde)', pcd, 'Consentimento de acessibilidade');
   return out;
 }
 

@@ -73,6 +73,29 @@ function pedidosDeExemplo() {
   };
 }
 
+const PERSONAS_PEDIDO = ['C007938', 'C068579', 'C059592', 'C036462', 'C039227', 'C076260', 'C006566', 'C062244'];
+
+/** Um pedido fictício concluído (acompanhamento em andamento) para cada persona oficial. */
+function pedidosDasPersonas() {
+  const dias = proximosDiasUteis(4);
+  const ha = (h) => iso(new Date(Date.now() - h * 3600e3));
+  const out = {};
+  PERSONAS_PEDIDO.forEach((cid, i) => {
+    const id = `J-DEMO-${cid}`;
+    const cadu = i % 2 === 1;
+    out[id] = cadu ? {
+      jornada_id: id, cidadao_id: cid, servico_id: 352, estado: 'concluida',
+      campos: { tipo_atendimento: 'atualizacao', pessoas_na_familia: 3, canal_aviso: 'app', unidade: 'U3B', data: dias[1].valor, hora: '10:00' },
+      auto: ['canal_aviso'], criada_em: ha(30), atualizada_em: ha(28), concluida_em: ha(28), protocolo: `CNX-2026-0002${i}1`, acompanhamento: 2,
+    } : {
+      jornada_id: id, cidadao_id: cid, servico_id: 942, estado: 'concluida',
+      campos: { canal_aviso: 'app', unidade: 'U3A', data: dias[2].valor, hora: '09:00' },
+      auto: ['canal_aviso'], criada_em: ha(30), atualizada_em: ha(28), concluida_em: ha(28), protocolo: `CNX-2026-0002${i}2`, acompanhamento: 2,
+    };
+  });
+  return out;
+}
+
 /** Cria os pedidos de exemplo que faltam. Com `refazer`, volta os dois ao estado inicial. */
 export function semearPedidosDemo({ refazer = false } = {}) {
   if (!dados.cidadaos.has(DEMO_ID)) return;
@@ -83,6 +106,9 @@ export function semearPedidosDemo({ refazer = false } = {}) {
   }
   for (const [id, j] of Object.entries(pedidosDeExemplo())) {
     if (refazer || !jornadas[id]) jornadas[id] = j;
+  }
+  for (const [id, j] of Object.entries(pedidosDasPersonas())) {
+    if (dados.cidadaos.has(j.cidadao_id) && (refazer || !jornadas[id])) jornadas[id] = j;
   }
   if (refazer || !fixados[DEMO_ID]) fixados[DEMO_ID] = [942, 953];
   salvar();

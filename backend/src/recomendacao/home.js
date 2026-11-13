@@ -3,6 +3,7 @@ import { preferencias } from '../dados/store.js';
 import { temConsentimentoSaude, temConsentimentoAcessibilidade } from '../dados/consentimento.js';
 import { listarJornadas } from '../dados/jornada/index.js';
 import { curto } from '../dados/servicos.js';
+import { itemDeServico } from '../dados/catalogo.js';
 import { montarVitrine } from './vitrine.js';
 import { REGRAS, categoriasSensiveis } from './regras.js';
 import { montarHomeVisitante, servicosMaisUsados, acaoDoServico } from './home-visitante.js';
@@ -54,16 +55,26 @@ function porQueVejo(v) {
   }
 }
 
+// Campos que diferenciam os cartões: descrição curta e tipo do serviço (Agendamento, Solicitacao, Informacao).
+function extrasDoServico(s) {
+  if (!s) return { descricao: '', tipo_servico: 'Informacao' };
+  const i = itemDeServico(s);
+  return { descricao: i.descricao, tipo_servico: i.tipo };
+}
+
 function itemDaVitrine(v, id, posicao) {
   const s = dados.servicos.get(v.servico_id);
-  const p = porQueVejo(v);
+  const base = porQueVejo(v);
+  const motivo = v.motivo || base.texto;
+  const p = { ...base, texto: motivo === base.texto ? motivo : `${motivo} ${base.texto}` };
   return {
+    ...extrasDoServico(s),
     posicao,
     servico_id: v.servico_id,
     titulo: v.titulo,
     orgao: v.orgao,
     tag: v.tag,
-    motivo: p.texto,
+    motivo,
     por_que_vejo: p,
     rotulo_leitor: `Abrir ${v.titulo}`,
     acao: acaoDoServico(s),
@@ -75,7 +86,7 @@ function itemDaVitrine(v, id, posicao) {
 function itemSimples(s, posicao, motivo, origem) {
   const titulo = curto(s.nome);
   const p = { texto: motivo, dados_usados: origem === 'historico' ? [DADOS.historico] : [] };
-  return { posicao, servico_id: s.servico_id, titulo, orgao: s.orgao_sigla, motivo, por_que_vejo: p, rotulo_leitor: `Abrir ${titulo}`, acao: acaoDoServico(s) };
+  return { ...extrasDoServico(s), posicao, servico_id: s.servico_id, titulo, orgao: s.orgao_sigla, motivo, por_que_vejo: p, rotulo_leitor: `Abrir ${titulo}`, acao: acaoDoServico(s) };
 }
 
 const podeMostrar = (s, id) => categoriasSensiveis(s).every((c) => (c === 'saude' ? temConsentimentoSaude(id) : temConsentimentoAcessibilidade(id)));
