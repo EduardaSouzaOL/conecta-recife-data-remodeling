@@ -32,9 +32,11 @@ ARN_PAPEL="arn:aws:iam::$CONTA:role/$PAPEL"
 BALDE="${BALDE_ESTADO:-conecta-api-estado-$CONTA}"
 if ! aws s3api head-bucket --bucket "$BALDE" >/dev/null 2>&1; then
   aws s3api create-bucket --bucket "$BALDE" >/dev/null
+  # Bucket novo já nasce com acesso público bloqueado; reforça se a conta permitir.
   aws s3api put-public-access-block --bucket "$BALDE" \
-    --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
-  aws s3api put-bucket-tagging --bucket "$BALDE" --tagging 'TagSet=[{Key=projeto,Value=hackats-conecta-recife}]'
+    --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true \
+    || echo "AVISO: sem permissão para reforçar o bloqueio público (o padrão do S3 já bloqueia)."
+  aws s3api put-bucket-tagging --bucket "$BALDE" --tagging 'TagSet=[{Key=projeto,Value=hackats-conecta-recife}]' || true
 fi
 aws iam put-role-policy --role-name "$PAPEL" --policy-name estado-s3 --policy-document \
   "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":[\"s3:GetObject\",\"s3:PutObject\"],\"Resource\":\"arn:aws:s3:::$BALDE/estado.json\"},{\"Effect\":\"Allow\",\"Action\":\"s3:ListBucket\",\"Resource\":\"arn:aws:s3:::$BALDE\"}]}"
