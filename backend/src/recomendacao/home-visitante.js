@@ -1,5 +1,6 @@
 import { dados } from '../dados/carga.js';
 import { temJornada, curto } from '../dados/servicos.js';
+import { TAGS } from './vitrine/textos.js';
 
 // Home simplificada: sem login, sem desligar a personalização. Não lê perfil, histórico, saúde nem acessibilidade.
 
@@ -67,5 +68,38 @@ export function montarHomeVisitante({ q } = {}) {
     explicacao_geral: 'Você não entrou na sua conta. Mostramos os serviços mais usados por todas as pessoas.',
     mensagem_busca: busca && !escolhidos.length ? 'Não encontramos serviços com esse nome. Tente outra palavra.' : null,
     blocos,
+  };
+}
+
+/** Lista plana (mesmo formato da vitrine) para quem não entrou: só os serviços mais usados. */
+export function montarVitrineVisitante(derivados, { limite = 8 } = {}) {
+  const itens = lerMaisUsados().slice(0, limite).map((s, i) => ({
+    posicao: i + 1,
+    servico_id: s.servico_id,
+    titulo: curto(s.nome),
+    nome: s.nome,
+    orgao: s.orgao_sigla,
+    tema: s.temas[0] || null,
+    tipo_servico: s.natureza,
+    digital: true,
+    jornada_disponivel: temJornada(s),
+    origem: 'geral',
+    tag: TAGS.geral,
+    motivo: MOTIVO,
+    outros_motivos: [],
+  }));
+  return {
+    cidadao_id: 'visitante',
+    base_da_personalizacao: 'geral',
+    explicacao_geral: 'Você não entrou na sua conta. Mostramos os serviços mais usados por todas as pessoas.',
+    aviso_saude: 'Não usamos nenhuma informação de saúde nesta lista.',
+    aviso_acessibilidade: 'Não usamos nenhuma informação de acessibilidade nesta lista.',
+    total_acessos_historico: 0,
+    semana_de_referencia_da_demanda: derivados.semana_ref,
+    itens,
+    consentimento: null,
+    convite_consentimento: null,
+    consentimento_acessibilidade: null,
+    convite_acessibilidade: null,
   };
 }

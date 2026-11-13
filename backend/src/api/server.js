@@ -4,6 +4,7 @@ import { carregarDados } from '../dados/carga.js';
 import { carregarDerivados } from '../recomendacao/derivados.js';
 import { carregarEstado, salvarLogo } from '../dados/store.js';
 import { criarApp } from './app.js';
+import { iniciarDemo } from '../dados/demo.js';
 import { cabecalhosJson, criarCors, interpretarJson, METODOS_COM_CORPO, respostaDeErro, verificarTamanho } from './http-comum.js';
 
 const PORTA = Number(process.env.PORT || 8080);
@@ -36,6 +37,7 @@ function responder(res, status, corpo) {
 async function main() {
   await carregarDados();
   carregarEstado();
+  iniciarDemo(); // cidadã fictícia DEMO001 e pedidos de exemplo (só em memória)
   const derivados = await carregarDerivados();
   const tratar = criarApp(derivados);
 

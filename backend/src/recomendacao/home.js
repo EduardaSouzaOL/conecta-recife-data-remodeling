@@ -3,7 +3,9 @@ import { preferencias, listarFixados } from '../dados/store.js';
 import { temConsentimentoSaude, temConsentimentoAcessibilidade } from '../dados/consentimento.js';
 import { listarJornadas } from '../dados/jornada/index.js';
 import { curto } from '../dados/servicos.js';
+import { itemDeServico } from '../dados/catalogo.js';
 import { montarVitrine } from './vitrine.js';
+import { temHomeFixa, blocosFixos } from './home-fixa.js';
 import { REGRAS, categoriasSensiveis } from './regras.js';
 import { montarHomeVisitante, servicosMaisUsados, acaoDoServico } from './home-visitante.js';
 import { montarNichos } from './nichos.js';
@@ -55,16 +57,29 @@ function porQueVejo(v) {
   }
 }
 
-function itemDaVitrine(v, id, posicao) {
+// Campos que diferenciam os cartões: descrição curta e tipo do serviço (Agendamento, Solicitacao, Informacao).
+function extrasDoServico(s) {
+  if (!s) return { descricao: '', tipo_servico: 'Informacao' };
+  const i = itemDeServico(s);
+  return { descricao: i.descricao, tipo_servico: i.tipo };
+}
+
+function itemDaVitrine(v, id, posicao, id_bloco) {
   const s = dados.servicos.get(v.servico_id);
-  const p = porQueVejo(v);
+  const base = porQueVejo(v);
+  // No bloco de direitos, o motivo sempre fala de direito ("pode ter direito"), nunca de outro bloco.
+  const motivo = id_bloco === 'direitos' && !/direito/i.test(v.motivo || '')
+    ? 'Você pode ter direito a este serviço. Confira as regras antes de pedir.'
+    : (v.motivo || base.texto);
+  const p = { ...base, texto: motivo === base.texto ? motivo : `${motivo} ${base.texto}` };
   return {
+    ...extrasDoServico(s),
     posicao,
     servico_id: v.servico_id,
     titulo: v.titulo,
     orgao: v.orgao,
     tag: v.tag,
-    motivo: p.texto,
+    motivo,
     por_que_vejo: p,
     rotulo_leitor: `Abrir ${v.titulo}`,
     acao: acaoDoServico(s),
@@ -76,12 +91,12 @@ function itemDaVitrine(v, id, posicao) {
 function itemSimples(s, posicao, motivo, origem) {
   const titulo = curto(s.nome);
   const p = { texto: motivo, dados_usados: origem === 'historico' ? [DADOS.historico] : [] };
-  return { posicao, servico_id: s.servico_id, titulo, orgao: s.orgao_sigla, motivo, por_que_vejo: p, rotulo_leitor: `Abrir ${titulo}`, acao: acaoDoServico(s) };
+  return { ...extrasDoServico(s), posicao, servico_id: s.servico_id, titulo, orgao: s.orgao_sigla, motivo, por_que_vejo: p, rotulo_leitor: `Abrir ${titulo}`, acao: acaoDoServico(s) };
 }
 
 const podeMostrar = (s, id) => categoriasSensiveis(s).every((c) => (c === 'saude' ? temConsentimentoSaude(id) : temConsentimentoAcessibilidade(id)));
 
-function controles(id, ativa) {
+export function controles(id, ativa) {
   return [{
     id: ativa ? 'desligar_personalizacao' : 'ligar_personalizacao',
     rotulo: ativa ? 'Não usar meus dados para sugestões' : 'Usar meus dados para sugestões',
@@ -102,7 +117,7 @@ function atalhosDoHistorico(hist, id) {
 
 /** Serviço sugerido depois do último pedido concluído, se houver. */
 function proximoPasso(id, derivados) {
-  const concluida = listarJornadas(id).find((j) => j.estado === 'concluida');
+  const concluida = listarJornadas(id).find((j) => j.estado === 'concluida' || (j.estado === 'em_andamento' && j.protocolo));
   if (!concluida) return null;
   for (const [dest] of derivados.proximo[concluida.servico_id] || []) {
     const s = dados.servicos.get(dest);
@@ -118,7 +133,14 @@ export function montarHome(id, derivados, consulta = {}) {
   const pref = preferencias[id] || {};
   if (pref.personalizar === false) {
     const v = montarHomeVisitante(consulta);
-    return { ...v, perfil: 'logado', cidadao_id: id, personalizacao_ativa: false, controles: controles(id, false) };
+    return {
+      ...v,
+      perfil: 'logado',
+      cidadao_id: id,
+      personalizacao_ativa: false,
+      explicacao_geral: 'Você desligou as sugestões com os seus dados. Mostramos os serviços mais usados por todas as pessoas.',
+      controles: controles(id, false),
+    };
   }
 
   const vit = montarVitrine(id, derivados, { limite: 20 });
@@ -156,7 +178,7 @@ export function montarHome(id, derivados, consulta = {}) {
   for (const b of BLOCOS) {
     const itens = porBloco.get(b.id);
     if (!itens.length) continue;
-    blocos.push({ id: b.id, grupo: 'recomendados', titulo: b.titulo, itens: itens.map((v, i) => itemDaVitrine(v, id, i + 1)) });
+    blocos.push({ id: b.id, grupo: 'recomendados', titulo: b.titulo, itens: itens.map((v, i) => itemDaVitrine(v, id, i + 1, b.id)) });
   }
 
   const prox = proximoPasso(id, derivados);
@@ -190,6 +212,7 @@ export function montarHome(id, derivados, consulta = {}) {
     convite_consentimento: vit.convite_consentimento,
     convite_acessibilidade: vit.convite_acessibilidade,
     controles: controles(id, true),
-    blocos,
+    // Personas da apresentação (C076260 e C062244): blocos definidos pela equipe.
+    blocos: temHomeFixa(id) ? blocosFixos(id) : blocos,
   };
 }

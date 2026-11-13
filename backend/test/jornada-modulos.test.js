@@ -21,9 +21,9 @@ after(() => amb?.limpar());
 // ---------- estrutura ----------
 
 test('a pasta tem os módulos previstos e o index reexporta os nomes públicos', async () => {
-  assert.deepEqual(readdirSync(PASTA).sort(), ['acoes-visao.js', 'acoes.js', 'index.js', 'opcoes.js', 'operacoes.js', 'telas.js', 'validacao.js', 'visao.js']);
+  assert.deepEqual(readdirSync(PASTA).sort(), ['acoes-visao.js', 'acoes.js', 'acompanhamento.js', 'index.js', 'opcoes.js', 'operacoes.js', 'telas.js', 'validacao.js', 'visao.js']);
   assert.deepEqual(Object.keys(J).sort(), [
-    'alterarJornada', 'avaliarJornada', 'canaisDeProblema', 'cancelarJornada', 'confirmarJornada', 'iniciarJornada', 'listarJornadas', 'obterJornada', 'preencherJornada', 'proximosDiasUteis',
+    'alterarJornada', 'aplicarValorDigitado', 'avaliarJornada', 'avancarPedido', 'canaisDeProblema', 'cancelarJornada', 'confirmarJornada', 'iniciarJornada', 'listarJornadas', 'obterJornada', 'preencherJornada', 'proximosDiasUteis',
   ]);
 });
 
@@ -32,9 +32,10 @@ test('dependências entre módulos seguem operacoes → visao → validacao → 
     'opcoes.js': [],
     'telas.js': ['opcoes.js'],
     'validacao.js': ['opcoes.js'],
-    'visao.js': ['telas.js', 'validacao.js'],
-    'operacoes.js': ['telas.js', 'validacao.js', 'visao.js'],
-    'acoes.js': ['visao.js'],
+    'acompanhamento.js': [],
+    'visao.js': ['telas.js', 'validacao.js', 'acompanhamento.js'],
+    'operacoes.js': ['telas.js', 'validacao.js', 'visao.js', 'acompanhamento.js'],
+    'acoes.js': ['visao.js', 'validacao.js', 'acompanhamento.js'],
     'index.js': ['opcoes.js', 'operacoes.js', 'acoes.js'],
   };
   for (const [arq, ok] of Object.entries(permitido)) {

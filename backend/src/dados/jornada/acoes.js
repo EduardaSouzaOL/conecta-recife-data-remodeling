@@ -1,7 +1,9 @@
 import { dados } from '../carga.js';
 import { jornadas, registrarEvento, salvar } from '../store.js';
 import { visao } from './visao.js';
-import { SERVICOS_ALTERAVEIS } from './acoes-visao.js';
+import { SERVICOS_ALTERAVEIS, podeCancelar } from './acoes-visao.js';
+import { PADRAO_SENSIVEL } from './validacao.js';
+import { etapaDoAcompanhamento, acompanhamentoFinalizado } from './acompanhamento.js';
 
 // Ações simuladas sobre um pedido: canais de problema, cancelar, alterar e avaliar.
 // Nada é enviado à Prefeitura. Cada ação grava um evento sem texto livre.
@@ -32,7 +34,7 @@ export function canaisDeProblema(id) {
 export function cancelarJornada(id) {
   const j = jornadas[id];
   if (!j) return naoEncontrada;
-  if (j.estado !== 'em_andamento') return { erro: 'jornada_encerrada', mensagem: 'Este pedido já foi encerrado e não pode ser cancelado.' };
+  if (!podeCancelar(j)) return { erro: 'jornada_encerrada', mensagem: 'Este pedido já foi encerrado e não pode ser cancelado.' };
   j.estado = 'cancelada';
   j.cancelada_em = j.atualizada_em = agora();
   salvar();
@@ -50,6 +52,7 @@ export function alterarJornada(id) {
   delete j.protocolo;
   delete j.concluida_em;
   delete j.avaliacao;
+  delete j.acompanhamento;
   j.estado = 'em_andamento';
   j.alterada_em = j.atualizada_em = agora();
   salvar();
@@ -58,7 +61,9 @@ export function alterarJornada(id) {
 }
 
 /** Nota de 1 a 5 ou "não consegui", uma vez só, em pedido concluído. */
-export function avaliarJornada(id, { nota, nao_consegui } = {}) {
+const RESOLVIDO = ['sim', 'em_parte', 'nao'];
+
+export function avaliarJornada(id, { nota, nao_consegui, resolvido, comentario } = {}) {
   const j = jornadas[id];
   if (!j) return naoEncontrada;
   if (j.estado !== 'concluida') return { erro: 'jornada_nao_concluida', mensagem: 'Você pode avaliar depois de concluir o pedido.' };
@@ -66,9 +71,32 @@ export function avaliarJornada(id, { nota, nao_consegui } = {}) {
   const semNota = nao_consegui === true || nao_consegui === 'true';
   const n = Number(nota);
   if (!semNota && !(Number.isInteger(n) && n >= 1 && n <= 5)) return { erro: 'nota_invalida', mensagem: 'Escolha uma nota de 1 a 5 ou toque em "Não consegui".' };
-  j.avaliacao = semNota ? { nao_consegui: true, ts: agora() } : { nota: n, ts: agora() };
+  if (resolvido !== undefined && resolvido !== null && !RESOLVIDO.includes(resolvido)) {
+    return { erro: 'avaliacao_invalida', mensagem: 'Diga se resolveu: "sim", "em_parte" ou "nao".' };
+  }
+  let texto = null;
+  if (comentario !== undefined && comentario !== null && comentario !== '') {
+    texto = String(comentario).trim();
+    if (texto.length > 200) return { erro: 'avaliacao_invalida', mensagem: 'O comentário pode ter até 200 caracteres.' };
+    if (PADRAO_SENSIVEL.test(texto)) return { erro: 'avaliacao_invalida', mensagem: 'Por segurança, não escreva CPF, nome completo, telefone, e-mail ou endereço aqui.' };
+  }
+  const extra = { ...(resolvido ? { resolvido } : {}), ...(texto ? { comentario: texto } : {}) };
+  j.avaliacao = semNota ? { nao_consegui: true, ...extra, ts: agora() } : { nota: n, ...extra, ts: agora() };
   j.atualizada_em = j.avaliacao.ts;
   salvar();
-  registrarEvento(j.cidadao_id, 'avaliacao_registrada', { servico_id: j.servico_id, ...(semNota ? { nao_consegui: true } : { nota: n }) });
+  registrarEvento(j.cidadao_id, 'avaliacao_registrada', { servico_id: j.servico_id, ...(semNota ? { nao_consegui: true } : { nota: n }), ...(resolvido ? { resolvido } : {}) });
   return { avaliacao: { jornada_id: j.jornada_id, ...j.avaliacao, mensagem: 'Obrigado por avaliar.' } };
+}
+
+/** Demonstração: passa o pedido confirmado para a próxima etapa (por exemplo, de "Aguardando confirmação da unidade" para "Consulta confirmada"). */
+export function avancarPedido(id) {
+  const j = jornadas[id];
+  if (!j) return naoEncontrada;
+  if (j.estado !== 'concluida') return { erro: 'jornada_nao_concluida', mensagem: 'Só dá para avançar um pedido que já foi confirmado.' };
+  if (acompanhamentoFinalizado(j)) return { erro: 'etapa_final', mensagem: 'Este pedido já está na última etapa.' };
+  j.acompanhamento = etapaDoAcompanhamento(j) + 1;
+  j.atualizada_em = agora();
+  salvar();
+  registrarEvento(j.cidadao_id, 'pedido_avancado', { servico_id: j.servico_id, etapa: j.acompanhamento });
+  return { jornada: visao(j) };
 }

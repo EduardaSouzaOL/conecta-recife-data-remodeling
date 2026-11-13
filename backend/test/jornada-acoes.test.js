@@ -70,7 +70,7 @@ test('avaliar e alterar: só depois de concluir; avaliação uma vez; alterar re
 
   const alt = (await chamar('POST', `/dados/jornadas/${id}/alterar`)).corpo.jornada;
   assert.equal(alt.estado, 'em_andamento');
-  assert.equal(alt.protocolo, undefined);
+  assert.equal(alt.protocolo, null); // o campo sempre existe; vazio até confirmar de novo
   assert.ok(Object.keys(alt.campos_preenchidos).length > 0);
   assert.deepEqual(alt.acoes.map((x) => x.id), ['problema', 'cancelar']);
 });

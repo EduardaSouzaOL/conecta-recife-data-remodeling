@@ -3,7 +3,16 @@ import {
   resumoConsentimento, resumoTodos, registrarDecisao, historicoConsentimento,
 } from '../../dados/consentimento.js';
 import { falhar } from '../erros.js';
-import { identificarCidadao, lerCampo, lerFinalidade } from '../entrada.js';
+import { identificarCidadao, lerCampo, lerFinalidade, exigirLogin } from '../entrada.js';
+import { resumoConsentimentoVisitante } from '../../dados/demo.js';
+import { FINALIDADES } from '../../dados/consentimento.js';
+
+const respostaVisitante = (finalidade) => ({
+  cidadao_id: 'visitante',
+  ...resumoConsentimentoVisitante(finalidade),
+  historico: [],
+  finalidades: Object.fromEntries(FINALIDADES.map((f) => [f, resumoConsentimentoVisitante(f)])),
+});
 
 const respostaConsentimento = (id, finalidade) => ({
   cidadao_id: id,
@@ -21,7 +30,8 @@ export function registrarRotasConsentimentos(rota) {
     consulta: '?finalidade=',
   });
   rota(['GET'], '/dados/consentimentos/:id', ({ p, consulta }) => {
-    const { id } = identificarCidadao(p.id);
+    const { id, visitante } = identificarCidadao(p.id);
+    if (visitante) return respostaVisitante(lerFinalidade({}, consulta));
     return respostaConsentimento(id, lerFinalidade({}, consulta));
   }, {
     area: 'motor_de_dados',
@@ -29,7 +39,7 @@ export function registrarRotasConsentimentos(rota) {
     consulta: '?finalidade=',
   });
   rota(['POST'], '/dados/consentimentos/:id', ({ p, corpo, consulta }) => {
-    const { id } = identificarCidadao(p.id);
+    const { id } = exigirLogin(identificarCidadao(p.id));
     const f = lerFinalidade(corpo, consulta);
     const r = registrarDecisao(id, lerCampo(corpo, consulta, 'decisao'), f);
     if (r.erro) falhar(r.erro, r.mensagem);

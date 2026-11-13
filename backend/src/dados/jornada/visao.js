@@ -1,7 +1,8 @@
 import { dados } from '../carga.js';
 import { telasDoServico } from './telas.js';
 import { acoesDisponiveis } from './acoes-visao.js';
-import { opcoesDoCampo, todosValidos, validar } from './validacao.js';
+import { opcoesDoCampo, todosValidos, validar, unidadeEscolhida } from './validacao.js';
+import { acompanhar, rotuloDeData, estadoPublico } from './acompanhamento.js';
 
 // ---------- montagem da resposta ----------
 
@@ -25,8 +26,9 @@ function descreverCampo(c, ctx, j) {
 }
 
 function rotuloDoValor(c, valor, ctx) {
-  if (c.tipo === 'select') return (opcoesDoCampo(c, ctx) || []).find((o) => o.valor === valor)?.rotulo ?? String(valor);
+  if (c.tipo === 'select') return (opcoesDoCampo(c, ctx) || []).find((o) => o.valor === valor)?.rotulo ?? (c.nome === 'data' ? rotuloDeData(valor) : String(valor));
   if (c.tipo === 'booleano') return valor ? 'Sim' : 'Não';
+  if (c.nome === 'data') return rotuloDeData(valor);
   return String(valor);
 }
 
@@ -69,7 +71,7 @@ function montarVisao(j, servico, ctx, { puladas, atual, visiveis, idx }, faltand
     jornada_id: j.jornada_id,
     cidadao_id: j.cidadao_id,
     servico: { servico_id: servico.servico_id, nome: servico.nome, orgao: servico.orgao_sigla },
-    estado: j.estado,
+    estado: estadoPublico(j),
     aviso: AVISO,
     telas: visiveis.map((t) => ({ id: t.id, titulo: t.titulo })),
     telas_puladas: puladas,
@@ -88,7 +90,12 @@ function montarVisao(j, servico, ctx, { puladas, atual, visiveis, idx }, faltand
     erros,
     pode_confirmar: faltando.length === 0 && j.estado === 'em_andamento',
     acoes: acoesDisponiveis(j),
-    resumo: atual.revisao || j.estado === 'concluida' ? resumoDe(j) : undefined,
+    resumo: resumoDe(j),
+    protocolo: null,
+    concluida_em: null,
+    mensagem_final: null,
+    unidade: unidadeEscolhida(j.campos, ctx),
+    ...acompanhar(j, visiveis, idx),
   };
   if (j.estado === 'concluida') {
     base.protocolo = j.protocolo;

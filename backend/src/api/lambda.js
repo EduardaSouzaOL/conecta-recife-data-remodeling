@@ -4,11 +4,14 @@ import { carregarDados, DIR_DATA } from '../dados/carga.js';
 import { carregarEstado, salvarLogo } from '../dados/store.js';
 import { carregarDerivados } from '../recomendacao/derivados.js';
 import { criarApp } from './app.js';
+import { iniciarDemo, semearPedidosDemo } from '../dados/demo.js';
+import { sincronizarDoS3, enviarParaS3 } from '../dados/estado-s3.js';
 import { cabecalhosJson, criarCors, interpretarJson, METODOS_COM_CORPO, respostaDeErro, verificarTamanho } from './http-comum.js';
 
 /**
  * Adaptador AWS Lambda (Function URL, payload 2.0). Usa o mesmo roteador do servidor HTTP.
- * Fase 1: o estado (consentimentos, pedidos, eventos) fica em DATA_DIR (/tmp/data) e some quando a instância é trocada.
+ * O estado (consentimentos, pedidos, eventos) fica em DATA_DIR (/tmp/data). Com ESTADO_S3, ele é compartilhado
+ * entre as instâncias por um objeto no S3 (ver dados/estado-s3.js); sem ela, cada instância tem o seu.
  */
 
 const CORS = criarCors('GET,POST,PUT,PATCH,DELETE,OPTIONS');
@@ -36,6 +39,7 @@ function iniciar() {
       prepararDados();
       await carregarDados();
       carregarEstado();
+      iniciarDemo(); // cidadã fictícia DEMO001 e pedidos de exemplo (só em memória)
       const derivados = await carregarDerivados();
       return criarApp(derivados);
     })().catch((e) => { pronto = null; throw e; });
@@ -59,12 +63,14 @@ export async function handler(evento) {
   if (metodo === 'OPTIONS') return { statusCode: 204, headers: CORS, body: '' };
   try {
     const tratar = await iniciar();
+    // Estado mais novo das outras instâncias; os pedidos de exemplo da DEMO001 sempre existem.
+    if (await sincronizarDoS3()) semearPedidosDemo();
     const caminho = (evento.rawPath || evento.path || '/').replace(/\/+$/, '');
     const consulta = evento.queryStringParameters || {};
     const corpo = METODOS_COM_CORPO.includes(metodo) ? lerCorpo(evento) : {};
     const { status, corpo: saida } = await tratar({ metodo, caminho, consulta, corpo });
     // O Lambda pode congelar a instância antes do timer de 500 ms do store: grava na hora.
-    if (metodo !== 'GET') salvarLogo();
+    if (metodo !== 'GET') { salvarLogo(); await enviarParaS3(); }
     return resposta(status, saida);
   } catch (e) {
     const { status, corpo } = respostaDeErro(e);

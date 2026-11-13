@@ -24,7 +24,15 @@ export function carregarEstado() {
   } catch {
     return; // primeira execução: arquivo ausente
   }
-  if (!texto.trim()) return; // arquivo vazio
+  carregarEstadoDeTexto(texto);
+}
+
+/** Estado serializado (o mesmo conteúdo de estado.json). Usado para compartilhar entre instâncias do Lambda. */
+export const estadoComoTexto = () => JSON.stringify(estado);
+
+/** Recarrega o estado a partir do texto JSON, no lugar (as referências exportadas continuam valendo). */
+export function carregarEstadoDeTexto(texto) {
+  if (!texto || !texto.trim()) return; // arquivo vazio
   let lido;
   try {
     lido = JSON.parse(texto);

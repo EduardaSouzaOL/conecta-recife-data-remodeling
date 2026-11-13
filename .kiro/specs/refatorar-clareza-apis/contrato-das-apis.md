@@ -350,3 +350,57 @@ Divergência registrada: a regra do projeto diz que erro que o cidadão pode cor
 - Saída 200: `{ ok, cidadao_id, personalizacao_ativa }`. Com `false`, a vitrine ignora histórico, saúde e acessibilidade e usa só o perfil geral (`base_da_personalizacao: perfil`).
 - Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`, `400 valor_invalido`
 - Efeitos colaterais: grava a preferência e o evento `personalizacao_ligada` ou `personalizacao_desligada`
+### GET /recomendacao/{id}/personalizacao
+- Área: motor de recomendação (situação da personalização)
+- Entrada: caminho `{id}` (`cidadao_id` ou `visitante`)
+- Saída 200: `{ cidadao_id, personalizacao_ativa, autorizou_dados_de_saude, rotulo, consentimento_saude, controle }`. Visitante: `personalizacao_ativa: false`, `consentimento_saude: null`, `controle: null`.
+- Erros: `404 cidadao_nao_encontrado`
+- Efeitos colaterais: nenhum
+### POST /demo/jornadas/{id}/avancar
+- Área: demonstração (simulado)
+- Entrada: caminho `{id}` (`jornada_id`); sem corpo
+- Saída 200: `{ ok, etapa_atual, jornada }`. Passa o pedido confirmado para a próxima etapa do acompanhamento.
+- Erros: `404 jornada_nao_encontrada`, `409 jornada_nao_concluida`, `409 etapa_final`
+- Efeitos colaterais: grava o evento `pedido_avancado`
+### POST /demo/reiniciar
+- Área: demonstração
+- Entrada: sem corpo
+- Saída 200: `{ ok, cidadao_id: "DEMO001", pedidos[] }`. Recria os dois pedidos de exemplo da cidadã fictícia DEMO001.
+- Erros: nenhum
+- Efeitos colaterais: regrava os pedidos J-DEMO0001 e J-DEMO0002, tira os outros pedidos da DEMO001 e regrava os atalhos fixados dela (nenhum outro cidadão é tocado)
+### GET /dados/busca
+- Área: motor de dados (busca no catálogo)
+- Entrada: consulta `q` (termo) e `limite` (1 a 50, padrão 20)
+- Saída 200: `{ q, total, mensagem, itens[] }`. Cada item: `id`, `titulo`, `descricao` (curta), `tipo` (`Agendamento`, `Solicitacao` ou `Informacao`), `orgao`. Sem resultado: `itens: []` e `mensagem` em texto simples.
+- Erros: nenhum de regra de negócio
+- Efeitos colaterais: grava o evento `busca_feita` (sem o termo e sem `cidadao_id`)
+### GET /dados/categorias
+- Área: motor de dados (categorias)
+- Entrada: nenhuma
+- Saída 200: `{ total, categorias[] }`. Cada categoria: `categoria_id` (kebab-case), `rotulo`, `total_servicos`.
+- Erros: nenhum
+- Efeitos colaterais: nenhum
+### GET /dados/categorias/{categoria_id}/servicos
+- Área: motor de dados (serviços por categoria)
+- Entrada: caminho `{categoria_id}`; consulta `limite` (1 a 50, padrão 50)
+- Saída 200: `{ categoria_id, rotulo, total, itens[] }`, itens como na busca, mais procurados primeiro.
+- Erros: `404 categoria_nao_encontrada`
+- Efeitos colaterais: nenhum
+### GET /dados/cidadaos/{id}/interesses
+- Área: motor de dados (interesses do onboarding)
+- Entrada: caminho `{id}` (`cidadao_id` ou `visitante`)
+- Saída 200: `{ cidadao_id, interesses[] }`
+- Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`
+- Efeitos colaterais: nenhum
+### PUT /dados/cidadaos/{id}/interesses
+- Área: motor de dados (interesses do onboarding)
+- Entrada: caminho `{id}`; corpo `interesses` (lista de `categoria_id`)
+- Saída 200: `{ ok, cidadao_id, interesses[] }`
+- Erros: `400 tema_invalido`, `403 login_necessario` (visitante), `400 id_invalido`, `404 cidadao_nao_encontrado`
+- Efeitos colaterais: grava a preferência e o evento `interesses_salvos`
+### GET /dados/metricas
+- Área: motor de dados (medição)
+- Entrada: nenhuma
+- Saída 200: `{ desde, ate, pedidos_criados, pedidos_confirmados, pedidos_cancelados, pedidos_alterados, avaliacoes, telas_puladas, erros_de_preenchimento, homes_vistas, homes_visitante, personalizacao_desligada, buscas, taxa_de_conclusao, nota_media, nao_consegui, resolvido{}, rotulos{}, por_dia[], aviso }`
+- Erros: nenhum
+- Efeitos colaterais: nenhum

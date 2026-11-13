@@ -53,10 +53,18 @@ test('com consentimento de saúde o bloco aparece e o título não cita a condi�
   const id = 'C062244';
   await amb.tratar({ metodo: 'POST', caminho: `/dados/consentimentos/${id}`, consulta: {}, corpo: { decisao: 'concedido', finalidade: 'saude_personalizacao' } });
   const h = await home(id);
-  const b = h.blocos.find((x) => x.id === 'saude');
-  assert.ok(b, 'bloco saude ausente');
-  assert.equal(b.titulo, 'Cuidar de você');
-  for (const i of b.itens) assert.equal(i.motivo, 'Com base no seu uso do app.');
+  // C062244 tem Home definida pela equipe: com consentimento ganha "Cuidados contínuos".
+  const b = h.blocos.find((x) => x.id === 'cuidados_continuos');
+  assert.ok(b, 'bloco cuidados_continuos ausente');
+  assert.equal(b.titulo, 'Cuidados contínuos');
+  for (const x of h.blocos) {
+    assert.doesNotMatch(x.titulo, /hipertens|diabet|gestan|saúde mental/i);
+    for (const i of x.itens) assert.doesNotMatch(i.motivo_curto, /hipertens|diabet|gestan|saúde mental/i);
+  }
+  await amb.tratar({ metodo: 'POST', caminho: `/dados/consentimentos/${id}`, consulta: {}, corpo: { decisao: 'revogado', finalidade: 'saude_personalizacao' } });
+  const sem = await home(id);
+  assert.ok(!sem.blocos.some((x) => x.id === 'cuidados_continuos'));
+  assert.doesNotMatch(JSON.stringify(sem.blocos), /hipertens|diabet/i);
 });
 
 test('pouco ou nenhum histórico: primeiro bloco é "Mais procurados", nunca vazio', async () => {
@@ -78,6 +86,24 @@ test('personalização desligada devolve a estrutura do visitante com personaliz
   await amb.tratar({ metodo: 'POST', caminho: `/recomendacao/${id}/personalizacao`, consulta: {}, corpo: { ativa: true } });
 });
 
+test('GET personalizacao mostra o estado (ligada por padrão, desligada depois do POST) e o botão para mudar', async () => {
+  const id = 'C076260';
+  const ler = async () => (await amb.tratar({ metodo: 'GET', caminho: `/recomendacao/${id}/personalizacao`, consulta: {}, corpo: {} })).corpo;
+  let r = await ler();
+  assert.equal(r.cidadao_id, id);
+  assert.equal(r.personalizacao_ativa, true);
+  assert.equal(r.controle.id, 'desligar_personalizacao');
+  assert.deepEqual(r.controle.acao.corpo, { ativa: false });
+  await amb.tratar({ metodo: 'POST', caminho: `/recomendacao/${id}/personalizacao`, consulta: {}, corpo: { ativa: false } });
+  r = await ler();
+  assert.equal(r.personalizacao_ativa, false);
+  assert.equal(r.controle.id, 'ligar_personalizacao');
+  assert.match((await home(id)).explicacao_geral, /desligou as sugestões/);
+  await amb.tratar({ metodo: 'POST', caminho: `/recomendacao/${id}/personalizacao`, consulta: {}, corpo: { ativa: true } });
+  // visitante não tem personalização: a rota responde (sem erro 500) com o estado "desligado"
+  const vis = (await amb.tratar({ metodo: 'GET', caminho: '/recomendacao/visitante/personalizacao', consulta: {}, corpo: {} })).corpo;
+  assert.equal(vis.personalizacao_ativa, false);
+});
 test('id inexistente dá 404 e a lista plana segue com "itens"', async () => {
   await assert.rejects(() => amb.tratar({ metodo: 'GET', caminho: '/recomendacao/C999999/home', consulta: {}, corpo: {} }), (e) => e.status === 404 || e.codigo === 'cidadao_nao_encontrado' || /cidadao_nao_encontrado/.test(JSON.stringify(e)));
   const plana = await amb.tratar({ metodo: 'GET', caminho: '/recomendacao/C007938', consulta: {}, corpo: {} });
