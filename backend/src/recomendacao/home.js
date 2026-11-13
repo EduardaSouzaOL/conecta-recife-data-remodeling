@@ -1,11 +1,12 @@
 import { dados } from '../dados/carga.js';
-import { preferencias } from '../dados/store.js';
+import { preferencias, listarFixados } from '../dados/store.js';
 import { temConsentimentoSaude, temConsentimentoAcessibilidade } from '../dados/consentimento.js';
 import { listarJornadas } from '../dados/jornada/index.js';
 import { curto } from '../dados/servicos.js';
 import { montarVitrine } from './vitrine.js';
 import { REGRAS, categoriasSensiveis } from './regras.js';
 import { montarHomeVisitante, servicosMaisUsados, acaoDoServico } from './home-visitante.js';
+import { montarNichos } from './nichos.js';
 
 // Home em blocos: reagrupa a lista da vitrine (que já aplica consentimento e preferências).
 // Nada aqui recalcula pontuação. Cada serviço aparece em um só bloco, com no máximo 3 itens.
@@ -166,6 +167,16 @@ export function montarHome(id, derivados, consulta = {}) {
       titulo: 'Próximo passo',
       itens: [itemSimples(prox.servico, 1, `Quem usou ${curto(prox.de.nome, 60)} também costuma usar este.`, 'historico')],
     });
+  }
+
+  const blocoAtalhos = blocos.find((b) => b.grupo === 'atalhos');
+  if (blocoAtalhos) {
+    const fixados = listarFixados(id);
+    const nichosAtalhos = montarNichos(id, hist, podeMostrar, fixados);
+    if (nichosAtalhos) {
+      blocoAtalhos.nichos = nichosAtalhos.nichos;
+      blocoAtalhos.filtros = nichosAtalhos.filtros;
+    }
   }
 
   return {

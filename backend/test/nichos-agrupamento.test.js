@@ -35,7 +35,10 @@ test('itens por usos e desempate por servico_id; máximo de 6', () => {
   const r = montarNichos('C1', hist(...ids, 8, 8, 7), sempre, [], c);
   assert.equal(r.nichos.length, 1);
   assert.deepEqual(r.nichos[0].itens.map((i) => i.servico_id), [8, 7, 1, 2, 3, 4]);
-  assert.deepEqual(Object.keys(r.nichos[0].itens[0]).sort(), ['servico_id', 'titulo']);
+  assert.deepEqual(
+    Object.keys(r.nichos[0].itens[0]).sort(),
+    ['acao_fixar', 'banner', 'fixado', 'logo', 'motivo', 'rotulo_fixar', 'rotulo_leitor', 'servico_id', 'titulo'],
+  );
 });
 
 test('nicho cujos serviços foram bloqueados por podeMostrar fica ausente', () => {

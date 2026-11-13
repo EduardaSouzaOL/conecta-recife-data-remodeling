@@ -4,6 +4,7 @@ import { curto } from '../dados/servicos.js';
 // Nichos da Home ("Seus atalhos por nicho"). Ver .kiro/specs/destravar-backend-para-kodiak/design.md
 
 const TEMA_IGNORADO = 'conecta labs';
+const SERVICOS_DE_JORNADA = new Set([942, 352]);
 
 /**
  * Tema principal (nicho) de um serviço: o primeiro valor de `temas` que, após trim,
@@ -25,11 +26,53 @@ const MAX_ITENS = 6;
 
 const slug = (t) => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 
+function textoBanner(descricao, titulo) {
+  if (typeof descricao !== 'string' || !descricao.trim()) return titulo;
+  const limpo = descricao.replace(/\s+/g, ' ').trim();
+  const frase = limpo.split(/(?<=[.!?])\s+/)[0] || limpo;
+  return curto(frase, 120);
+}
+
+function montarItemNicho(servico, fixado) {
+  const titulo = curto(servico.nome || `Serviço ${servico.servico_id}`);
+  const ehAgendamento = servico.natureza === 'Agendamento';
+  const rotulo_botao = ehAgendamento ? 'Agende aqui' : 'Abrir serviço';
+  const acao = SERVICOS_DE_JORNADA.has(servico.servico_id)
+    ? { tipo: 'iniciar_jornada', servico_id: servico.servico_id }
+    : { tipo: 'abrir_servico', servico_id: servico.servico_id };
+
+  return {
+    servico_id: servico.servico_id,
+    titulo,
+    motivo: fixado ? 'Fixado por você' : 'Você usa bastante',
+    fixado,
+    rotulo_fixar: fixado ? 'Remover dos atalhos' : 'Fixar nos atalhos',
+    acao_fixar: {
+      tipo: 'fixar_servico',
+      servico_id: servico.servico_id,
+      fixar: !fixado,
+    },
+    rotulo_leitor: fixado
+      ? `${titulo}, fixado nos atalhos. Toque para remover.`
+      : `${titulo}. Toque para fixar nos atalhos.`,
+    logo: {
+      tipo: 'sigla',
+      valor: servico.orgao_sigla || '',
+    },
+    banner: {
+      titulo,
+      texto: textoBanner(servico.descricao, titulo),
+      rotulo_botao,
+      rotulo_leitor: `${titulo}, ${rotulo_botao.toLowerCase()}`,
+      acao,
+    },
+  };
+}
+
 /**
- * Agrupa por tema os serviços que o cidadão já usou. `historico` é a lista de linhas de
+ * Agrupa por tema os serviços que o cidadão já usou ou fixou. `historico` é a lista de linhas de
  * `dados.historico` (servico_id no índice 2). `podeMostrar(servico, id)` aplica consentimento.
- * Devolve `{ nichos }` ou null se não houver nichos. Itens mínimos (servico_id, titulo);
- * a tarefa 3.3 completa item, banner e filtros. `servicos` permite injetar o catálogo em testes.
+ * Devolve `{ nichos, filtros }` ou null se não houver nichos.
  */
 export function montarNichos(id, historico, podeMostrar, fixados = [], servicos = dados.servicos) {
   const usos = new Map();
@@ -39,7 +82,7 @@ export function montarNichos(id, historico, podeMostrar, fixados = [], servicos 
   const posFixado = new Map();
   for (const f of fixados || []) if (!posFixado.has(f)) posFixado.set(f, posFixado.size);
 
-  const grupos = new Map(); // tema -> { total, itens: [{ servico, usos, pos }] }
+  const grupos = new Map(); // tema -> { total, fixados, itens: [{ servico, usos, pos }] }
   const ids = new Set([...usos.keys(), ...posFixado.keys()]);
   for (const sid of ids) {
     const s = servicos.get(sid);
@@ -63,14 +106,22 @@ export function montarNichos(id, historico, podeMostrar, fixados = [], servicos 
       id: slug(tema),
       titulo: tema,
       filtro: tema,
+      rotulo_leitor: `Serviços de ${tema} que você usa`,
       aberto: i === 0,
       itens: g.itens
         .sort((a, b) => (a.pos !== null && b.pos !== null ? a.pos - b.pos : a.pos !== null ? -1 : b.pos !== null ? 1 : 0)
           || b.usos - a.usos || a.servico.servico_id - b.servico.servico_id)
         .slice(0, MAX_ITENS)
-        .map(({ servico }) => ({ servico_id: servico.servico_id, titulo: curto(servico.nome) })),
+        .map(({ servico, pos }) => montarItemNicho(servico, pos !== null)),
     }))
     .filter((n) => n.itens.length > 0);
 
-  return nichos.length ? { nichos } : null;
+  if (!nichos.length) return null;
+
+  const filtros = [
+    { id: 'todos', rotulo: 'Todos', rotulo_leitor: 'Mostrar todos os atalhos' },
+    ...nichos.map((n) => ({ id: n.id, rotulo: n.filtro, rotulo_leitor: `Filtrar por ${n.filtro}` })),
+  ];
+
+  return { nichos, filtros };
 }

@@ -27,7 +27,11 @@ Pedimos a liberação do backend abaixo para ser chamado pelas telas do Kodiak (
 | `POST /dados/jornadas` | `{cidadao_id, servico_id}` |
 | `GET /dados/jornadas/{id}` | Etapa atual do pedido |
 | `POST /dados/jornadas/{id}/confirmar` | `{confirmar: true}` |
+| `GET /dados/fixados/{id}` | Serviços fixados nos atalhos do cidadão |
+| `POST /dados/fixados/{id}` | `{servico_id, fixar: true\|false}` |
 | `POST /dados/eventos` | Evento de uso |
+| `GET /recomendacao/visitante/home` | Home simplificada para visitante sem login |
+| `GET /recomendacao/{id}/home` | Home em blocos personalizada do cidadão logado |
 | `GET /recomendacao/{id}?limite=8` | Serviços sugeridos com motivo |
 
 ## Erros

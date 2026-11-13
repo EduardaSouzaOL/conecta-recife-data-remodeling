@@ -17,7 +17,7 @@ Recorte: `nichos[]` com prioridade para os serviços fixados (pins) do cidadão;
   - Rodar no código atual e confirmar que passam.
   - _Requirements: 3.1, 3.5_
 
-- [ ] 3. Implementar `recomendacao/nichos.js`
+- [x] 3. Implementar `recomendacao/nichos.js`
   - [x] 3.1 Normalização de temas
     - `normalizarTema(temas)`: primeiro valor com trim, não vazio e diferente de "Conecta Labs".
     - Testes: espaços sobrando, "Conecta Labs" ignorado, sem tema válido fica fora.
@@ -38,41 +38,41 @@ Recorte: `nichos[]` com prioridade para os serviços fixados (pins) do cidadão;
     - Serviço fixado sem tema válido ou inexistente fica fora. Fixado pelo próprio cidadão aparece mesmo se `podeMostrar` o bloquearia como sugestão.
     - Testes: fixado sem uso entra, fixado primeiro, nicho com fixado antes, sem fixados igual ao atual, sem histórico com fixados, sem histórico sem fixados, corte com 6 itens e 4 nichos priorizando fixados.
     - _Requirements: 2.11_
-  - [ ] 3.5 Item, banner e filtros
+  - [x] 3.5 Item, banner e filtros
     - `logo { tipo: 'sigla', valor }`, `banner { titulo, texto, rotulo_botao, rotulo_leitor, acao }`, `rotulo_leitor` em todo item, `filtros[]` com "Todos".
     - "Agende aqui" para Agendamento, senão "Abrir serviço". `iniciar_jornada` só para 942 e 352. Sem telefone, horário nem local.
     - Testes: `rotulo_botao`, `acao` para 942 e 352, ausência de campo de unidade, `rotulo_leitor` em todo item, `filtros`.
     - _Requirements: 2.11_
-  - [ ] 3.6 Campos de fixado no item
+  - [x] 3.6 Campos de fixado no item
     - Cada item ganha `fixado: boolean`, `rotulo_fixar` ("Fixar nos atalhos" ou "Remover dos atalhos"), `acao_fixar { tipo: "fixar_servico", servico_id, fixar }` (aponta para `POST /dados/fixados/{id}`; `fixar` é o valor que o toque vai enviar) e `rotulo_leitor` coerente com o estado (por exemplo, "IPTU, fixado nos atalhos. Toque para remover.").
     - Etiqueta de motivo pronta da API: "Fixado por você" se fixado, senão "Você usa bastante". Sem citar condição de saúde.
     - Testes: os quatro campos em todo item, fixado e não fixado, `acao_fixar.fixar` oposto ao estado atual, etiqueta de motivo, `rotulo_leitor`.
     - _Requirements: 2.11, 3.3_
-  - [ ] 3.7 Privacidade
+  - [x] 3.7 Privacidade
     - Usar só catálogo e histórico, excluir das sugestões serviços bloqueados por `podeMostrar` (o fixado pelo próprio cidadão continua aparecendo), título do nicho sem condição de saúde.
     - Testes: nenhum termo de saúde nos títulos (C059592, C007938); sem consentimento nada muda.
     - _Requirements: 3.3_
 
-- [ ] 4. Ligar em `recomendacao/home.js`
+- [x] 4. Ligar em `recomendacao/home.js`
   - Em `montarHome`, ler os fixados do cidadão no store, passá-los a `montarNichos` e acrescentar `nichos` e `filtros` ao primeiro bloco com `grupo === 'atalhos'`. Nada mais muda.
   - Testes: persona C059592 e C007938 (com histórico) com nichos; cidadão com fixados vê fixados primeiro; cidadão sem histórico e com fixados tem nichos só dos fixados; cidadão sem histórico e sem fixados sem nichos; personalização desligada sem nichos.
   - _Requirements: 2.11, 3.1_
 
-- [ ] 5. Verificar a correção e a preservação
-  - [ ] 5.1 O teste de exploração da tarefa 1 passa
+- [x] 5. Verificar a correção e a preservação
+  - [x] 5.1 O teste de exploração da tarefa 1 passa
     - _Requirements: 2.11_
-  - [ ] 5.2 Os testes de preservação da tarefa 2 seguem passando
+  - [x] 5.2 Os testes de preservação da tarefa 2 seguem passando
     - Golden tests sem mudança de fixture. Se o golden da Home incluir o campo novo, regenerar a fixture e registrar isso aqui.
     - _Requirements: 3.1, 3.5_
 
-- [ ] 6. Atualizar `.kiro/specs/refatorar-clareza-apis/contrato-das-apis.md`
+- [x] 6. Atualizar `.kiro/specs/refatorar-clareza-apis/contrato-das-apis.md`
   - Na seção `GET /recomendacao/{id}/home`, documentar `nichos[]`, `filtros[]`, os campos de nicho e de item, as regras (4 nichos, 6 itens, ordem, ausência) e que não há dados da unidade.
   - Acrescentar as rotas `GET /dados/fixados/{id}` e `POST /dados/fixados/{id}` (corpo, respostas, limite 6, erros 404/422, idempotência), os campos novos do item (`fixado`, `rotulo_fixar`, `acao_fixar`, etiqueta de motivo) e os eventos `servico_fixado` e `servico_desafixado`. Só acréscimos.
   - Acrescentar as duas rotas à lista de `liberacao-backend-kodiak.md`; se não houver lista, registrar só no contrato.
   - Confirmar que o teste de contrato continua passando.
   - _Requirements: 3.1_
 
-- [ ] 7. Checkpoint: rodar `npm run teste`
+- [x] 7. Checkpoint: rodar `npm run teste`
   - Se faltar `backend/data/derivados.json`, rodar `npm run derivar` antes, ambos em `backend/`.
   - Todos os testes devem passar. Em caso de dúvida, perguntar ao usuário.
 

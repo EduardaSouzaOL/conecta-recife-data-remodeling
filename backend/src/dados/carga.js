@@ -1,10 +1,12 @@
+import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { lerCsv } from './csv.js';
 
 const aqui = path.dirname(fileURLToPath(import.meta.url));
 export const RAIZ = path.resolve(aqui, '..', '..');
-export const DIR_BD = process.env.BD_DIR || path.resolve(RAIZ, '..', 'BD');
+const dirBdPadrao = path.resolve(RAIZ, '..', 'BD');
+export const DIR_BD = process.env.BD_DIR || (fs.existsSync(dirBdPadrao) ? dirBdPadrao : path.resolve(RAIZ, '..', 'dados'));
 export const DIR_DATA = process.env.DATA_DIR || path.resolve(RAIZ, 'data');
 
 // Campos de saúde: ficam num atributo separado e só saem do módulo com consentimento.

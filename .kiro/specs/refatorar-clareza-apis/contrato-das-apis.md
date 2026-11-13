@@ -41,6 +41,8 @@ Um teste (`backend/test/contrato.test.js`) garante que todo par método/caminho 
 | POST | `/dados/jornadas/{id}/avaliar` | Motor de dados |
 | POST | `/dados/eventos` | Motor de dados |
 | GET | `/dados/eventos/resumo` | Motor de dados |
+| GET | `/dados/fixados/{id}` | Motor de dados |
+| POST | `/dados/fixados/{id}` | Motor de dados |
 | GET | `/recomendacao/visitante/home` | Motor de recomendação |
 | GET | `/recomendacao/{id}/home` | Motor de recomendação |
 | GET | `/recomendacao/{id}` | Motor de recomendação |
@@ -229,7 +231,6 @@ Também existem, fora do roteador e só no servidor local: `OPTIONS` em qualquer
 - Saída 200: `{ cidadao_id, fixados: [servico_id], limite }`. `fixados` está na ordem de fixação; `limite` é 6.
 - Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`
 - Efeitos colaterais: nenhum
-- Observação: seção mínima da tarefa 3.3; a tarefa 6 completa.
 
 ### POST /dados/fixados/{id}
 
@@ -238,7 +239,6 @@ Também existem, fora do roteador e só no servidor local: `OPTIONS` em qualquer
 - Saída 200: a mesma de `GET /dados/fixados/{id}`. Idempotente: fixar quem já está fixado ou desafixar quem não está não muda nada.
 - Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`, `404 servico_nao_encontrado`, `422 fixar_invalido` (corpo inválido), `422 limite_de_fixados` (já são 6)
 - Efeitos colaterais: quando o estado muda, grava o evento `servico_fixado` ou `servico_desafixado`
-- Observação: seção mínima da tarefa 3.3; a tarefa 6 completa.
 
 ---
 
@@ -323,6 +323,7 @@ Divergência registrada: a regra do projeto diz que erro que o cidadão pode cor
 - Área: motor de recomendação (Home em blocos, logado)
 - Entrada: caminho `{id}` (`cidadao_id`)
 - Saída 200: `{ perfil: "logado", cidadao_id, personalizacao_ativa, base_da_personalizacao, explicacao_geral, aviso_saude, aviso_acessibilidade, convite_consentimento, convite_acessibilidade, controles[], blocos[] }`. Cada bloco: `id`, `grupo` (`atalhos` ou `recomendados`), `titulo`, `itens[]` (até 3). Cada item: `posicao`, `servico_id`, `titulo`, `motivo`, `por_que_vejo { texto, dados_usados[] }`, `rotulo_leitor`, `acao`; itens recomendados trazem também `tag` e `dispensar`. Com menos de 3 acessos no histórico, o primeiro bloco é "Mais procurados". Sem personalização, devolve a estrutura da Home do visitante com `personalizacao_ativa: false`. Bloco vazio não é enviado; um serviço aparece em um bloco só.
+- No primeiro bloco com `grupo: "atalhos"`, quando o cidadão tem serviços usados ou fixados com tema válido, entram também `nichos[]` (até 4 nichos, ordenados primeiro por presença de serviço fixado e depois por soma de usos e nome; apenas o primeiro com `aberto: true`, nenhum nicho vazio) e `filtros[]` (`Todos` + um filtro por nicho). Cada nicho traz `id`, `titulo`, `filtro`, `rotulo_leitor`, `aberto` e `itens[]` (até 6 itens: fixados primeiro na ordem de fixação, depois mais usados). Cada item de nicho traz `servico_id`, `titulo`, `motivo` ("Fixado por você" ou "Você usa bastante"), `fixado`, `rotulo_fixar`, `acao_fixar { tipo: "fixar_servico", servico_id, fixar }`, `rotulo_leitor`, `logo { tipo: "sigla", valor }` e `banner { titulo, texto, rotulo_botao, rotulo_leitor, acao }` (sem dados de telefone, horário ou local da unidade).
 - Erros: `400 id_invalido`, `404 cidadao_nao_encontrado`
 - Efeitos colaterais: grava o evento `home_vista`
 
